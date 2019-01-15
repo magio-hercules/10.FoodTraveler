@@ -15,6 +15,8 @@ import UserScreen from '../screens/UserScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
+}, {
+  headerMode: 'none'
 });
 
 HomeStack.navigationOptions = {
@@ -33,6 +35,8 @@ HomeStack.navigationOptions = {
 
 const ListStack = createStackNavigator({
   List: ListScreen,
+}, {
+  headerMode: 'none'
 });
 
 ListStack.navigationOptions = {
@@ -47,6 +51,8 @@ ListStack.navigationOptions = {
 
 const TileStack = createStackNavigator({
   Tile: TileScreen,
+}, {
+  headerMode: 'none'
 });
 
 TileStack.navigationOptions = {
@@ -61,6 +67,8 @@ TileStack.navigationOptions = {
 
 const CardStack = createStackNavigator({
   Card: CardScreen,
+}, {
+  headerMode: 'none'
 });
 
 CardStack.navigationOptions = {
@@ -75,6 +83,8 @@ CardStack.navigationOptions = {
 
 const UserStack = createStackNavigator({
   Profile: UserScreen,
+}, {
+  headerMode: 'none'
 });
 
 UserStack.navigationOptions = {

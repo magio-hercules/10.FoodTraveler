@@ -26,12 +26,12 @@ class LogoTitle extends React.Component {
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    // header: null,
-    // title: 'Home',
+  //   // header: null,
+  //   // title: 'Home',
     headerTitle: <LogoTitle />,
-    headerStyle: {
-      backgroundColor: '#ada',
-    },
+  //   headerStyle: {
+  //     backgroundColor: '#ada',
+  //   },
   };
 
   state = {
