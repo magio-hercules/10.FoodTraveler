@@ -1,12 +1,15 @@
-import React, {Component} from 'react';
-import {NavigationActions} from 'react-navigation';
+import React, { Component } from 'react';
+import { NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
-import {ScrollView, Text, View} from 'react-native';
+import { ScrollView, Text, View, Image, TouchableHighlight } from 'react-native';
 import { DrawerActions } from 'react-navigation';
-// import styles from '../../styles/index';
+
+import Styles from '../constants/Styles';
+import Colors from '../constants/Colors';
 
 class DrawerScreen extends Component {
   navigateToScreen = (route) => () => {
+    console.log('navigateToScreen');
     const navigateAction = NavigationActions.navigate({
       routeName: route
     });
@@ -14,24 +17,76 @@ class DrawerScreen extends Component {
     this.props.navigation.dispatch(DrawerActions.closeDrawer())
   }
 
+  _onPressHome = () => {
+    console.log('_onPressHome');
+  }
+
+  _onPressShutdown = () => {
+    console.log('_onPressShutdown');
+    // this.setState({
+    //   count: this.state.count+1
+    // })
+  }
+
   render () {
     return (
       <View>
         <ScrollView>
           <View>
+            {/* Profile section */}
+            <View style={[Styles.sectionHeadingStyle, {backgroundColor: Colors.drawerSectionHeader1}, {flex:1, flexDirection:'row'}]}>
+              <View style={[{color: Colors.WHITE}, {flex:1, flexDirection:'column'}]}>
+                <Text style={[{color: Colors.WHITE}, {fontSize: 18}]}>
+                  김종민
+                </Text>
+                <Text style={[{color: Colors.WHITE}]}>
+                  kjmhercules@gmail.com
+                </Text>
+              </View>
+              <TouchableHighlight style={{ width: 30, height: 30, marginLeft: 0, marginTop: 0, alignSelf:'center', padding: 10 }}
+                                  onPress={this._onPressShutdown}
+                                  underlayColor='#ada'>
+                <Image source={require('../assets/icons/shutdown.png')}
+                      style={[{ width: 30, height: 30, marginLeft: 0, marginTop: 0 }]}
+                      />
+              </TouchableHighlight>
+            </View>
+            
             <View >
-              <Text onPress={this.navigateToScreen('Home')}>
+              <Text style={Styles.navItemStyle} onPress={this._onPressHome}>
+                1번 함수
+              </Text>
+            </View>
+            
+            {/* TravelPlace section */}
+            <Text style={[Styles.sectionHeadingStyle, {backgroundColor: Colors.drawerSectionHeader2}]}>
+              Travel Place
+            </Text>
+            <View >
+              <Text style={Styles.navItemStyle} onPress={this.navigateToScreen('Food')}>
+                Food
+              </Text>
+              <Text style={Styles.navItemStyle} onPress={this.navigateToScreen('Home')}>
                 Home
               </Text>
             </View>
+
+            {/* FoodType section */}
+            <Text style={[Styles.sectionHeadingStyle, {backgroundColor: Colors.drawerSectionHeader3}]}>
+              Food Type
+            </Text>
             <View >
-              <Text onPress={this.navigateToScreen('List')}>
+              <Text style={Styles.navItemStyle} onPress={this.navigateToScreen('List')}>
               List
               </Text>
-            </View>
-            <View >
-              <Text onPress={this.navigateToScreen('Tile')}>
+              <Text style={Styles.navItemStyle} onPress={this.navigateToScreen('Tile')}>
               Tile
+              </Text>
+              <Text style={Styles.navItemStyle} onPress={this.navigateToScreen('Card')}>
+              Card
+              </Text>
+              <Text style={Styles.navItemStyle} onPress={this.navigateToScreen('Profile')}>
+              Profile
               </Text>
             </View>
           </View>

@@ -6,6 +6,8 @@ import { createDrawerNavigator, DrawerActions, DrawerItems } from 'react-navigat
 import MainTabNavigator from './MainTabNavigator';
 import DrawerScreen from '../screens/DrawerScreen';
 
+import Layout from '../constants/Layout';
+
 
 // export default createSwitchNavigator({
 //   // You could add another route here for authentication.
@@ -21,7 +23,7 @@ const DrawerNavigator = createDrawerNavigator({
 },{
   initialRouteName: 'Home',
   contentComponent: DrawerScreen,
-  drawerWidth: 200
+  drawerWidth: Layout.drawerWidth
 });
 
 const MenuImage = ({navigation}) => {

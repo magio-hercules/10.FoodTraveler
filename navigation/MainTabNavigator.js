@@ -4,6 +4,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 
+import FoodScreen from '../screens/FoodScreen';
 import HomeScreen from '../screens/HomeScreen';
 import ListScreen from '../screens/ListScreen';
 import TileScreen from '../screens/TileScreen';
@@ -12,6 +13,25 @@ import UserScreen from '../screens/UserScreen';
 
 
 
+const FoodStack = createStackNavigator({
+  Food: FoodScreen,
+}, {
+  headerMode: 'none'
+});
+
+FoodStack.navigationOptions = {
+  tabBarLabel: 'Food',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === 'ios'
+          ? `ios-information-circle${focused ? '' : '-outline'}`
+          : 'md-information-circle'
+      }
+    />
+  ),
+};
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -98,6 +118,7 @@ UserStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
+  FoodStack,
   HomeStack,
   ListStack,
   TileStack,
