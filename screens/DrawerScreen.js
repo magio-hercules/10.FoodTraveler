@@ -43,11 +43,11 @@ class DrawerScreen extends Component {
                   kjmhercules@gmail.com
                 </Text>
               </View>
-              <TouchableHighlight style={{ width: 30, height: 30, marginLeft: 0, marginTop: 0, alignSelf:'center', padding: 10 }}
+              <TouchableHighlight style={{ width: 40, height: 40, marginLeft: 0, marginTop: 0, alignSelf:'center', padding: 10 }}
                                   onPress={this._onPressShutdown}
                                   underlayColor='#ada'>
                 <Image source={require('../assets/icons/shutdown.png')}
-                      style={[{ width: 30, height: 30, marginLeft: 0, marginTop: 0 }]}
+                      style={[{ width: 30, height: 30, marginLeft: -4, marginTop: -4 }]}
                       />
               </TouchableHighlight>
             </View>

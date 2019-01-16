@@ -13,5 +13,6 @@ export default {
     imagePart: width,
     contentPart: 150
   },
-  drawerWidth: 250
+  drawerWidth: 250,
+  contentsIconSize:35
 };

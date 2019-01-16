@@ -1,9 +1,9 @@
+
 export default {
     container: {
       paddingTop: 20,
       flex: 1
     },
-    
     
     sectionHeadingStyle: {
       backgroundColor: '#A5D6A7',

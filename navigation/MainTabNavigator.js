@@ -12,6 +12,12 @@ import CardScreen from '../screens/CardScreen';
 import UserScreen from '../screens/UserScreen';
 
 
+// name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
+// name={Platform.OS === 'ios' ? 'ios-heart' : 'md-heart'}
+// name={Platform.OS === 'ios' ? 'ios-people' : 'md-people'}
+// name={Platform.OS === 'ios' ? 'ios-pin' : 'md-pin'}
+// name={Platform.OS === 'ios' ? 'ios-settings' : 'md-settings'}
+
 
 const FoodStack = createStackNavigator({
   Food: FoodScreen,
@@ -24,11 +30,7 @@ FoodStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
+      name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
     />
   ),
 };
