@@ -11,8 +11,11 @@ export default {
   isSmallDevice: width < 375,
   size: {
     imagePart: width,
-    contentPart: 150
+    contentPart: 160
   },
   drawerWidth: 250,
-  contentsIconSize:35
+  imagePartIconSectionTop: width - 70,
+  imagePartIconSection: 70,
+  imagePartIconSize: 50,
+  contentsPartIconSize:35,
 };

@@ -8,7 +8,8 @@ export const randomCards = (count = 10) => {
       image: faker.image.image(),
       title: faker.lorem.words(5),
       caption: faker.lorem.words(3),
-      words: faker.lorem.paragraphs(200)
+      words: faker.lorem.paragraphs(200),
+      favorite: faker.random.boolean()
     });
     // console.log(arr[i]);
   }
