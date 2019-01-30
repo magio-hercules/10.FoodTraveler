@@ -7,6 +7,8 @@ import LayoutInfo from '../constants/Layout';
 
 import { Dimensions } from 'react-native';
 import Layout from '../constants/Layout';
+import InformationIcon from '../components/InformationIcon';
+import ComunityIcon from '../components/ComunityIcon';
 
 // import cloneDeep from 'lodash/cloneDeep';
 const cloneDeep = require('clone-deep');
@@ -103,114 +105,52 @@ export default class FoodScreen extends React.Component {
               height= {LayoutInfo.size.imagePart + LayoutInfo.size.contentPart}
               contentContainerStyle={{ height: LayoutInfo.size.contentPart }} 
             >
-            {/* <View style={styles.ImagePartLayout}>
-              <Image style={[styles.ImagePart, styles.ImagePartLayout]}
-                    source={{uri: item.image}} >
-              </Image>
-              <View style={[styles.ImagePartOverlay]}>
-              </View>
-            </View> */}
              <ImageBackground
               style={[styles.ImagePartLayout, styles.ImagePart]}
               source={{uri: item.image}} >
               <View style={[styles.ImagePartOverlay]}>
-                <TouchableHighlight 
-                    onPress={this._onPressIngredient}
-                    underlayColor='#fff'>
-                    <View style={styles.ImagePartIcon}>
-                      <Image style={styles.ImagePartIconImage}
-                            source={require('../assets/icons/contents/ingredients.png')}/>
-                      <Text style={styles.ImagePartIconText}>
-                        Ingredient </Text>
-                    </View>
-                </TouchableHighlight>
-                <TouchableHighlight onPress={this._onPressCook}
-                    underlayColor='#fff'>
-                    <View style={styles.ImagePartIcon}>
-                      <Image style={styles.ImagePartIconImage}
-                            source={require('../assets/icons/contents/chef.png')}/>
-                      <Text style={styles.ImagePartIconText}>
-                        Cook </Text>
-                    </View>
-                </TouchableHighlight>
-                <TouchableHighlight onPress={this._onPressEat}
-                    underlayColor='#fff'>
-                    <View style={styles.ImagePartIcon}>
-                      <Image style={styles.ImagePartIconImage}
-                            source={require('../assets/icons/contents/eat.png')}/>
-                      <Text style={styles.ImagePartIconText}>
-                        Eat </Text>
-                    </View>
-                </TouchableHighlight>
-                <TouchableHighlight onPress={this._onPressHistory}
-                    underlayColor='#fff'>
-                    <View style={styles.ImagePartIcon}>
-                      <Image style={styles.ImagePartIconImage}
-                            source={require('../assets/icons/contents/history.png')}/>
-                      <Text style={styles.ImagePartIconText}>
-                        History </Text>
-                    </View>
-                </TouchableHighlight>
-                <TouchableHighlight onPress={this._onPressCaution}
-                    underlayColor='#fff'>
-                    <View style={styles.ImagePartIcon}>
-                      <Image style={styles.ImagePartIconImage}
-                            source={require('../assets/icons/contents/caution.png')}/>
-                      <Text style={styles.ImagePartIconText}>
-                        Caution </Text>
-                    </View>
-                </TouchableHighlight>
+                <InformationIcon 
+                  name='Ingredient'
+                  iconSrc={require('../assets/icons/contents/ingredients.png')}
+                  onPress={this._onPressIngredient}/>
+                <InformationIcon 
+                  name='Cook'
+                  iconSrc={require('../assets/icons/contents/chef.png')}
+                  onPress={this._onPressCook}/>
+                <InformationIcon 
+                  name='Eat'
+                  iconSrc={require('../assets/icons/contents/eat.png')}
+                  onPress={this._onPressEat}/>
+                <InformationIcon 
+                  name='History'
+                  iconSrc={require('../assets/icons/contents/history.png')}
+                  onPress={this._onPressHistory}/>
+                <InformationIcon 
+                  name='Caution'
+                  iconSrc={require('../assets/icons/contents/caution.png')}
+                  onPress={this._onPressCaution}/>
               </View>
             </ImageBackground>
-            
 
             <View style={[styles.ContentPart]} >
               <View style={styles.ContentHeader}>
                 <Text style={styles.ContentHeaderText}>몸국 / [Momguk]</Text>
                 <View style={styles.IconPart} >
-                  <TouchableHighlight style={styles.Icon}
-                      onPress={() => this._onPressHeart(index)}
-                      underlayColor='#fff'>
-                    <Image style={styles.IconImage}
-                          tintColor={item.favorite ? '#f44336' : 'rgb(50, 50, 50)'}
-                          source={item.favorite ? require('../assets/icons/heart_3.png') : require('../assets/icons/heart_2.png')}/>
-                  </TouchableHighlight>
-                  {/* <TouchableHighlight style={styles.Icon}
-                      onPress={this._onPressHeart}
-                      underlayColor='#fff'>
-                    <Image style={styles.IconImage}
-                          
-                          source={require('../assets/icons/heart_3.png')}/>
-                  </TouchableHighlight> */}
-                  <TouchableHighlight style={styles.Icon}
-                      onPress={this._onPressMessage}
-                      underlayColor='#fff'>
-                    <Image style={styles.IconImage}
-                          source={require('../assets/icons/message.png')}/>
-                  </TouchableHighlight>
-                  <TouchableHighlight style={styles.Icon}
-                      onPress={this._onPressHeart}
-                      underlayColor='#fff'>
-                    <Image style={styles.IconImage}
-                          source={require('../assets/icons/share.png')}/>
-                  </TouchableHighlight>
+                  <ComunityIcon 
+                    iconSrc={item.favorite ? require('../assets/icons/heart_3.png') : require('../assets/icons/heart_2.png')}
+                    tintColor={item.favorite ? '#f44336' : 'rgb(50, 50, 50)'}
+                    onPress={() => this._onPressHeart(index)}/>
+                  <ComunityIcon 
+                    iconSrc={require('../assets/icons/message.png')}
+                    onPress={this._onPressMessage}/>
+                  <ComunityIcon 
+                    iconSrc={require('../assets/icons/share.png')}
+                    onPress={this._onPressShare}/>
                 </View>
               </View>
               
-              {/* <Text > {item.title} </Text> */}
               <Text numberOfLines={5}
                     ellipsizeMode='tail'> {item.words} </Text>
-              {/* <View
-                style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }} >
-                <Text numberOfLines={5}
-                      ellipsizeMode='tail'> {item.words} </Text>
-                <Button 
-                  icon={<Icon name='rowing' color='#ffffff' />}
-                  backgroundColor='#03A9F4'
-                  buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                  title='Test' >
-                </Button>
-              </View>  */}
             </View>
           </View>
           );
@@ -242,28 +182,6 @@ const styles = StyleSheet.create({
     height: LayoutInfo.imagePartIconSection,
     backgroundColor: 'white',
   }, 
-  ImagePartIcon: {
-    flexDirection: 'column', 
-    justifyContent: 'center',
-    alignItems: 'center',
-    // top: LayoutInfo.imagePartIconSectionTop,
-    // width: 70,
-    width: LayoutInfo.imagePartIconSize + 15, 
-    height: LayoutInfo.imagePartIconSection,
-    // backgroundColor: '#aad',
-  }, 
-  ImagePartIconImage: {
-    width: LayoutInfo.imagePartIconSize, 
-    height: LayoutInfo.imagePartIconSize,
-    // backgroundColor: '#dd1',
-  },
-  ImagePartIconText: {
-    fontSize:11,
-    justifyContent: 'center',
-    alignItems:'center',
-    // width: 70,
-    // backgroundColor: '#a1a'
-  },
   ContentPart: {
     flex: 1,
     flexDirection: 'column', 
@@ -290,16 +208,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // backgroundColor:'#aaf',
   },
-  Icon: {
-    flexDirection: 'row', 
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: Layout.contentsPartIconSize,
-    height: Layout.contentsPartIconSize,
-    // backgroundColor:'#afa',
-  },
-  IconImage: {
-    width: Layout.contentsPartIconSize,
-    height: Layout.contentsPartIconSize,
-  }
 });
