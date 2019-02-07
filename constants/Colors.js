@@ -16,7 +16,7 @@ export default {
 
   drawerSectionHeader: '#ADA',
   drawerSectionHeader1: '#9dc3e6',
-  drawerSectionHeader2: '#ffd966',
+  drawerSectionHeader2: '#f9bd57',
   drawerSectionHeader3: '#ff99cc',
   
 };
