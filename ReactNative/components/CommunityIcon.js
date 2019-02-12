@@ -20,7 +20,7 @@ function createWarning(funcName) {
 }
 
 
-export default class ComunityIcon extends Component {
+export default class CommunityIcon extends Component {
     constructor(props) {
         super(props);
     }
@@ -38,8 +38,8 @@ export default class ComunityIcon extends Component {
     }
 }
 
-ComunityIcon.propTypes = propTypes;
-ComunityIcon.defaultProps = defaultProps;
+CommunityIcon.propTypes = propTypes;
+CommunityIcon.defaultProps = defaultProps;
 
 
 const styles = StyleSheet.create({
