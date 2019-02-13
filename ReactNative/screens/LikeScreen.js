@@ -28,14 +28,9 @@ class LogoTitle extends React.Component {
 }
 
 export default class LikeScreen extends React.Component {
-  static navigationOptions = {
-  //   // header: null,
-  //   // title: 'Home',
-    headerTitle: <LogoTitle />,
-  //   headerStyle: {
-  //     backgroundColor: '#ada',
-  //   },
-  };
+  // static navigationOptions = {
+  //   // headerTitle: <LogoTitle />,
+  // };
 
   state = {
     refreshing: false,

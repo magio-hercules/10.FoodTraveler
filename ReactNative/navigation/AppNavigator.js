@@ -8,6 +8,12 @@ import DrawerScreen from '../screens/DrawerScreen';
 
 import Layout from '../constants/Layout';
 
+import IngredientScreen from '../screens/information/IngredientScreen';
+import CookScreen from '../screens/information/CookScreen';
+import EatScreen from '../screens/information/EatScreen';
+import HistoryScreen from '../screens/information/HistoryScreen';
+import CautionScreen from '../screens/information/CautionScreen';
+
 
 // export default createSwitchNavigator({
 //   // You could add another route here for authentication.
@@ -15,16 +21,49 @@ import Layout from '../constants/Layout';
 //   Main: MainTabNavigator,
 // });
 
+// const InfoStack = createStackNavigator({
+//   Ingredient: IngredientScreen,
+//   Cook: CookScreen,
+//   Eat: EatScreen,
+//   History: HistoryScreen,
+//   Caution: CautionScreen
+// }, {
+//   // headerMode: 'none'
+// });
 
 const DrawerNavigator = createDrawerNavigator({
   Home:{
-      screen: MainTabNavigator
-  }
+      screen: MainTabNavigator,
+      // headerMode: 'none'
+  },
+  // Info: {
+  //   screen: InfoStack
+  // }
 },{
   initialRouteName: 'Home',
   contentComponent: DrawerScreen,
-  drawerWidth: Layout.drawerWidth
+  drawerWidth: Layout.drawerWidth,
+  
 });
+
+// drawer 오픈시 StatusBar hide
+// const defaultGetStateForAction = DrawerNavigator.router.getStateForAction;
+// DrawerNavigator.router.getStateForAction = (action, state) => {
+//   switch (action.type) {
+//     case 'Navigation/OPEN_DRAWER':
+//     case 'Navigation/DRAWER_OPENED':
+//       StatusBar.setHidden(true, 'slide');
+//       break;
+      
+//     case 'Navigation/CLOSE_DRAWER':
+//     case 'Navigation/DRAWER_CLOSED':
+//       StatusBar.setHidden(false, 'slide');
+//       break;
+//     }
+
+//   return defaultGetStateForAction(action, state);
+// };
+
 
 const MenuImage = ({navigation}) => {
   if(!navigation.state.isDrawerOpen){
@@ -35,27 +74,31 @@ const MenuImage = ({navigation}) => {
   }
 }
 
+
+
 const StackNavigator = createStackNavigator({
   //important: key and screen name (i.e. DrawerNavigator) should be same while using the drawer navigator inside stack navigator.
   // Main: MainTabNavigator,
-  DrawerNavigator:DrawerNavigator
+  DrawerNavigator: DrawerNavigator
 },{
-  navigationOptions: ({ navigation }) => ({
-      title: 'FoodTraveler',  // Title to appear in status bar
-      headerLeft: 
-      <TouchableOpacity  onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())} }>
-          <MenuImage navigation={navigation}/>
-      </TouchableOpacity>,
-      headerStyle: {
-          backgroundColor: '#ada',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-        fontSize:27
-      },
-
-  })
+   headerMode: 'none', // 루트 헤더 show/hide
+   // MainTabNavigator로 옮김
+  //  navigationOptions: ({ navigation }) => ({
+  //     // initialRouteName: Home,
+  //     title: 'FoodTraveler',  // Title to appear in status bar
+  //     headerLeft: 
+  //     <TouchableOpacity  onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())} }>
+  //         <MenuImage navigation={navigation}/>
+  //     </TouchableOpacity>,
+  //     headerStyle: {
+  //         backgroundColor: '#ada',
+  //     },
+  //     headerTintColor: '#fff',
+  //     headerTitleStyle: {
+  //       fontWeight: 'bold',
+  //       fontSize:27
+  //     },
+  // })
 });
 
 export default StackNavigator;

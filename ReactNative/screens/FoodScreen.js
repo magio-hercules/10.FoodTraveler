@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, FlatList, View, Text, Image, TouchableHighlight, ImageBackground } from 'react-native';
 import { Tile, Button, Icon } from 'react-native-elements';
 import { randomCards } from '../temp/tile';
+import PropTypes from 'prop-types';
+import { NavigationActions } from 'react-navigation';
 
 import LayoutInfo from '../constants/Layout';
 
@@ -11,6 +13,7 @@ import InformationIcon from '../components/InformationIcon';
 import CommunityIcon from '../components/CommunityIcon';
 
 import { create } from 'apisauce'
+import CookScreen from './information/CookScreen';
 
 // import cloneDeep from 'lodash/cloneDeep';
 const cloneDeep = require('clone-deep');
@@ -45,7 +48,7 @@ export default class FoodScreen extends React.Component {
   static navigationOptions = {
   //   // header: null,
   //   // title: 'Home',
-    headerTitle: <LogoTitle />,
+    // headerTitle: <LogoTitle />,
   //   headerStyle: {
   //     backgroundColor: '#ada',
   //   },
@@ -83,9 +86,8 @@ export default class FoodScreen extends React.Component {
         for (let i = 0; i < count; i ++) {
           arr.push({
             key: data[i].id,
-            title: data[i].food_type_list,
-            caption: data[i].caution_list,
-            words: data[i].caution_list,
+            title: data[i].title_en,
+            description: data[i].desc_en,
             favorite: true,
 
             description_id: data[i].description_id,
@@ -100,7 +102,7 @@ export default class FoodScreen extends React.Component {
             image_url: data[i].image_url,
           });
         }
-        // console.log(arr);
+        console.log(arr);
         return arr;
       })
       .catch((err) => {
@@ -118,25 +120,50 @@ export default class FoodScreen extends React.Component {
     console.log('_onPressIngredient : description_id(' + _id + ')');
 
     api
-    .post('/description', { "id": _id })
+    .post('/description', { "description_id": _id })
     .then(response => response.data)
     .then(console.log);
+    
+    const navigateAction = NavigationActions.navigate({
+      routeName: "Ingredient"
+    });
+    this.props.navigation.dispatch(navigateAction);
   }
 
   _onPressCook = (index) => {
     console.log('_onPressCook');
+
+    // this.props.navigation.navigate(CookScreen)
+
+    const navigateAction = NavigationActions.navigate({
+      routeName: "Cook"
+    });
+    this.props.navigation.dispatch(navigateAction);
   }
 
   _onPressEat = (index) => {
     console.log('_onPressEat');
+
+    const navigateAction = NavigationActions.navigate({
+      routeName: "Eat"
+    });
+    this.props.navigation.dispatch(navigateAction);
   }
 
   _onPressHistory = (index) => {
     console.log('_onPressHistory');
+    const navigateAction = NavigationActions.navigate({
+      routeName: "History"
+    });
+    this.props.navigation.dispatch(navigateAction);
   }
 
   _onPressCaution = (index) => {
     console.log('_onPressCaution');
+    const navigateAction = NavigationActions.navigate({
+      routeName: "Caution"
+    });
+    this.props.navigation.dispatch(navigateAction);
   }
 
   
@@ -177,7 +204,6 @@ export default class FoodScreen extends React.Component {
             <View
               key={item.key}
               // title={item.title}
-              // caption={item.caption}
               
               // height={LayoutInfo.size.imagePart + LayoutInfo.size.contentPart}
               width= {LayoutInfo.width}
@@ -214,7 +240,7 @@ export default class FoodScreen extends React.Component {
 
             <View style={[styles.ContentPart]} >
               <View style={styles.ContentHeader}>
-                <Text style={styles.ContentHeaderText}>몸국 / [Momguk]</Text>
+                <Text style={styles.ContentHeaderText}> {item.title} </Text>
                 <View style={styles.IconPart} >
                   <CommunityIcon 
                     iconSrc={item.favorite ? require('../assets/icons/heart_3.png') : require('../assets/icons/heart_2.png')}
@@ -230,7 +256,7 @@ export default class FoodScreen extends React.Component {
               </View>
               
               <Text numberOfLines={5}
-                    ellipsizeMode='tail'> {item.words} </Text>
+                    ellipsizeMode='tail'> {item.description} </Text>
             </View>
           </View>
           );
@@ -239,6 +265,11 @@ export default class FoodScreen extends React.Component {
     );
   }
 }
+
+
+FoodScreen.propTypes = {
+  navigation: PropTypes.object
+};
 
 
 const styles = StyleSheet.create({

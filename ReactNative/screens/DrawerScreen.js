@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
-import { StyleSheet, ScrollView, Text, View, Image, TouchableHighlight } from 'react-native';
+import { StyleSheet, ScrollView, Text, View, Image, TouchableHighlight, StatusBar } from 'react-native';
 import { DrawerActions } from 'react-navigation';
 
 import Styles from '../constants/Styles';
@@ -185,6 +185,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 10,
     color: '#FFF',
+    marginTop: StatusBar.currentHeight,
     fontSize: 18
   }, 
   profileSection: {
