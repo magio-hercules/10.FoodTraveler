@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, Easing, Animated, TouchableOpacity, Image, Text } from 'react-native';
+import { Platform, Easing, Animated, TouchableOpacity, Image, Text, StyleSheet } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, DrawerActions } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
@@ -41,32 +41,47 @@ const MenuImage = ({navigation}) => {
 }
 
 const _navigationOptions = (navigation, bHeaderLeft = true) => {
-  const title = navigation.state.routeName;
-  const headerLeft = bHeaderLeft ? 
-    <TouchableOpacity onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())} }>
-        <MenuImage navigation={navigation}/>
-    </TouchableOpacity> : undefined;
+  const headerTitle = navigation.state.routeName;
+  const headerLeft = 
+    bHeaderLeft ? 
+      <TouchableOpacity onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())} }>
+          <MenuImage navigation={navigation}/>
+      </TouchableOpacity> 
+    : 
+      undefined;
 
   return {
-    title,
+    headerTitle,
     headerLeft,
     headerStyle: {
         backgroundColor: '#ada',
     },
     headerTintColor: '#fff',
     headerTitleStyle: {
-      fontWeight: 'bold',
-      fontSize:27
+      fontFamily: 'netmarbleB', 
+      fontWeight: undefined, 
+      fontSize:27,
+      marginLeft: 0,
+      marginTop: 5,
     },
   };
 };
+
+const _tabBarOptions = () => {
+  return {
+    labelStyle: {
+      fontFamily: 'netmarbleL'
+    }
+  };
+}
+
 
 const FoodStack = createStackNavigator({
   // Food: FoodScreen,
   Food: {
     screen: FoodScreen,
     navigationOptions: ({ navigation }) => ({
-      title: `Food`,
+      headerTitle: `FoodTraveler`,
       headerLeft: 
         <TouchableOpacity  onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())} }>
             <MenuImage navigation={navigation}/>
@@ -83,22 +98,6 @@ const FoodStack = createStackNavigator({
   navigationOptions: ({ navigation }) => (
     _navigationOptions(navigation, false)
   ),
-//   navigationOptions: ({ navigation }) => ({
-//     // initialRouteName: Home,
-//     title: 'FoodTraveler',  // Title to appear in status bar
-//     // headerLeft: 
-//     // <TouchableOpacity  onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())} }>
-//     //     <MenuImage navigation={navigation}/>
-//     // </TouchableOpacity>,
-//     headerStyle: {
-//         backgroundColor: '#ada',
-//     },
-//     headerTintColor: '#fff',
-//     headerTitleStyle: {
-//       fontWeight: 'bold',
-//       fontSize:27
-//     },
-// }),
   transitionConfig: () => ({
     transitionSpec: {
       duration: 500,
@@ -146,6 +145,7 @@ FoodStack.navigationOptions = ({ navigation }) => {
   return {
     tabBarVisible,
     tabBarLabel: 'Food',
+    tabBarOptions: _tabBarOptions(),
     tabBarIcon: ({ focused }) => (
       <TabBarIcon
         focused={focused}
@@ -167,6 +167,7 @@ const LikeStack = createStackNavigator({
 
 LikeStack.navigationOptions = {
   tabBarLabel: 'Like',
+  tabBarOptions: _tabBarOptions(),
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -186,6 +187,7 @@ const PeopleStack = createStackNavigator({
 
 PeopleStack.navigationOptions = {
   tabBarLabel: 'People',
+  tabBarOptions: _tabBarOptions(),
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -205,6 +207,7 @@ const LocationStack = createStackNavigator({
 
 LocationStack.navigationOptions = {
   tabBarLabel: 'Location',
+  tabBarOptions: _tabBarOptions(),
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -224,6 +227,7 @@ const UtilityStack = createStackNavigator({
 
 UtilityStack.navigationOptions = {
   tabBarLabel: 'Utility',
+  tabBarOptions: _tabBarOptions(),
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}

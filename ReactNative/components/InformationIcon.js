@@ -8,10 +8,12 @@ const propTypes = {
     name : PropTypes.string,
     iconSrc : PropTypes.node,
     onPress: PropTypes.func,
+    index: PropTypes.number
 };
 
 const defaultProps = {
     onPress: createWarning('onPress'),
+    index: -1
 };
 
 function createWarning(funcName) {
@@ -50,7 +52,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column', 
         justifyContent: 'center',
         alignItems: 'center',
-        width: LayoutInfo.imagePartIconSize + 15, 
+        width: LayoutInfo.imagePartIconSize + 17, 
         height: LayoutInfo.imagePartIconSection,
         // backgroundColor: '#aad',
     },
@@ -63,6 +65,7 @@ const styles = StyleSheet.create({
         fontSize:11,
         justifyContent: 'center',
         alignItems:'center',
-        // backgroundColor: '#a1a'
+        fontFamily: 'netmarbleL'
+        // backgroundColor: '#a1a',
     },
 });

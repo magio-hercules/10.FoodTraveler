@@ -15,6 +15,11 @@ import CommunityIcon from '../components/CommunityIcon';
 import { create } from 'apisauce'
 import CookScreen from './information/CookScreen';
 
+// for redux
+import { connect } from 'react-redux';
+import * as actions from '../actions';
+
+
 // import cloneDeep from 'lodash/cloneDeep';
 const cloneDeep = require('clone-deep');
 
@@ -24,8 +29,6 @@ const api = create({
   baseURL: 'http://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com:7000/FooTravel',
   headers: { 'Content-Type': 'application/json' },
 })
-
-
 
 class LogoTitle extends React.Component {
   render() {
@@ -45,6 +48,7 @@ class LogoTitle extends React.Component {
 
 
 export default class FoodScreen extends React.Component {
+// default class FoodScreen extends React.Component {
   static navigationOptions = {
   //   // header: null,
   //   // title: 'Home',
@@ -60,6 +64,20 @@ export default class FoodScreen extends React.Component {
     // data: this._getTotalFoods()
     data: []
   };
+
+  // 참고 LifeCycle
+  // 컴포넌트 생성시 constructor -> componentWillMount -> render -> componentDidMount
+  // 컴포넌트 제거시 componentWillUnmount 
+  // 컴포넌트 prop 변경시 componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate-> render -> componentDidUpdate 
+
+  constructor(props){
+    super(props);
+    console.log("FoodScreen constructor");
+  }
+
+  componentWillMount () {
+    console.log("call componentWillMount");
+  }
 
   async componentDidMount() {
     console.log("call componentDidMount");
@@ -86,23 +104,26 @@ export default class FoodScreen extends React.Component {
         for (let i = 0; i < count; i ++) {
           arr.push({
             key: data[i].id,
+            title_local: data[i].title_local,
+            title_phonetic: data[i].title_phonetic,
             title: data[i].title_en,
             description: data[i].desc_en,
             favorite: true,
 
             description_id: data[i].description_id,
-            history_id: data[i].history_id,
             food_type_list: data[i].food_type_list,
             ingredient_list: data[i].ingredient_list,
-            allergy_list: data[i].allergy_list,
-            caution_list: data[i].caution_list,
-            direction_list: data[i].direction_list,
+            cook_list: data[i].cook_list,
             eat_list: data[i].eat_list,
+            history_list: data[i].history_list,
+            caution_list: data[i].caution_list,
+            
+            allergy_list: data[i].allergy_list,
             city_list: data[i].city_list,
             image_url: data[i].image_url,
           });
         }
-        console.log(arr);
+        // console.log(arr);
         return arr;
       })
       .catch((err) => {
@@ -114,54 +135,81 @@ export default class FoodScreen extends React.Component {
   // information
   _onPressIngredient = (index) => {
     console.log('call _onPressIngredient : index(' + index + ')');
-    // console.log(this.state.data);
-    // console.log(this.state.data[index]);
-    let _id = this.state.data[index].description_id;
-    console.log('_onPressIngredient : description_id(' + _id + ')');
-
-    api
-    .post('/description', { "description_id": _id })
-    .then(response => response.data)
-    .then(console.log);
+    let _key = this.state.data[index].key;
+    let ingredient_list = this.state.data[index].ingredient_list;
+    console.log('_onPressIngredient : food_id(' + _key + ')');
+    console.log('_onPressIngredient : ingredient_list(' + ingredient_list + ')');
     
     const navigateAction = NavigationActions.navigate({
-      routeName: "Ingredient"
+      routeName: "Ingredient",
+      params: {
+        // index: this.state.index,
+        ingredient_list: ingredient_list,
+      }
     });
     this.props.navigation.dispatch(navigateAction);
   }
 
   _onPressCook = (index) => {
-    console.log('_onPressCook');
-
-    // this.props.navigation.navigate(CookScreen)
-
+    console.log('call _onPressCook : index(' + index + ')');
+    let _key = this.state.data[index].key;
+    let cook_list = this.state.data[index].cook_list;
+    console.log('_onPressCook : food_id(' + _key + ')');
+    console.log('_onPressCook : cook_list(' + cook_list + ')');
+    
     const navigateAction = NavigationActions.navigate({
-      routeName: "Cook"
+      routeName: "Cook",
+      params: {
+        cook_list: cook_list,
+      }
     });
     this.props.navigation.dispatch(navigateAction);
   }
 
   _onPressEat = (index) => {
-    console.log('_onPressEat');
-
+    console.log('call _onPressEat : index(' + index + ')');
+    let _key = this.state.data[index].key;
+    let eat_list = this.state.data[index].eat_list;
+    console.log('_onPressEat : food_id(' + _key + ')');
+    console.log('_onPressEat : eat_list(' + eat_list + ')');
+    
     const navigateAction = NavigationActions.navigate({
-      routeName: "Eat"
+      routeName: "Eat",
+      params: {
+        eat_list: eat_list,
+      }
     });
     this.props.navigation.dispatch(navigateAction);
   }
 
   _onPressHistory = (index) => {
-    console.log('_onPressHistory');
+    console.log('call _onPressHistory : index(' + index + ')');
+    let _key = this.state.data[index].key;
+    let history_list = this.state.data[index].history_list;
+    console.log('_onPressHistory : food_id(' + _key + ')');
+    console.log('_onPressHistory : history_list(' + history_list + ')');
+    
     const navigateAction = NavigationActions.navigate({
-      routeName: "History"
+      routeName: "History",
+      params: {
+        history_list: history_list,
+      }
     });
     this.props.navigation.dispatch(navigateAction);
   }
 
   _onPressCaution = (index) => {
-    console.log('_onPressCaution');
+    console.log('call _onPressCaution : index(' + index + ')');
+    let _key = this.state.data[index].key;
+    let caution_list = this.state.data[index].caution_list;
+    console.log('_onPressCaution : food_id(' + _key + ')');
+    console.log('_onPressCaution : caution_list(' + caution_list + ')');
+    
     const navigateAction = NavigationActions.navigate({
-      routeName: "Caution"
+      routeName: "Caution",
+      params: {
+        caution_list: caution_list,
+      }
     });
     this.props.navigation.dispatch(navigateAction);
   }
@@ -240,7 +288,16 @@ export default class FoodScreen extends React.Component {
 
             <View style={[styles.ContentPart]} >
               <View style={styles.ContentHeader}>
-                <Text style={styles.ContentHeaderText}> {item.title} </Text>
+                <Text 
+                  style={styles.ContentHeaderText}> 
+                  {item.title_local + ' [' + item.title_phonetic + ']' 
+                   + '\r\n' + ': ' + item.title} 
+                </Text>
+                {/* <Text 
+                  ellipsizeMode='tail' 
+                  style={styles.ContentHeaderText}> 
+                  {' / ' + item.title} 
+                </Text> */}
                 <View style={styles.IconPart} >
                   <CommunityIcon 
                     iconSrc={item.favorite ? require('../assets/icons/heart_3.png') : require('../assets/icons/heart_2.png')}
@@ -255,8 +312,10 @@ export default class FoodScreen extends React.Component {
                 </View>
               </View>
               
-              <Text numberOfLines={5}
-                    ellipsizeMode='tail'> {item.description} </Text>
+              <Text 
+                  style={styles.ContentText}
+                  numberOfLines={5}
+                  ellipsizeMode='tail'> {item.description} </Text>
             </View>
           </View>
           );
@@ -270,6 +329,25 @@ export default class FoodScreen extends React.Component {
 FoodScreen.propTypes = {
   navigation: PropTypes.object
 };
+
+
+const mapStateToProps = (state) => {
+  return {
+      number: state.counter.number,
+      index: state.info.index,
+      // color: state.ui.color
+  };
+};
+
+const mapDispatchProps = (dispatch) => {
+  return {
+      handleIncrement: () => { dispatch(actions.increment())},
+      handleShowIngredient: (index) => { dispatch(actions.showInfoIngredient(index))}
+  };
+};
+
+connect(mapStateToProps, mapDispatchProps)(FoodScreen);
+
 
 
 const styles = StyleSheet.create({
@@ -307,14 +385,21 @@ const styles = StyleSheet.create({
     justifyContent:'space-between',
     alignItems: 'center',
     paddingTop: 5,
-    paddingBottom: 5,
+    // paddingBottom: 5,
     // backgroundColor:'#a1a',
   },
   ContentHeaderText: {
+    flex: 8,
     fontSize: 20,
-    alignItems: 'center'
+    alignItems: 'center',
+    fontFamily: 'netmarbleM'
+  },
+  ContentText: {
+    fontFamily: 'netmarbleL'
   },
   IconPart: {
+    flex: 3,
+    justifyContent:'center',
     flexDirection: 'row', 
     alignItems: 'center',
     // backgroundColor:'#aaf',

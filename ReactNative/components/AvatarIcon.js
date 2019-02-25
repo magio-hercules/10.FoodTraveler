@@ -37,13 +37,14 @@ export default class AvatarIcon extends Component {
                 underlayColor='#fff'>
                 <View style={styles.AvatarPart}>
                     <Avatar 
-                        rounded
+                        // rounded
                         size={this.props.size}
                         // title={this.props.title}
                         icon={this.props.icon}
                         source={this.props.imageSrc}
                         activeOpacity={this.props.activeOpacity}
                         onPress={this.props.onPress}
+                        overlayContainerStyle={{backgroundColor: 'white'}}
                         // showEditButton
                     />
                     <Text style={styles.AvatarText}>
@@ -70,6 +71,7 @@ const styles = StyleSheet.create({
         fontSize:12,
         justifyContent: 'center',
         alignItems:'center',
+        fontFamily: 'netmarbleL',
         // backgroundColor: '#a1a'
     },
 });

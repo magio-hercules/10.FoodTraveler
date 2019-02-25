@@ -56,16 +56,16 @@ export default class DrawerScreen extends Component {
 
   render () {
     return (
-      <View>
+      <View style={styles.defaultFont}>
         <ScrollView>
           <View>
             {/* Profile section */}
             <View style={[styles.profileSectionHeader, {backgroundColor: Colors.drawerSectionHeader1}, {flex:1, flexDirection:'row'}]}>
               <View style={[{color: Colors.WHITE}, {flex:1, flexDirection:'column'}]}>
-                <Text style={[{color: Colors.WHITE}, {fontSize: 18}]}>
+                <Text style={[styles.profileSectionHeaderText, {color: Colors.WHITE}, {fontSize: 18}]}>
                   김종민
                 </Text>
-                <Text style={[{color: Colors.WHITE}]}>
+                <Text style={[styles.profileSectionHeaderText, {color: Colors.WHITE}]}>
                   kjmhercules@gmail.com
                 </Text>
               </View>
@@ -180,12 +180,16 @@ DrawerScreen.propTypes = {
 
 
 const styles = StyleSheet.create({
+  defaultFont: {
+    fontFamily: 'netmarbleL'
+  },
   profileSectionHeader: {
     backgroundColor: '#A5D6A7',
     paddingVertical: 5,
     paddingHorizontal: 10,
     color: '#FFF',
     marginTop: StatusBar.currentHeight,
+    fontFamily: 'netmarbleL',
     fontSize: 18
   }, 
   profileSection: {
@@ -195,11 +199,15 @@ const styles = StyleSheet.create({
     // padding: 10,
     backgroundColor: 'white',
   }, 
+  profileSectionHeaderText : {
+    fontFamily: 'netmarbleL',
+  },
   travelSectionHeader: {
     backgroundColor: '#A5D6A7',
     paddingVertical: 5,
     paddingHorizontal: 10,
     color: '#FFF',
+    fontFamily: 'netmarbleL',
     fontSize: 18
   }, 
   travelSection: {
@@ -213,6 +221,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 10,
     color: '#FFF',
+    fontFamily: 'netmarbleL',
     fontSize: 18
   }, 
   foodSection: {

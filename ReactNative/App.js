@@ -3,6 +3,14 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 
+// for Redux
+import { createStore } from 'redux';
+import reducers from './reducers';
+import { Provider } from 'react-redux';
+
+const store = createStore(reducers);
+
+
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
@@ -20,11 +28,13 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          {/* {Platform.OS === 'android' && <StatusBar barStyle="default" />} */}
-          <AppNavigator />
-        </View>
+        <Provider store={store}>
+          <View style={styles.container}>
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            {/* {Platform.OS === 'android' && <StatusBar barStyle="default" />} */}
+            <AppNavigator />
+          </View>
+        </Provider>
       );
     }
   }
@@ -40,7 +50,10 @@ export default class App extends React.Component {
         ...Icon.Ionicons.font,
         // We include SpaceMono because we use it in HomeScreen.js. Feel free
         // to remove this if you are not using it in your app
-        'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
+        // 'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
+        'netmarbleB': require('./assets/fonts/netmarbleB.ttf'),
+        'netmarbleM': require('./assets/fonts/netmarbleM.ttf'),
+        'netmarbleL': require('./assets/fonts/netmarbleL.ttf'),
       }),
     ]);
   };
