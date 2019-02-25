@@ -5,7 +5,8 @@ module.exports = function () {
         /////////
         getTotalFoods: function () {
             // .../total_foods
-            return 'SELECT * FROM t_foods';
+            // return 'SELECT * FROM t_foods';
+            return 'SELECT * FROM t_foods JOIN d_description USING(description_id) order by id asc';
         },
         
 
@@ -26,12 +27,40 @@ module.exports = function () {
         },
 
 
+        // information //
         // ingredient
         postIngredient: function () {
             // .../ingredient (id)
            return 'SELECT * FROM d_ingredient';
         },
 
+
+        // cook
+        postCook: function () {
+            // .../cook (id)
+           return 'SELECT * FROM d_cook';
+        },
+
+
+        // eat
+        postEat: function () {
+            // .../eat (id)
+           return 'SELECT * FROM d_eat';
+        },
+
+
+        // history
+        postHistory: function () {
+            // .../history (id)
+           return 'SELECT * FROM d_history';
+        },
+
+
+        // caution
+        postCaution: function () {
+            // .../caution (id)
+           return 'SELECT * FROM d_caution';
+        },
 
 
 

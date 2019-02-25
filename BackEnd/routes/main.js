@@ -5,6 +5,7 @@ var router = express.Router();
 // controller
 var controller_contents = require('../controllers/contents');
 var controller_food 	= require('../controllers/foods');
+var controller_info 	= require('../controllers/information');
 
 
 // middleware that is specific to this router
@@ -36,6 +37,13 @@ router.get('/total_foods', 				controller_food.getTotalFoods);
 // food
 router.post('/food',					controller_food.postFood);
 router.post('/description',				controller_food.postDescription);
+
+// info
+router.post('/ingredient',				controller_info.postIngredient);
+router.post('/cook',					controller_info.postCook);
+router.post('/eat',						controller_info.postEat);
+router.post('/history',					controller_info.postHistory);
+router.post('/caution',					controller_info.postCaution);
 
 
 module.exports = router;
