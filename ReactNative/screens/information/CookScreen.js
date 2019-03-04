@@ -103,9 +103,26 @@ export default class CookScreen extends React.Component {
               let _type, _desc;
               let index = 1;
               
+              let _lan;
+              switch (global.language) {
+                case 'ko':
+                _lan = "description_ko";
+                  break;
+                case 'en':
+                _lan = "description_en";
+                  break;
+                case 'jp':
+                _lan = "description_jp";
+                  break;
+                case 'zh':
+                _lan = "description_zh";
+                  break;
+              }
+
               for (let i = 0; i < count; i ++) {
                 _type = data[i].type;
-                _desc = data[i].description_en;
+                // _desc = data[i].description_en;
+                _desc = data[i][_lan];
                 _typeIndex = _type + ' ' + index;
                 
                 arr.push({

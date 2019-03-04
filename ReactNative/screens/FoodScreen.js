@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { NavigationActions } from 'react-navigation';
 
 import LayoutInfo from '../constants/Layout';
+import Language from '../constants/Language';
 
 import { Dimensions } from 'react-native';
 import Layout from '../constants/Layout';
@@ -89,6 +90,14 @@ export default class FoodScreen extends React.Component {
     console.log("end componentDidMount");
   }
 
+  async componentWillReceiveProps() {
+    console.log('FoodScreen componentWillReceiveProps');
+
+    let _data = await this._getTotalFoods();
+    console.log("_data : " + _data);
+    this.setState({data: _data});
+  }
+
   _getTotalFoods() {
     console.log("call _getTotalFoods");
     
@@ -99,6 +108,26 @@ export default class FoodScreen extends React.Component {
         // console.log(data);
         console.log("count : " + data.length);
 
+        let _title, _desc;
+        switch (global.language) {
+          case 'ko':
+            _title = "title_ko";
+            _desc = "desc_ko";
+            break;
+          case 'en':
+            _title = "title_en";
+            _desc = "desc_en";
+            break;
+          case 'jp':
+            _title = "title_jp";
+            _desc = "desc_jp";
+            break;
+          case 'zh':
+            _title = "title_zh";
+            _desc = "desc_zh";
+            break;
+        } 
+
         let count = data.length;
         let arr = [];
         for (let i = 0; i < count; i ++) {
@@ -106,8 +135,10 @@ export default class FoodScreen extends React.Component {
             key: data[i].id,
             title_local: data[i].title_local,
             title_phonetic: data[i].title_phonetic,
-            title: data[i].title_en,
-            description: data[i].desc_en,
+            // title: data[i].title_en,
+            // description: data[i].desc_en,
+            title: data[i][_title],
+            description: data[i][_desc],
             favorite: true,
 
             description_id: data[i].description_id,
@@ -263,24 +294,29 @@ export default class FoodScreen extends React.Component {
               source={{uri: item.image_url}} >
               <View style={[styles.ImagePartOverlay]}>
                 <InformationIcon 
-                  name='Ingredient'
+                  // name='Ingredient'
+                  name={Language.Ingredient[global.language]}
                   iconSrc={require('../assets/icons/contents/ingredients.png')}
                   // onPress={this._onPressIngredient}/>
                   onPress={() => this._onPressIngredient(index)}/>
                 <InformationIcon 
-                  name='Cook'
+                  // name='Cook'
+                  name={Language.Cook[global.language]}
                   iconSrc={require('../assets/icons/contents/chef.png')}
                   onPress={() => this._onPressCook(index)}/>
                 <InformationIcon 
-                  name='Eat'
+                  // name='Eat'
+                  name={Language.Eat[global.language]}
                   iconSrc={require('../assets/icons/contents/eat.png')}
                   onPress={() => this._onPressEat(index)}/>
                 <InformationIcon 
-                  name='History'
+                  // name='History'
+                  name={Language.History[global.language]}
                   iconSrc={require('../assets/icons/contents/history.png')}
                   onPress={() => this._onPressHistory(index)}/>
                 <InformationIcon 
-                  name='Caution'
+                  // name='Caution'
+                  name={Language.Caution[global.language]}
                   iconSrc={require('../assets/icons/contents/caution.png')}
                   onPress={() => this._onPressCaution(index)}/>
               </View>

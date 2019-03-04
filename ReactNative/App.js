@@ -16,7 +16,14 @@ export default class App extends React.Component {
     isLoadingComplete: false,
   };
   
+  constructor(props){
+    super(props);
+    console.log("App constructor");
 
+    // global.language = 'en';
+    global.language = 'ko';
+  }
+  
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (

@@ -76,30 +76,55 @@ export default class IngredientScreen extends React.Component {
           // let fileName = `../../assets/icons/ingredient/` + keys[index] + `.png`;
           // _imageSrc = require(fileName);
 
-          if (keys[index] == "Meat") {
-            _imageSrc = require('../../assets/icons/ingredient/Meat.png');
-          } else if (keys[index] == "Seafood") {
-            _imageSrc = require('../../assets/icons/ingredient/Seafood.png');
-          } else if (keys[index] == "Grain") {
-            _imageSrc = require('../../assets/icons/ingredient/Grain.png');
-          } else if (keys[index] == "Vegetable") {
-            _imageSrc = require('../../assets/icons/ingredient/Vegetable.png');
-          } else if (keys[index] == "Nut") {
-            _imageSrc = require('../../assets/icons/ingredient/Nut.png');
-          } else if (keys[index] == "Bread") {
-            _imageSrc = require('../../assets/icons/ingredient/Bread.png');
-          }else if (keys[index] == "Fruit") {
-            _imageSrc = require('../../assets/icons/ingredient/Fruit.png');
-          } else if (keys[index] == "Oil") {
-            _imageSrc = require('../../assets/icons/ingredient/Oil.png');
-          } else if (keys[index] == "Flavor") {
-            _imageSrc = require('../../assets/icons/ingredient/Flavor.png');
-          } else if (keys[index] == "Milk product") {
-            _imageSrc = require('../../assets/icons/ingredient/Milk product.png');
-          } else if (keys[index] == "Drink") {
-            _imageSrc = require('../../assets/icons/ingredient/Drink.png');
-          } else if (keys[index] == "Liquor") {
-            _imageSrc = require('../../assets/icons/ingredient/Liquor.png');
+          switch (keys[index]) {
+            case "Meat":
+            case "고기":
+              _imageSrc = require('../../assets/icons/ingredient/Meat.png');
+              break;
+            case "Seafood":
+            case "해산물":
+              _imageSrc = require('../../assets/icons/ingredient/Seafood.png');
+              break;
+            case "Grain":
+            case "곡물":
+              _imageSrc = require('../../assets/icons/ingredient/Grain.png');
+              break;
+            case "Vegetable":
+            case "채소":
+              _imageSrc = require('../../assets/icons/ingredient/Vegetable.png');
+              break;
+            case "Nut":
+            case "견과":
+              _imageSrc = require('../../assets/icons/ingredient/Nut.png');
+              break;
+            case "Bread":
+            case "빵":
+              _imageSrc = require('../../assets/icons/ingredient/Bread.png');
+              break;
+            case "Fruit":
+            case "과일":
+              _imageSrc = require('../../assets/icons/ingredient/Fruit.png');
+              break;
+            case "Oil":
+            case "기름":
+              _imageSrc = require('../../assets/icons/ingredient/Oil.png');
+              break;
+            case "Flavor":
+            case "조미료":
+              _imageSrc = require('../../assets/icons/ingredient/Flavor.png');
+              break;
+            case "Milk product":
+            case "유제품":
+              _imageSrc = require('../../assets/icons/ingredient/Milk product.png');
+              break;
+            case "Drink":
+            case "음료":
+              _imageSrc = require('../../assets/icons/ingredient/Drink.png');
+              break;
+            case "Liquor":
+            case "주류":
+              _imageSrc = require('../../assets/icons/ingredient/Liquor.png');
+              break;
           }
 
           return (
@@ -169,6 +194,26 @@ export default class IngredientScreen extends React.Component {
               let arr = [];
               let typeArr = {};
 
+              let _index, _value, _type, _lan;
+              switch (global.language) {
+                case 'ko':
+                  _type = "type_ko";
+                  _lan = "ingredient_ko";
+                  break;
+                case 'en':
+                  _type = "type_en";
+                  _lan = "ingredient_en";
+                  break;
+                case 'jp':
+                  _type = "type_jp";
+                  _lan = "ingredient_jp";
+                  break;
+                case 'zh':
+                  _type = "type_zh";
+                  _lan = "ingredient_zh";
+                  break;
+              }
+
               for (let i = 0; i < count; i ++) {
                 // type 1
                 // arr.push({
@@ -181,23 +226,14 @@ export default class IngredientScreen extends React.Component {
                 // });
 
                 // type 2
-                let _type_en = data[i].type_en;
-                let _ingredient_en = data[i].ingredient_en;
-                if (false) {
-                  if (typeArr[_type_en] == null || typeArr[_type_en] == undefined) {
-                    typeArr[_type_en] = [];
-                    console.log("add " + _type_en + ": " + _ingredient_en);
-                    typeArr[_type_en].push(_ingredient_en);
-                  } else {
-                    console.log("add " + _type_en + ": " + _ingredient_en);
-                    typeArr[_type_en].push(_ingredient_en);
-                  }
+                // let _type_en = data[i].type_en;
+                // let _ingredient_en = data[i].ingredient_en;
+                let _index = data[i][_type];
+                let _value = data[i][_lan];
+                if (typeArr[_index] == null || typeArr[_index] == undefined) {
+                  typeArr[_index] = _value;
                 } else {
-                  if (typeArr[_type_en] == null || typeArr[_type_en] == undefined) {
-                    typeArr[_type_en] = _ingredient_en;
-                  } else {
-                    typeArr[_type_en] += ', ' + _ingredient_en;
-                  }
+                  typeArr[_index] += ', ' + _value;
                 }
 
                 // type3 
