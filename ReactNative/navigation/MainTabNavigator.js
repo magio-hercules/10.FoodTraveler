@@ -21,12 +21,6 @@ import CautionScreen from '../screens/information/CautionScreen';
 import ProfileScreen from '../screens/option/ProfileScreen';
 import FilterScreen from '../screens/option/FilterScreen';
 
-// import HomeScreen from '../screens/HomeScreen';
-// import ListScreen from '../screens/ListScreen';
-// import TileScreen from '../screens/TileScreen';
-// import CardScreen from '../screens/CardScreen';
-// import UserScreen from '../screens/UserScreen';
-
 // name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
 // name={Platform.OS === 'ios' ? 'ios-heart' : 'md-heart'}
 // name={Platform.OS === 'ios' ? 'ios-people' : 'md-people'}
@@ -149,15 +143,6 @@ const FoodStack = createStackNavigator({
   }),
 });
 
-// FoodStack.navigationOptions = {
-//   tabBarLabel: 'Food',
-//   tabBarIcon: ({ focused }) => (
-//     <TabBarIcon
-//       focused={focused}
-//       name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
-//     />
-//   ),
-// };
 FoodStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = navigation.state.index > 0 ? false : true;
   console.log("FoodStack.navigationOptions");
@@ -185,17 +170,6 @@ const LikeStack = createStackNavigator({
   ),
 });
 
-// LikeStack.navigationOptions = {
-//   // tabBarLabel: 'Like',
-//   tabBarLabel: Language.Like[global.language],
-//   tabBarOptions: _tabBarOptions(),
-//   tabBarIcon: ({ focused }) => (
-//     <TabBarIcon
-//       focused={focused}
-//       name={Platform.OS === 'ios' ? 'ios-heart' : 'md-heart'}
-//     />
-//   ),
-// };
 LikeStack.navigationOptions = ({ navigation }) => {
   console.log("LikeStack.navigationOptions");
   console.log("global.language : " + global.language);
@@ -216,6 +190,7 @@ LikeStack.navigationOptions = ({ navigation }) => {
   };
 };
 
+
 const RestaurantStack = createStackNavigator({
   Restaurant: RestaurantScreen,
 }, {
@@ -225,18 +200,6 @@ const RestaurantStack = createStackNavigator({
   ),
 });
 
-// PeopleStack.navigationOptions = {
-//   // tabBarLabel: 'People',
-//   // tabBarLabel: 'Restaurant',
-//   tabBarLabel: Language.Restaurant[global.language],
-//   tabBarOptions: _tabBarOptions(),
-//   tabBarIcon: ({ focused }) => (
-//     <TabBarIcon
-//       focused={focused}
-//       name={Platform.OS === 'ios' ? 'ios-restaurant' : 'md-restaurant'}
-//     />
-//   ),
-// };
 RestaurantStack.navigationOptions = ({ navigation }) => {
   console.log("RestaurantStack.navigationOptions");
   
@@ -254,6 +217,7 @@ RestaurantStack.navigationOptions = ({ navigation }) => {
     ),
   };
 };
+
 
 const LocationStack = createStackNavigator({
   Location: LocationScreen,
@@ -283,6 +247,7 @@ LocationStack.navigationOptions = ({ navigation }) => {
   };
 };
 
+
 const UtilityStack = createStackNavigator({
   Utility: UtilityScreen,
 }, {
@@ -311,91 +276,6 @@ UtilityStack.navigationOptions = ({ navigation }) => {
   };
 };
 
-//////////////////////////////////////////////////////////////////////////////////////////
-
-// const HomeStack = createStackNavigator({
-//   Home: HomeScreen,
-// }, {
-//   headerMode: 'none'
-// });
-
-// HomeStack.navigationOptions = {
-//   tabBarLabel: 'Home',
-//   tabBarIcon: ({ focused }) => (
-//     <TabBarIcon
-//       focused={focused}
-//       name={
-//         Platform.OS === 'ios'
-//           ? `ios-information-circle${focused ? '' : '-outline'}`
-//           : 'md-information-circle'
-//       }
-//     />
-//   ),
-// };
-
-// const ListStack = createStackNavigator({
-//   List: ListScreen,
-// }, {
-//   headerMode: 'none'
-// });
-
-// ListStack.navigationOptions = {
-//   tabBarLabel: 'List',
-//   tabBarIcon: ({ focused }) => (
-//     <TabBarIcon
-//       focused={focused}
-//       name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
-//     />
-//   ),
-// };
-
-// const TileStack = createStackNavigator({
-//   Tile: TileScreen,
-// }, {
-//   headerMode: 'none'
-// });
-
-// TileStack.navigationOptions = {
-//   tabBarLabel: 'Tile',
-//   tabBarIcon: ({ focused }) => (
-//     <TabBarIcon
-//       focused={focused}
-//       name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-//     />
-//   ),
-// };
-
-// const CardStack = createStackNavigator({
-//   Card: CardScreen,
-// }, {
-//   headerMode: 'none'
-// });
-
-// CardStack.navigationOptions = {
-//   tabBarLabel: 'Card',
-//   tabBarIcon: ({ focused }) => (
-//     <TabBarIcon
-//       focused={focused}
-//       name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-//     />
-//   ),
-// };
-
-// const UserStack = createStackNavigator({
-//   Profile: UserScreen,
-// }, {
-//   headerMode: 'none'
-// });
-
-// UserStack.navigationOptions = {
-//   tabBarLabel: 'Profile',
-//   tabBarIcon: ({ focused }) => (
-//     <TabBarIcon
-//       focused={focused}
-//       name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'}
-//     />
-//   ),
-// };
 
 export default createBottomTabNavigator({
   FoodStack,
@@ -403,12 +283,6 @@ export default createBottomTabNavigator({
   RestaurantStack,
   LocationStack, 
   UtilityStack,
-
-  // HomeStack,
-  // ListStack,
-  // TileStack,
-  // CardStack,
-  // UserStack
 },
   {
     lazy: false,

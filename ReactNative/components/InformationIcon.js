@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column', 
         justifyContent: 'center',
         alignItems: 'center',
-        width: LayoutInfo.imagePartIconSize + 17, 
+        width: LayoutInfo.imagePartIconSize + 25, 
         height: LayoutInfo.imagePartIconSection,
         // backgroundColor: '#aad',
     },

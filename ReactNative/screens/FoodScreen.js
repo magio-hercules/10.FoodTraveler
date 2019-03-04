@@ -426,12 +426,13 @@ const styles = StyleSheet.create({
   },
   ContentHeaderText: {
     flex: 8,
-    fontSize: 20,
+    fontSize: 18,
     alignItems: 'center',
     fontFamily: 'netmarbleM'
   },
   ContentText: {
-    fontFamily: 'netmarbleL'
+    fontFamily: 'netmarbleL',
+    marginTop: 5
   },
   IconPart: {
     flex: 3,
