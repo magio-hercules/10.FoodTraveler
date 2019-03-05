@@ -8,37 +8,13 @@ import DrawerScreen from '../screens/DrawerScreen';
 
 import Layout from '../constants/Layout';
 
-import IngredientScreen from '../screens/information/IngredientScreen';
-import CookScreen from '../screens/information/CookScreen';
-import EatScreen from '../screens/information/EatScreen';
-import HistoryScreen from '../screens/information/HistoryScreen';
-import CautionScreen from '../screens/information/CautionScreen';
 
-
-// export default createSwitchNavigator({
-//   // You could add another route here for authentication.
-//   // Read more at https://reactnavigation.org/docs/en/auth-flow.html
-//   Main: MainTabNavigator,
-// });
-
-// const InfoStack = createStackNavigator({
-//   Ingredient: IngredientScreen,
-//   Cook: CookScreen,
-//   Eat: EatScreen,
-//   History: HistoryScreen,
-//   Caution: CautionScreen
-// }, {
-//   // headerMode: 'none'
-// });
 
 const DrawerNavigator = createDrawerNavigator({
   Home:{
       screen: MainTabNavigator,
       // headerMode: 'none'
   },
-  // Info: {
-  //   screen: InfoStack
-  // }
 },{
   initialRouteName: 'Home',
   contentComponent: DrawerScreen,
