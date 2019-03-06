@@ -4,11 +4,15 @@ import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 
 // for Redux
-import { createStore } from 'redux';
-import reducers from './reducers';
 import { Provider } from 'react-redux';
 
-const store = createStore(reducers);
+// #type 1, normal
+import { createStore } from 'redux';
+// import reducers from './reducers';
+// const store = createStore(reducers);
+
+// #type 2, import
+import store from './store';
 
 
 export default class App extends React.Component {

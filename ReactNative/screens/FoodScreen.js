@@ -18,7 +18,8 @@ import CookScreen from './information/CookScreen';
 
 // for redux
 import { connect } from 'react-redux';
-import * as actions from '../actions';
+// import * as actions from '../actions';
+import * as counterActions from '../reducers/counter';
 
 
 // import cloneDeep from 'lodash/cloneDeep';
@@ -48,7 +49,7 @@ class LogoTitle extends React.Component {
 
 
 
-export default class FoodScreen extends React.Component {
+class FoodScreen extends React.Component {
 // default class FoodScreen extends React.Component {
   static navigationOptions = {
   //   // header: null,
@@ -298,6 +299,7 @@ export default class FoodScreen extends React.Component {
                   name={Language.Ingredient[global.language]}
                   iconSrc={require('../assets/icons/contents/ingredients.png')}
                   // onPress={this._onPressIngredient}/>
+                  number={this.props.number}
                   onPress={() => this._onPressIngredient(index)}/>
                 <InformationIcon 
                   // name='Cook'
@@ -338,13 +340,17 @@ export default class FoodScreen extends React.Component {
                   <CommunityIcon 
                     iconSrc={item.favorite ? require('../assets/icons/heart_3.png') : require('../assets/icons/heart_2.png')}
                     tintColor={item.favorite ? '#f44336' : 'rgb(50, 50, 50)'}
-                    onPress={() => this._onPressHeart(index)}/>
+                    // onPress={() => this._onPressHeart(index)}/>
+                    />
                   <CommunityIcon 
                     iconSrc={require('../assets/icons/message.png')}
-                    onPress={() => this._onPressMessage(index)}/>
+                    // onPress={() => this._onPressMessage(index)}/>
+                    onPlus={this.props.increment}/>
                   <CommunityIcon 
                     iconSrc={require('../assets/icons/share.png')}
-                    onPress={() => this._onPressShare(index)}/>
+                    // onPress={() => this._onPressShare(index)}/>
+                    onPlus={this.props.decrement}
+                    />
                 </View>
               </View>
               
@@ -375,15 +381,38 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchProps = (dispatch) => {
-  return {
-      handleIncrement: () => { dispatch(actions.increment())},
-      handleShowIngredient: (index) => { dispatch(actions.showInfoIngredient(index))}
-  };
-};
+// #type 1
+// const mapDispatchProps = (dispatch) => {
+//   return {
+//       handleIncrement: () => { dispatch(actions.increment())},
+//       handleDecrement: () => { dispatch(actions.decrement())},
+//       handleShowIngredient: (index) => { dispatch(actions.showInfoIngredient(index))}
+//   };
+// };
 
-connect(mapStateToProps, mapDispatchProps)(FoodScreen);
+// #type 2
+// props 값으로 넣어 줄 액션 함수들을 정의해줍니다
+const mapDispatchProps = (dispatch) => ({
+  increment: () => dispatch(counterActions.increment()),
+  decrement: () => dispatch(counterActions.decrement())
+})
 
+// 컴포넌트를 리덕스와 연동 할 떄에는 connect 를 사용합니다.
+// connect() 의 결과는, 컴포넌트에 props 를 넣어주는 함수를 반환합니다.
+// 반환된 함수에 우리가 만든 컴포넌트를 넣어주면 됩니다.
+// #type 1
+export default connect(mapStateToProps, mapDispatchProps)(FoodScreen);
+
+// #type 2
+// export default connect(
+//   (state) => ({
+//     number: state.counter.number
+//   }), 
+//   (dispatch) => ({
+//     increment: () => dispatch(counterActions.increment()),
+//     decrement: () => dispatch(counterActions.decrement())
+//   })
+// )(CounterContainer);
 
 
 const styles = StyleSheet.create({

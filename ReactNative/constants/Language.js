@@ -161,4 +161,11 @@ export default {
     'zh': 'Drink',
     'jp': 'Drink',
   },
+  // Filter
+  Filter: {
+    'ko': '필터',
+    'en': 'Filter',
+    'zh': 'Filter',
+    'jp': 'Filter',
+  },
 };

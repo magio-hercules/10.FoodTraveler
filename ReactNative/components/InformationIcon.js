@@ -8,12 +8,14 @@ const propTypes = {
     name : PropTypes.string,
     iconSrc : PropTypes.node,
     onPress: PropTypes.func,
-    index: PropTypes.number
+    index: PropTypes.number,
+    number: PropTypes.number
 };
 
 const defaultProps = {
     onPress: createWarning('onPress'),
-    index: -1
+    index: -1,
+    number: 0
 };
 
 function createWarning(funcName) {
@@ -35,7 +37,7 @@ export default class InformationIcon extends Component {
                     <Image style={styles.ImagePartIconImage}
                             source={this.props.iconSrc}/>
                     <Text style={styles.ImagePartIconText}>
-                        {this.props.name} </Text>
+                        {this.props.name} {this.props.number} </Text>
                 </View>
             </TouchableHighlight>
         );

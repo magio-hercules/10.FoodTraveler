@@ -48,6 +48,11 @@ const _navigationOptions = (navigation, bHeaderLeft = true) => {
   // console.log("_routeName : "  + _routeName);
   // console.log("global.language : " + global.language);
   // const headerTitle = navigation.state.routeName;
+  if (Language[_routeName] == null || Language[_routeName] == undefined) {
+    console.warn('_navigationOptions is not defined : _routeName(' + _routeName +')');
+    return;
+  }
+  
   const headerTitle = Language[_routeName][global.language];
   
   const headerLeft = 

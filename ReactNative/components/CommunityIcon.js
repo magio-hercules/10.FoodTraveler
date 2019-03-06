@@ -9,10 +9,14 @@ const propTypes = {
     iconSrc : PropTypes.node,
     tintColor : PropTypes.string,
     onPress: PropTypes.func,
+    onPlus: PropTypes.func,
+    onSubtract: PropTypes.func,
 };
 
 const defaultProps = {
     onPress: createWarning('onPress'),
+    onPlus: createWarning('onPlus'),
+    onSubtract: createWarning('onSubtract'),
 };
 
 function createWarning(funcName) {
@@ -28,7 +32,8 @@ export default class CommunityIcon extends Component {
     render() {
         return (
             <TouchableHighlight style={styles.Icon}
-                onPress={this.props.onPress}
+                // onPress={this.props.onPress}
+                onPress={this.props.onPlus}
                 underlayColor='#fff'>
                 <Image style={styles.IconImage}
                           tintColor={this.props.tintColor}

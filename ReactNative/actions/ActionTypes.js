@@ -1,3 +1,0 @@
-export const SHOW_INFO_INGREDIENT = "SHOW_INFO_INGREDIENT";
-
-export const INCREMENT = "INCREMENT";
