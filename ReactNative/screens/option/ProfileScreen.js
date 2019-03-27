@@ -7,8 +7,6 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import Language from '../../constants/Language';
-import RNRestart from 'react-native-restart';
 
 
 
@@ -41,7 +39,8 @@ export default class ProfileScreen extends React.Component {
     // this.setState({
     //   count: this.state.count+1
     // })
-    global.language = 'ko';
+
+    // global.language = 'ko';
     
     // Immediately reload the React Native Bundle
     // RNRestart.Restart();
@@ -49,7 +48,8 @@ export default class ProfileScreen extends React.Component {
 
   _onPressEnglish = () => {
     console.log('_onPressEnglish');
-    global.language = 'en';
+    
+    // global.language = 'en';
 
     // Immediately reload the React Native Bundle
     // RNRestart.Restart();
@@ -62,7 +62,7 @@ export default class ProfileScreen extends React.Component {
           <Image style={styles.avatar} source={require('../../assets/icons/test/profile_tiger.png')}/>
           <View style={styles.body}>
             <View style={styles.bodyContent}>
-              <Text style={styles.name}>쫑미니</Text>
+              <Text style={styles.name}>장영훈</Text>
               <Text style={styles.info}>{global.language == 'en' ? 'Developer' : '개발자'}</Text>
               <Text style={styles.description}>
                 {global.language == 'en' ? 'Lorem ipsum dolor sit amet, saepe sapientem eu nam.' 

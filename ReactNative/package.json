@@ -21,7 +21,6 @@
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
     "react-native-elements": "^1.0.0",
-    "react-native-restart": "0.0.9",
     "react-native-vector-icons": "^6.1.0",
     "react-navigation": "^2.18.2",
     "react-redux": "^6.0.0",

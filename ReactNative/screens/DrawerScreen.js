@@ -93,10 +93,12 @@ export default class DrawerScreen extends Component {
             <View style={[styles.profileSectionHeader, {backgroundColor: Colors.drawerSectionHeader1}, {flex:1, flexDirection:'row'}]}>
               <View style={[{color: Colors.WHITE}, {flex:1, flexDirection:'column'}]}>
                 <Text style={[styles.profileSectionHeaderText, {color: Colors.WHITE}, {fontSize: 18}]}>
-                  김종민
+                  {/* 김종민 */}
+                  장영훈
                 </Text>
                 <Text style={[styles.profileSectionHeaderText, {color: Colors.WHITE}]}>
-                  kjmhercules@gmail.com
+                  {/* kjmhercules@gmail.com */}
+                  cool0huny@naver.com
                 </Text>
               </View>
               <TouchableHighlight style={{ width: 40, height: 40, marginLeft: 0, marginTop: 0, alignSelf:'center', padding: 10 }}

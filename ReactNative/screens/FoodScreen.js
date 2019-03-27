@@ -375,8 +375,8 @@ FoodScreen.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-      number: state.counter.number,
-      index: state.info.index,
+      number: state.counter.number
+      // index: state.info.index,
       // color: state.ui.color
   };
 };

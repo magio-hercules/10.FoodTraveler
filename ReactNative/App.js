@@ -24,8 +24,8 @@ export default class App extends React.Component {
     super(props);
     console.log("App constructor");
 
-    // global.language = 'en';
-    global.language = 'ko';
+    global.language = 'en';
+    // global.language = 'ko';
   }
   
   render() {

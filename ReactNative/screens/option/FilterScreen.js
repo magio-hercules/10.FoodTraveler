@@ -35,11 +35,10 @@ export default class FilterScreen extends React.Component {
       <View style={styles.container}>
         <View style={styles.header}>
           <View style={styles.headerContent}>
-              <Image style={styles.avatar}
-                source={{uri: 'https://bootdey.com/img/Content/avatar/avatar1.png'}}/>
+              <Image style={styles.avatar} source={require('../../assets/icons/test/profile_tiger.png')}/>
 
               <Text style={styles.name}>
-                LABIS
+                발자국연구소
               </Text>
           </View>
         </View>
