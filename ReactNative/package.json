@@ -1,0 +1,35 @@
+{
+  "name": "com.labis.foodtraveler",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "apisauce": "^1.0.2",
+    "lodash": "^4.17.11",
+    "prop-types": "^15.6.0",
+    "react": "16.8.3",
+    "react-native": "0.59.1",
+    "react-native-elements": "^1.0.0",
+    "react-native-gesture-handler": "^1.0.17",
+    "react-native-splash-screen": "^3.2.0",
+    "react-native-vector-icons": "^6.1.0",
+    "react-navigation": "^3.5.1",
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.1",
+    "redux-actions": "^2.6.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/runtime": "^7.3.4",
+    "babel-jest": "^24.5.0",
+    "jest": "^24.5.0",
+    "metro-react-native-babel-preset": "^0.53.1",
+    "react-test-renderer": "16.8.3"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
