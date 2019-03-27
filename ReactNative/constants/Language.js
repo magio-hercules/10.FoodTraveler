@@ -31,12 +31,18 @@ export default {
     'zh': 'Location',
     'jp': 'Location',
   },
-  Location: {
+  Location: { // TODO, delete
     'ko': '위치',
     'en': 'Location',
     'zh': 'Location',
     'jp': 'Location',
   },
+  Class: {
+    'ko': '쿠킹클래스',
+    'en': 'Cooking',
+    'zh': 'Cooking',
+    'jp': 'Cooking',
+  },  
   Utility: {
     'ko': '유틸리티',
     'en': 'Utility',

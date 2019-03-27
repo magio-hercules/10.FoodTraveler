@@ -8,7 +8,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import FoodScreen from '../screens/FoodScreen';
 import LikeScreen from '../screens/LikeScreen';
 import RestaurantScreen from '../screens/RestaurantScreen';
-import LocationScreen from '../screens/LocationScreen';
+import ClassScreen from '../screens/ClassScreen';
 import UtilityScreen from '../screens/UtilityScreen';
 
 import IngredientScreen from '../screens/information/IngredientScreen';
@@ -177,9 +177,13 @@ FoodStack.navigationOptions = ({ navigation }) => {
     tabBarLabel: Language.Food[global.language],
     tabBarOptions: _tabBarOptions(),
     tabBarIcon: ({ focused }) => (
+           // <TabBarIcon
+      //   focused={focused}
+      //   name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
+      // />
       <TabBarIcon
         focused={focused}
-        name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
+        iconSrc={require('../assets/icons/tab/home.png')}
       />
     ),
   };
@@ -207,9 +211,13 @@ LikeStack.navigationOptions = ({ navigation }) => {
     tabBarOptions: _tabBarOptions(),
     // lazy: false,
     tabBarIcon: ({ focused }) => (
+     // <TabBarIcon
+      //   focused={focused}
+      //   name={Platform.OS === 'ios' ? 'ios-heart' : 'md-heart'}
+      // />
       <TabBarIcon
         focused={focused}
-        name={Platform.OS === 'ios' ? 'ios-heart' : 'md-heart'}
+        iconSrc={require('../assets/icons/tab/like.png')}
       />
     ),
   };
@@ -235,17 +243,21 @@ RestaurantStack.navigationOptions = ({ navigation }) => {
     // tabBarLabel: Language.Food[global.language],
     tabBarOptions: _tabBarOptions(),
     tabBarIcon: ({ focused }) => (
+       // <TabBarIcon
+      //   focused={focused}
+      //   name={Platform.OS === 'ios' ? 'ios-restaurant' : 'md-restaurant'}
+      // />
       <TabBarIcon
         focused={focused}
-        name={Platform.OS === 'ios' ? 'ios-restaurant' : 'md-restaurant'}
+        iconSrc={require('../assets/icons/tab/restaurant.png')}
       />
     ),
   };
 };
 
 
-const LocationStack = createStackNavigator({
-  Location: LocationScreen,
+const ClassStack = createStackNavigator({
+  Class: ClassScreen,
 }, {
   // headerMode: 'none'
   defaultNavigationOptions: ({ navigation }) => (
@@ -253,20 +265,24 @@ const LocationStack = createStackNavigator({
   ),
 });
 
-LocationStack.navigationOptions = ({ navigation }) => {
-  console.log("LocationStack.navigationOptions");
+ClassStack.navigationOptions = ({ navigation }) => {
+  console.log("ClassStack.navigationOptions");
   console.log("global.language : " + global.language);
-  console.log("Language.Location[global.language] : " + Language.Location[global.language]);
-  console.log("Language.Location : " + Language.Location);
+  console.log("Language.Class[global.language] : " + Language.Class[global.language]);
+  console.log("Language.Class : " + Language.Class);
 
   return {
-    // tabBarLabel: 'Location',
-    tabBarLabel: Language.Location[global.language],
+    // tabBarLabel: 'Class',
+    tabBarLabel: Language.Class[global.language],
     tabBarOptions: _tabBarOptions(),
     tabBarIcon: ({ focused }) => (
+       // <TabBarIcon
+      //   focused={focused}
+      //   name={Platform.OS === 'ios' ? 'ios-pin' : 'md-pin'}
+      // />
       <TabBarIcon
         focused={focused}
-        name={Platform.OS === 'ios' ? 'ios-pin' : 'md-pin'}
+        iconSrc={require('../assets/icons/tab/class.png')}
       />
     ),
   };
@@ -293,9 +309,13 @@ UtilityStack.navigationOptions = ({ navigation }) => {
     tabBarLabel: Language.Utility[global.language],
     tabBarOptions: _tabBarOptions(),
     tabBarIcon: ({ focused }) => (
+      // <TabBarIcon
+      //   focused={focused}
+      //   name={Platform.OS === 'ios' ? 'ios-settings' : 'md-settings'}
+      // />
       <TabBarIcon
         focused={focused}
-        name={Platform.OS === 'ios' ? 'ios-settings' : 'md-settings'}
+        iconSrc={require('../assets/icons/tab/utility.png')}
       />
     ),
   };
@@ -306,7 +326,7 @@ export default createBottomTabNavigator({
   FoodStack,
   LikeStack,
   RestaurantStack,
-  LocationStack, 
+  ClassStack, 
   UtilityStack,
 },
   {
