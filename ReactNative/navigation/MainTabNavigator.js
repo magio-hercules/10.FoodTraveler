@@ -11,11 +11,18 @@ import RestaurantScreen from '../screens/RestaurantScreen';
 import ClassScreen from '../screens/ClassScreen';
 import UtilityScreen from '../screens/UtilityScreen';
 
+// for RestaurantScreen
 import IngredientScreen from '../screens/information/IngredientScreen';
 import CookScreen from '../screens/information/CookScreen';
 import EatScreen from '../screens/information/EatScreen';
 import HistoryScreen from '../screens/information/HistoryScreen';
 import CautionScreen from '../screens/information/CautionScreen';
+
+// for RestaurantScreen
+import DetailScreen from '../screens/information/DetailScreen';
+import GalleryScreen from '../screens/information/GalleryScreen';
+import MapScreen from '../screens/information/MapScreen';
+
 
 import ProfileScreen from '../screens/option/ProfileScreen';
 import FilterScreen from '../screens/option/FilterScreen';
@@ -56,6 +63,7 @@ class NavigationDrawerStructure extends Component {
   }
 }
 
+// bHeaderLeft가 false인 경우 뒤로가기 버튼 표시.
 const _navigationOptions = (navigation, bHeaderLeft = true) => {
   console.log("_navigationOptions : " + navigation.state.routeName);
 
@@ -80,6 +88,7 @@ const _navigationOptions = (navigation, bHeaderLeft = true) => {
       // </TouchableOpacity> 
     : 
     undefined;
+  console.log("headerLeft : ");
   console.log(headerLeft);
   
   // const headerLeft = <NavigationDrawerStructure navigationProps={navigation} />;
@@ -225,19 +234,54 @@ LikeStack.navigationOptions = ({ navigation }) => {
 
 
 const RestaurantStack = createStackNavigator({
-  Restaurant: RestaurantScreen,
+  // Restaurant: RestaurantScreen,
+  Restaurant: {
+    screen: RestaurantScreen,
+    navigationOptions: ({ navigation }) => ({
+      headerTitle: Language.Restaurant[global.language],
+      headerLeft: 
+        <TouchableOpacity  onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())} }>
+            <MenuImage navigation={navigation}/>
+        </TouchableOpacity>,
+    }),
+  },
+
+  Detail: DetailScreen,
+  Gallery: GalleryScreen,
+  Map: MapScreen,
 }, {
   // headerMode: 'none'
   defaultNavigationOptions: ({ navigation }) => (
-    _navigationOptions(navigation)
+    _navigationOptions(navigation, false)
   ),
+  transitionConfig: () => ({
+    transitionSpec: {
+      duration: 500,
+      easing: Easing.out(Easing.poly(4)),
+      timing: Animated.timing,
+    },
+    screenInterpolator: sceneProps => {
+      const { layout, position, scene } = sceneProps;
+      const { index } = scene;
+      const width = layout.initWidth;
+      const translateX = position.interpolate({
+        inputRange: [index - 1, index],
+        outputRange: [width, 0],
+      });
+
+      return { /*opacity,*/ transform: [{ translateX }] };
+    },
+  }),
 });
 
 RestaurantStack.navigationOptions = ({ navigation }) => {
   console.log("RestaurantStack.navigationOptions");
+  console.log("navigation.state.index : " + navigation.state.index);
+  
+  let tabBarVisible = navigation.state.index > 0 ? false : true;
   
   return {
-    // tabBarLabel: 'People',
+    tabBarVisible,
     // tabBarLabel: 'Restaurant',
     tabBarLabel: Language.Restaurant[global.language],
     // tabBarLabel: Language.Food[global.language],

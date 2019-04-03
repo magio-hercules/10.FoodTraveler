@@ -174,4 +174,23 @@ export default {
     'zh': 'Filter',
     'jp': 'Filter',
   },
+  // Restaurant
+  Detail: {
+    'ko': '상세정보',
+    'en': 'Detail',
+    'zh': 'Detail',
+    'jp': 'Detail',
+  },
+  Gallery: {
+    'ko': '갤러리',
+    'en': 'Gallery',
+    'zh': 'Gallery',
+    'jp': 'Gallery',
+  },
+  Map: {
+    'ko': '지도',
+    'en': 'Map',
+    'zh': 'Map',
+    'jp': 'Map',
+  },
 };

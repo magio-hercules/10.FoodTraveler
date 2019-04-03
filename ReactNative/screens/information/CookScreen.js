@@ -138,7 +138,7 @@ export default class CookScreen extends React.Component {
             .catch((err) => {
               console.error(err);
             });
-  } // end of _getInfoIngredient(list)
+  } // end of _getCook(list)
 }
 
 

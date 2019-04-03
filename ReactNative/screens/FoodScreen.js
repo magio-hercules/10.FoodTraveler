@@ -104,7 +104,13 @@ class FoodScreen extends React.Component {
     
     return api
       .get('/total_foods')
-      .then(response => response.data)
+      // .then(console.log)
+      // .then(response => response.data) 
+      .then((response) => {
+        console.log("!!!response!!!");
+        console.log(response);
+        return response.data;
+      })
       .then((data) => {
         // console.log(data);
         console.log("count : " + data.length);
