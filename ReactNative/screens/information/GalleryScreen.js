@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, VirtualizedList } from 'react-native';
+import { View, Text, TouchableHighlight, StyleSheet, Image } from 'react-native';
+
+import ImageSlider from 'react-native-image-slider';
 
 import { create } from 'apisauce'
 import _size from 'lodash/size';
@@ -15,6 +17,13 @@ const api = create({
   baseURL: 'http://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com:7000/FooTravel',
   headers: { 'Content-Type': 'application/json' },
 })
+
+const images = [
+  'https://korean.visitseoul.net/comm/getImage?srvcId=MEDIA&parentSn=1889&fileTy=MEDIA&fileNo=1&thumbTy=L',
+  'http://tong.visitkorea.or.kr/cms/resource/88/1290988_image2_1.jpg',
+  'https://mblogthumb-phinf.pstatic.net/MjAxNzA3MDZfMjE0/MDAxNDk5MzI4NTUyMDY5.KriNSnlEsWIWsiRWY_mw7iHFptgchrzOkTooQlVtIdsg.mW7GQ5aDasNRlWDCfRHsg07RWKOYUR3Hj-OUJ47qKjcg.JPEG.thdus0322/%EB%AA%85%EB%8F%99%EC%97%AD_%EA%B3%A0%EA%B8%B0%EC%A7%91_%EA%B3%A0%EA%B6%81_%EB%AA%85%EB%8F%99%EC%A0%90_%287%29.JPG?type=w2',
+  'https://t1.daumcdn.net/cfile/tistory/231769345788362A4C',
+];
 
 export default class GalleryScreen extends React.Component {
   state = {
@@ -34,54 +43,48 @@ export default class GalleryScreen extends React.Component {
 
   render() {
     return (
-      <View> 
-        <Text>Gallery</Text>
-      </View>
-    //   <FlatList
-    //     // data={_values(this.state.data)}
-    //     // data={newArr}
-    //     data={this.state.data}
-    //     keyExtractor={(item, index) => index.toString()} 
-    //     renderItem={({ item, index }) => {
-    //       console.log("renderItem");
-    //       console.log(item);
-    //       console.log(item.type);
-    //       console.log(item.desc);
-
-    //       return (
-    //         <View style={styles.table}>
-    //           <View
-    //             style={styles.rowSection}
-    //             key={index}
-    //             width= {LayoutInfo.width}
-    //             height= {70}>
-    //             <View style={styles.iconPart}>
-    //               <Avatar
-    //                 size="medium"
-    //                 rounded
-    //                 overlayContainerStyle={{width:90, backgroundColor: '#BBDEFB'}}
-    //                 title={item.type}
-    //                 // iconStyle={{height:80, width:80}}
-    //                 titleStyle={{fontSize: 15}}
-    //                 // onPress={() => console.log("Works!")}
-    //                 activeOpacity={0.7} />
-    //             </View>
-    //             <Text 
-    //               style={{
-    //                 flex:1,
-    //                 marginLeft: 10,
-    //                   // backgroundColor:'#1aa'
-    //                 }} 
-    //               numberOfLines={4}
-    //               ellipsizeMode='tail'> 
-    //               {item.desc} 
-    //             </Text>
-    //           </View>
-    //           <Divider style={{ backgroundColor: 'blue' }} />
-    //         </View>
-    //       );
-    //   }}
-    // />
+      <ImageSlider
+        loop
+        autoPlayWithInterval={5000}
+        images={images}
+        onPress={({ index }) => alert(index)}
+        customSlide={({ index, item, style, width }) => (
+        // It's important to put style here because it's got offset inside
+        <View
+          key={index}
+          style={[
+            style,
+            styles.customSlide,
+            { backgroundColor: 'black' },
+          ]}
+        >
+          <Image 
+            source={{ uri: item }} 
+            resizeMode='contain'
+            style={styles.customImage} />
+        </View>
+      )}
+      customButtons={(position, move) => (
+        <View style={styles.buttons}>
+          {images.map((image, index) => {
+            return (
+              <TouchableHighlight
+                key={index}
+                underlayColor="transparent"
+                onPress={() => move(index)}
+                style={styles.button}
+              >
+                {/* <Text style={position === index ? styles.buttonSelected : styles.buttonNotSelected}>
+                  {index + 1}
+                </Text> */}
+                <Image style={position === index ? styles.dotSelected : styles.dotNormal}
+                      source={require('../../assets/icons/dot.png')}/>
+              </TouchableHighlight>
+            );
+          })}
+        </View>
+      )}
+    />
     );
   } // end of render
 
@@ -106,5 +109,43 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     // justifyContent: 'center',
     // backgroundColor: '#a1a'
-  }
+  },
+  buttons: {
+    zIndex: 1,
+    height: 15,
+    marginTop: -25,
+    marginBottom: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  button: {
+    margin: 3,
+    width: 15,
+    height: 15,
+    opacity: 0.9,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  dotSelected: {
+    opacity: 1,
+    tintColor: 'white',
+    width: 25,
+    height: 25,
+  },
+  dotNormal: {
+    opacity: 0.6,
+    tintColor: 'white',
+    width: 25,
+    height: 25,
+  },
+  customSlide: {
+    backgroundColor: 'green',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  customImage: {
+    width: LayoutInfo.window.width,
+    height: LayoutInfo.window.height
+  },
 });

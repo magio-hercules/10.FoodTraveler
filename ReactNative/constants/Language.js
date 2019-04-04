@@ -43,11 +43,11 @@ export default {
     'zh': 'Cooking',
     'jp': 'Cooking',
   },  
-  Utility: {
-    'ko': '유틸리티',
-    'en': 'Utility',
-    'zh': 'Utility',
-    'jp': 'Utility',
+  Help: {
+    'ko': '도움',
+    'en': 'Help',
+    'zh': 'Help',
+    'jp': 'Help',
   },
   // Information //
   Ingredient: {

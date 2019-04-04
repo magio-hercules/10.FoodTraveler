@@ -19,7 +19,8 @@ const api = create({
 export default class DetailScreen extends React.Component {
   state = {
     data: [],
-    typeArray: {}
+    name: '',
+    menu: '',
   };
 
   constructor(props){
@@ -30,58 +31,30 @@ export default class DetailScreen extends React.Component {
   async componentDidMount () {
     console.log("call componentWillMount");
 
+    let params = this.props.navigation.state.params;
+    this.setState({name: params.name, menu: params.menu});
   }
 
   render() {
     return (
-      <View> 
-        <Text>Detail</Text>
+      // <View> 
+      //   <Text>Detail</Text>
+      // </View>
+      <View style={[styles.ContentPart]} >
+        <View style={styles.ContentHeader}>
+          <Text 
+            style={styles.ContentHeaderText}> 
+            {this.state.name} 
+          </Text>
+        </View>
+        
+        <Text 
+            style={styles.ContentText}
+            numberOfLines={10}
+            ellipsizeMode='tail'> 
+          {this.state.menu} 
+        </Text>
       </View>
-    //   <FlatList
-    //     // data={_values(this.state.data)}
-    //     // data={newArr}
-    //     data={this.state.data}
-    //     keyExtractor={(item, index) => index.toString()} 
-    //     renderItem={({ item, index }) => {
-    //       console.log("renderItem");
-    //       console.log(item);
-    //       console.log(item.type);
-    //       console.log(item.desc);
-
-    //       return (
-    //         <View style={styles.table}>
-    //           <View
-    //             style={styles.rowSection}
-    //             key={index}
-    //             width= {LayoutInfo.width}
-    //             height= {70}>
-    //             <View style={styles.iconPart}>
-    //               <Avatar
-    //                 size="medium"
-    //                 rounded
-    //                 overlayContainerStyle={{width:90, backgroundColor: '#BBDEFB'}}
-    //                 title={item.type}
-    //                 // iconStyle={{height:80, width:80}}
-    //                 titleStyle={{fontSize: 15}}
-    //                 // onPress={() => console.log("Works!")}
-    //                 activeOpacity={0.7} />
-    //             </View>
-    //             <Text 
-    //               style={{
-    //                 flex:1,
-    //                 marginLeft: 10,
-    //                   // backgroundColor:'#1aa'
-    //                 }} 
-    //               numberOfLines={4}
-    //               ellipsizeMode='tail'> 
-    //               {item.desc} 
-    //             </Text>
-    //           </View>
-    //           <Divider style={{ backgroundColor: 'blue' }} />
-    //         </View>
-    //       );
-    //   }}
-    // />
     );
   } // end of render
 
@@ -89,22 +62,37 @@ export default class DetailScreen extends React.Component {
 
 
 const styles = StyleSheet.create({
-  table: {
-    padding: 10,
+  ContentPart: {
+    flex: 1,
+    flexDirection: 'column', 
     backgroundColor: 'white',
-  }, 
-  rowSection: {
-    flexDirection: 'row', 
-    alignItems: 'center',
-    // justifyContent: 'space-evenly',
-    justifyContent: 'flex-start',
-    // padding: 10,
-    // backgroundColor: 'white',
-  }, 
-  iconPart: {
-    width:90,
-    // alignItems: 'center',
+    // justifyContent: 'space-between',
     // justifyContent: 'center',
-    // backgroundColor: '#a1a'
-  }
+    paddingLeft: 16,
+    paddingTop: 16,
+    paddingRight: 16,
+  }, 
+  ContentHeader: {
+    flexDirection: 'row', 
+    justifyContent:'space-between',
+    alignItems: 'center',
+    // paddingTop: 5,
+    // paddingBottom: 5,
+    // backgroundColor:'#aa1',
+  },
+  ContentHeaderText: {
+    flex: 8,
+    fontSize: 20,
+    alignItems: 'center',
+    fontFamily: 'netmarbleM'
+  },
+  ContentText: {
+    flex: 1,
+    fontFamily: 'netmarbleL',
+    fontSize: 15,
+    marginTop: 10,
+    marginBottom: 10,
+    lineHeight: 30,
+    // backgroundColor:'#a1a',
+  },
 });

@@ -9,7 +9,7 @@ import FoodScreen from '../screens/FoodScreen';
 import LikeScreen from '../screens/LikeScreen';
 import RestaurantScreen from '../screens/RestaurantScreen';
 import ClassScreen from '../screens/ClassScreen';
-import UtilityScreen from '../screens/UtilityScreen';
+import HelpScreen from '../screens/HelpScreen';
 
 // for RestaurantScreen
 import IngredientScreen from '../screens/information/IngredientScreen';
@@ -192,7 +192,7 @@ FoodStack.navigationOptions = ({ navigation }) => {
       // />
       <TabBarIcon
         focused={focused}
-        iconSrc={require('../assets/icons/tab/home.png')}
+        iconSrc={require('../assets/icons/tab/food.png')}
       />
     ),
   };
@@ -333,8 +333,8 @@ ClassStack.navigationOptions = ({ navigation }) => {
 };
 
 
-const UtilityStack = createStackNavigator({
-  Utility: UtilityScreen,
+const HelpStack = createStackNavigator({
+  Help: HelpScreen,
 }, {
   // headerMode: 'none'
   defaultNavigationOptions: ({ navigation }) => (
@@ -342,15 +342,15 @@ const UtilityStack = createStackNavigator({
   ),
 });
 
-UtilityStack.navigationOptions = ({ navigation }) => {
-  console.log("UtilityStack.navigationOptions");
+HelpStack.navigationOptions = ({ navigation }) => {
+  console.log("HelpStack.navigationOptions");
   console.log("global.language : " + global.language);
-  console.log("Language.Utility[global.language] : " + Language.Utility[global.language]);
-  console.log("Language.Utility : " + Language.Utility);
+  console.log("Language.Help[global.language] : " + Language.Help[global.language]);
+  console.log("Language.Help : " + Language.Help);
 
   return {
-    // tabBarLabel: 'Utility',
-    tabBarLabel: Language.Utility[global.language],
+    // tabBarLabel: 'Help',
+    tabBarLabel: Language.Help[global.language],
     tabBarOptions: _tabBarOptions(),
     tabBarIcon: ({ focused }) => (
       // <TabBarIcon
@@ -359,7 +359,7 @@ UtilityStack.navigationOptions = ({ navigation }) => {
       // />
       <TabBarIcon
         focused={focused}
-        iconSrc={require('../assets/icons/tab/utility.png')}
+        iconSrc={require('../assets/icons/tab/help.png')}
       />
     ),
   };
@@ -371,7 +371,7 @@ export default createBottomTabNavigator({
   LikeStack,
   RestaurantStack,
   ClassStack, 
-  UtilityStack,
+  HelpStack,
 },
   {
     lazy: false,

@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-export default class UtilityScreen extends React.Component {
+export default class HelpScreen extends React.Component {
   static navigationOptions = {
-    title: 'Utility',
+    title: 'Help',
   };
 
   // componentDidMount() {

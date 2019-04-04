@@ -45,7 +45,8 @@ class RestaurantScreen extends React.Component {
   async componentDidMount() {
     console.log("call componentDidMount");
 
-    let _data = await this._getTotalFoods();
+    // let _data = await this._getTotalFoods();
+    let _data = await this._getTotalStores();
     console.log("_data : " + _data);
     this.setState({data: _data});
 
@@ -55,7 +56,8 @@ class RestaurantScreen extends React.Component {
   async componentWillReceiveProps() {
     console.log('RestaurantScreen componentWillReceiveProps');
 
-    let _data = await this._getTotalFoods();
+    // let _data = await this._getTotalFoods();
+    let _data = await this._getTotalStores();
     console.log("_data : " + _data);
     this.setState({data: _data});
   }
@@ -95,70 +97,13 @@ class RestaurantScreen extends React.Component {
         for (let i = 0; i < count; i ++) {
           arr.push({
             key: data[i].id,
+            food_id: data[i].food_id,
+            city_id: data[i].city_id,
             name: data[i].name,
             description: data[i][_desc],
-            gallery_list: data[i].gallery_list,
+            menu: data[i].menu,
+            // gallery_list: data[i].gallery_list,
             position: data[i].position,
-          });
-        }
-        // console.log(arr);
-        return arr;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
-
-
-  _getTotalFoods() {
-    console.log("call _getTotalFoods");
-    
-    return api
-      .get('/total_foods')
-      .then(response => response.data)
-      .then((data) => {
-        // console.log(data);
-        console.log("count : " + data.length);
-
-        let _title, _desc;
-        switch (global.language) {
-          case 'ko':
-            _title = "title_ko";
-            _desc = "desc_ko";
-            break;
-          case 'en':
-            _title = "title_en";
-            _desc = "desc_en";
-            break;
-          case 'jp':
-            _title = "title_jp";
-            _desc = "desc_jp";
-            break;
-          case 'zh':
-            _title = "title_zh";
-            _desc = "desc_zh";
-            break;
-        } 
-
-        let count = data.length;
-        let arr = [];
-        for (let i = 0; i < count; i ++) {
-          arr.push({
-            key: data[i].id,
-            name: data[i].name,
-            description: data[i][_desc],
-            
-            favorite: true,
-            description_id: data[i].description_id,
-            food_type_list: data[i].food_type_list,
-            ingredient_list: data[i].ingredient_list,
-            cook_list: data[i].cook_list,
-            eat_list: data[i].eat_list,
-            history_list: data[i].history_list,
-            caution_list: data[i].caution_list,
-            
-            allergy_list: data[i].allergy_list,
-            city_list: data[i].city_list,
             image_url: data[i].image_url,
           });
         }
@@ -170,9 +115,9 @@ class RestaurantScreen extends React.Component {
       });
   }
 
-
   _onPressDetail = (index) => {
     console.log('call _onPressDetail : index(' + index + ')');
+    let _data = this.state.data[index];
     let _key = this.state.data[index].key;
     console.log('_onPressDetail : store_id(' + _key + ')');
     
@@ -180,6 +125,8 @@ class RestaurantScreen extends React.Component {
       routeName: "Detail",
       params: {
         // index: this.state.index,
+        name: _data.name,
+        menu: _data.menu,
       }
     });
     this.props.navigation.dispatch(navigateAction);
@@ -374,5 +321,4 @@ const styles = StyleSheet.create({
     fontFamily: 'netmarbleL',
     marginTop: 5
   },
-  
 });
