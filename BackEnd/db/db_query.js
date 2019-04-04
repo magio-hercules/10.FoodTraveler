@@ -8,14 +8,17 @@ module.exports = function () {
             // return 'SELECT * FROM t_foods';
             return 'SELECT * FROM t_foods JOIN d_description USING(description_id) order by id asc';
         },
-        
+        getTotalStores: function () {
+            // .../total_stores
+            return 'SELECT * FROM t_stores order by id asc';
+        },
 
 
         //////////
         // POST //
         //////////
 
-        // food
+        // food //
         postFood: function () {
             // .../food (id)
            return 'SELECT * FROM t_foods';
@@ -24,6 +27,13 @@ module.exports = function () {
         postDescription: function () {
             // .../description (id)
            return 'SELECT * FROM d_description';
+        },
+
+
+        // stores //
+        postStore: function () {
+           // .../caution (id)
+           return 'SELECT * FROM t_stores';
         },
 
 
@@ -63,7 +73,7 @@ module.exports = function () {
         },
 
 
-
+      
 
         // contents
         postTotalContents: function () {

@@ -5,6 +5,7 @@ var router = express.Router();
 // controller
 var controller_contents = require('../controllers/contents');
 var controller_food 	= require('../controllers/foods');
+var controller_store 	= require('../controllers/stores');
 var controller_info 	= require('../controllers/information');
 
 
@@ -26,7 +27,13 @@ router.get('/', function(req, res) {
 /////////
 // GET //
 /////////
+
+// food //
 router.get('/total_foods', 				controller_food.getTotalFoods);
+
+// store //
+router.get('/total_stores', 			controller_store.getTotalStores);
+
 
 
 
@@ -34,11 +41,15 @@ router.get('/total_foods', 				controller_food.getTotalFoods);
 // POST //
 //////////
 
-// food
+// food //
 router.post('/food',					controller_food.postFood);
 router.post('/description',				controller_food.postDescription);
 
-// info
+// store //
+router.post('/store',					controller_store.postStore);
+
+
+// info //
 router.post('/ingredient',				controller_info.postIngredient);
 router.post('/cook',					controller_info.postCook);
 router.post('/eat',						controller_info.postEat);
