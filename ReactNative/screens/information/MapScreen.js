@@ -1,11 +1,18 @@
 import React from 'react';
+import { PermissionsAndroid } from 'react-native';
 import { View, Text, Image, FlatList, StyleSheet, Button, TouchableHighlight, ToastAndroid } from 'react-native';
 
 // # type1
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 // # type2
 // var MapView = require('react-native-maps');
-import { Marker, Callout, ProviderPropType } from 'react-native-maps';
+import { 
+  ProviderPropType,
+  Animated as AnimatedMap,
+  AnimatedRegion,
+  Marker, 
+  Callout, 
+ } from 'react-native-maps';
 
 import { create } from 'apisauce'
 import _size from 'lodash/size';
@@ -31,41 +38,97 @@ const api = create({
 })
 
 // 37.561918, 126.986552
-var position = {
-  latitude: 37.561918,
-  longitude: 126.986552
-};
-
-var position2 = {
-  latitude: 37.562218,
-  longitude: 126.979552
-};
 
 function randomColor() {
   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 }
 
+async function requestLocationPermission() {
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      {
+        title: 'FoodTraveler Location Permission',
+        message:
+          'FoodTraveler needs access to your location ' +
+          'so you can find your location.',
+        buttonNeutral: 'Ask Me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      },
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      console.log('You can use the location');
+      // this.state.bLocationPermission = true;
+    } else if (granted === PermissionsAndroid.RESULTS.DENIED) {
+      console.log('Location permission DENIED');
+    } else if (granted === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN) {
+      console.log('Location permission NEVER_ASK_AGAIN');
+    } else {
+      console.log('Location permission else');
+    }
+  } catch (err) {
+    console.warn(err);
+  }
+}
+
+async function requestCameraPermission() {
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.CAMERA,
+      {
+        title: 'Cool Photo App Camera Permission',
+        message:
+          'Cool Photo App needs access to your camera ' +
+          'so you can take awesome pictures.',
+        buttonNeutral: 'Ask Me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      },
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      console.log('You can use the camera');
+    } else {
+      console.log('Camera permission denied');
+    }
+  } catch (err) {
+    console.warn(err);
+  }
+}
 
 export default class MapScreen extends React.Component {
   state = {
     data: [],
-    typeArray: {}
+    typeArray: {},
+    // bLocationPermission,
   };
+
+  watchID: ?number = null
 
   constructor(props){
     super(props);
     
     this.state = {
-      region: {
-        latitude: LATITUDE,
-        longitude: LONGITUDE,
+      region: new AnimatedRegion ({
+        latitude: 0,
+        longitude: 0,
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA,
-      },
+      }),
       poi: null,
+      markerPos_store: {
+        latitude: LATITUDE,
+        longitude: LONGITUDE
+      },
+      markerPos_my: {
+        latitude: 0,
+        longitude: 0
+      },
     };
 
     this.onPoiClick = this.onPoiClick.bind(this);
+
+   
 
     console.log("MapScreen constructor");
   }
@@ -73,9 +136,60 @@ export default class MapScreen extends React.Component {
   componentDidMount () {
     console.log("[MAP] call componentDidMount");
     
+    // let bPermission = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
+
+  //   setTimeout(() => {
+  //     try {
+  //       const granted = PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
+  //       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+  //         console.log("[MAP] ACCESS_FINE_LOCATION permisson false");
+  //         requestLocationPermission();
+  //         this.setState({bLocationPermission: false});
+  //       } else {
+  //         console.log("[MAP] ACCESS_FINE_LOCATION permisson true");
+  //       // this.state.bLocationPermission = true;
+  //       this.setState({bLocationPermission: false});
+  //       }
+  //     } catch (err) {
+  //       console.warn(err);
+  //     }
+  // }, 300)
+
+    // this._aa();
+    requestLocationPermission();
+
+    let initRegion = {
+      latitude: LATITUDE,
+      longitude: LONGITUDE,
+      latitudeDelta: LATITUDE_DELTA,
+      longitudeDelta: LONGITUDE_DELTA,
+    }
+    this.setState({region: initRegion});
+
     console.log("[MAP] end componentDidMount");
   }
 
+  componentWillUnmount () {
+    navigator.geolocation.clearWatch(this.watchID);
+  }
+
+  async _aa() {
+    try {
+      const granted = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log("[MAP] ACCESS_FINE_LOCATION permisson false");
+        requestLocationPermission();
+        // this.setState({bLocationPermission: false});
+      } else {
+        console.log("[MAP] ACCESS_FINE_LOCATION permisson true");
+      // this.state.bLocationPermission = true;
+      // this.setState({bLocationPermission: false});
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  }
+  
   onPoiClick(e) {
     console.log("onPoiClick");
     const poi = e.nativeEvent;
@@ -90,7 +204,59 @@ export default class MapScreen extends React.Component {
   _onPressMyPosition = () => {
     console.log('call _onPressMyPosition');
     
-    ToastAndroid.show('press My Position', ToastAndroid.SHORT);
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+          let lat = parseFloat(position.coords.latitude);
+          let lng = parseFloat(position.coords.longitude);
+
+          let region = {
+            latitude: lat,
+            longitude: lng,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA,
+          }
+
+          let initPos = {
+            latitude: lat,
+            longitude: lng
+          }
+
+          this.setState({region: region});
+          this.setState({markerPos_my: initPos});
+
+          console.log(position);
+      },
+      (error) => {
+          // See error code charts below.
+          console.log(error.code, error.message);
+      },
+      { enableHighAccuracy: false, timeout: 5000, maximumAge: 2000 }
+    );
+
+    this.watchID = navigator.geolocation.watchPosition(
+      (position) => {
+          let lat = parseFloat(position.coords.latitude);
+          let lng = parseFloat(position.coords.longitude);
+
+          let region = {
+            latitude: lat,
+            longitude: lng,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA,
+          }
+
+          this.setState({region: region});
+          this.setState({markerPos_my: region});
+
+          console.log(position);
+      },
+      (error) => {
+          // See error code charts below.
+          console.log(error.code, error.message);
+      },
+      { enableHighAccuracy: false, timeout: 10000, maximumAge: 5000 }
+    );
+    // ToastAndroid.show('press My Position', ToastAndroid.SHORT);
   }
 
   _onPressButton = (flag) => {
@@ -104,14 +270,25 @@ export default class MapScreen extends React.Component {
   }
 
 
+  // onRegionChange(region) {
+  //   console.log('[MAP] call onRegionChange');
+  //   // this.state.region.setValue(region);
+  //   this.setState({ region });
+  // }
+  onRegionChange = (region) => {
+    console.log('[MAP] call onRegionChange');
+    this.setState({ region });
+  }
+
   render() {
     console.log("[MAP] render");
 
     return (
       <View style={styles.container}>
-        <MapView
-          provider={PROVIDER_GOOGLE} // remove if not using Google Maps
-          // provider={this.props.provider}
+        {/* <MapView */}
+        <AnimatedMap
+          // provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+          provider={this.props.provider}
           style={styles.map}
           // region={{
           //   latitude: 37.561918,
@@ -120,21 +297,32 @@ export default class MapScreen extends React.Component {
           //   longitudeDelta: 0.0121,
           // }}
           initialRegion={this.state.region}
+          region={this.state.region}
           // onPoiClick={this.onPoiClick}
           // onPoiClick={(e) => console.log(e)}
           // onPoiClick={({ nativeEvent }: any) => console.log(nativeEvent)}
           onPoiClick={() => Alert.alert('onPoiClick')}
+
+          // onRegionChange={this.onRegionChange}
+          // onRegionChange = (region) => {},
+          // onRegionChange={::this.onRegionChange},
+          onRegionChange={() => this.onRegionChange.bind(this)}
         >
         <Marker
               // key={marker.key}
-              // coordinate={marker.coordinate}
-              // pinColor={marker.color}
-              coordinate={position} 
-              pinColor={randomColor()}
-              // pinColor={'#aa1100'}
+              coordinate={this.state.markerPos_store} 
+              // pinColor={randomColor()}
+              pinColor={'#aa1100'}
               title="고궁 음식점"
               description="서울특별시 중구 충무로2가 명동8가길 27"
             />
+
+        <Marker coordinate={this.state.markerPos_my}>
+          <View style={styles.radius}>
+            <View style={styles.markerMy}>
+            </View>
+          </View>
+        </Marker>
 
         {this.state.poi && (
             <Marker
@@ -148,7 +336,8 @@ export default class MapScreen extends React.Component {
               </Callout>
             </Marker>
           )}
-      </MapView>
+      {/* </MapView> */}
+      </AnimatedMap>
       <TouchableHighlight 
           style={styles.button_my_position}
           underlayColor='#EEEEEE'
@@ -265,5 +454,24 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: '#ffffff'
   },
-  
+  radius: {
+    height: 50,
+    width: 50,
+    borderRadius: 50/2,
+    overflow: 'hidden',
+    backgroundColor: 'rgba(0, 122, 255, 0.1)',
+    borderWidth: 1,
+    borderColor: 'rgba(0, 112, 255, 0.3)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  markerMy: {
+    height: 20,
+    width: 20,
+    borderRadius: 20/2,
+    borderWidth: 3,
+    borderColor: 'white',
+    overflow: 'hidden',
+    backgroundColor: '#007aff',
+  },
 });
