@@ -107,8 +107,8 @@ class FoodScreen extends React.Component {
       // .then(console.log)
       // .then(response => response.data) 
       .then((response) => {
-        console.log("!!!response!!!");
-        console.log(response);
+        // console.log("!!!response!!!");
+        // console.log(response);
         return response.data;
       })
       .then((data) => {

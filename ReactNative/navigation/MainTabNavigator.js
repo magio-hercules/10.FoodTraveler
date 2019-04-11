@@ -88,8 +88,8 @@ const _navigationOptions = (navigation, bHeaderLeft = true) => {
       // </TouchableOpacity> 
     : 
     undefined;
-  console.log("headerLeft : ");
-  console.log(headerLeft);
+  // console.log("headerLeft : ");
+  // console.log(headerLeft);
   
   // const headerLeft = <NavigationDrawerStructure navigationProps={navigation} />;
 

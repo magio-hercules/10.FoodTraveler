@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Platform, TouchableOpacity, Image, StatusBar } 
 import { createStackNavigator, createSwitchNavigator, createMaterialTopTabNavigator } from 'react-navigation';
 import { createAppContainer, createDrawerNavigator, DrawerActions, DrawerItems } from 'react-navigation';
 
+import LoginNavigator from './LoginNavigator';
 import MainTabNavigator from './MainTabNavigator';
 import DrawerScreen from '../screens/DrawerScreen';
 
@@ -61,6 +62,22 @@ const StackNavigator = createStackNavigator({
   // })
 });
 
+const SwitchNavigator = createSwitchNavigator(
+  {
+    LoginNavigator: {
+      screen: LoginNavigator
+    },
+    DrawerNavigator: {
+      screen: DrawerNavigator
+    }
+  },
+  {
+    // initialRouteName: isLoggedIn ? "MainNavigator" : "LoginNavigator"
+    initialRouteName: 'LoginNavigator',
+    // headerMode: 'none'
+  }
+);
 
 // export default StackNavigator;
-export default createAppContainer(StackNavigator);
+// export default createAppContainer(StackNavigator);
+export default createAppContainer(SwitchNavigator);

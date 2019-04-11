@@ -16,8 +16,14 @@ import AvatarIcon from '../components/AvatarIcon';
 export default class DrawerScreen extends Component {
   constructor(props){
     super(props);
-    console.log("DrawerScreen constructor");
+    console.log("[DRAWER] constructor");
 
+    let params = this.props.navigation.state.params;
+    console.log("profile : " + params.profile);
+    
+    this.state = {
+      profile: params.profile
+    }
   }
 
 
@@ -42,13 +48,13 @@ export default class DrawerScreen extends Component {
   }
 
   _onProfile = () => {
-    console.log('call _onProfile');
+    console.log('[DRAWER] call _onProfile');
     // console.log('call _onProfile : index(' + index + ')');
     
     const navigateAction = NavigationActions.navigate({
       routeName: "Profile",
       params: {
-        profile_id: "1",
+        profile: this.state.profile,
       }
     });
     this.props.navigation.dispatch(navigateAction);

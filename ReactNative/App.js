@@ -28,6 +28,9 @@ export default class App extends Component {
 
   constructor(props){
     super(props);
+    console.log("+----------------------+");
+    console.log("|     FoodTraveler     |");
+    console.log("+----------------------+");
     console.log("App constructor");
 
     global.language = 'ko';
