@@ -294,6 +294,7 @@ RestaurantStack.navigationOptions = ({ navigation }) => {
       <TabBarIcon
         focused={focused}
         iconSrc={require('../assets/icons/tab/restaurant.png')}
+        // iconSrc={require('../assets/icons/tab/location.png')}
       />
     ),
   };

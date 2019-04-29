@@ -1,0 +1,36 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'FoodTraveler' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  #pod 'FBSDKCoreKit'
+  #pod 'FBSDKLoginKit'
+  #pod 'FBSDKShareKit'
+
+  pod 'FBSDKCoreKit', '~> 4.40.0'
+  pod 'FBSDKLoginKit', '~> 4.40.0'
+  pod 'FBSDKShareKit', '~> 4.40.0'
+  
+ # Pods for FoodTraveler
+
+  target 'FoodTravelerTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
+
+target 'FoodTraveler-tvOS' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for FoodTraveler-tvOS
+
+  target 'FoodTraveler-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

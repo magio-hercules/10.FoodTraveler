@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View, StatusBar} from 'react-native';
 import AppNavigator from './navigation/AppNavigator';
 // import { AppLoading, Asset, Font, Icon } from 'expo';
 import SplashScreen from 'react-native-splash-screen';
