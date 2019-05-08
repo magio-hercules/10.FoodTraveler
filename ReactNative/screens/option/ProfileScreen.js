@@ -222,7 +222,7 @@ class ProfileView extends Component {
           :
             facebookService.makeLogoutButton(() => {
               // this.logout()
-              console.log('_self : ' + _self);
+              // console.log('_self : ' + _self);
               
               _self.logout()
             })}

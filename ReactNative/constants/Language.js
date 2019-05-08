@@ -193,4 +193,35 @@ export default {
     'zh': 'Map',
     'jp': 'Map',
   },
+  // Help
+  Conversation: {
+    'ko': '회화',
+    'en': 'Conversation',
+    'zh': 'Conversation',
+    'jp': 'Conversation',
+  },
+  ExchangeRate: {
+    'ko': '환율',
+    'en': 'ExchangeRate',
+    'zh': 'ExchangeRate',
+    'jp': 'ExchangeRate',
+  },
+  Taxi: {
+    'ko': '택시',
+    'en': 'Taxi',
+    'zh': 'Taxi',
+    'jp': 'Taxi',
+  },
+  Airport: {
+    'ko': '공항',
+    'en': 'Airport',
+    'zh': 'Airport',
+    'jp': 'Airport',
+  },
+  Street: {
+    'ko': '거리',
+    'en': 'Street',
+    'zh': 'Street',
+    'jp': 'Street',
+  },
 };
