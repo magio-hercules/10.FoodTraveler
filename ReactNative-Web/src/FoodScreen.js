@@ -34,6 +34,13 @@ import CommunityIcon from './components/CommunityIcon';
 
 // const windowWidth = Dimensions.get('window').width;
 
+// import { observable, action } from 'mobx'
+// import { decorate, observable, action } from 'mobx';
+// import { observer } from 'mobx-react'
+// import { observer } from "mobx-react-lite";
+// import { FoodStoreContext } from './stores/FoodStore';
+
+
 const api = create({
   baseURL: 'http://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com:7000/FooTravel',
   headers: { 'Content-Type': 'text/plain' },
@@ -55,9 +62,14 @@ const api = create({
 
 
 
-
-export default class FoodScreen extends React.Component {
+// @observer
+class FoodScreen extends React.Component {
+// export default class FoodScreen extends React.Component {
 // default class FoodScreen extends React.Component {
+
+  // @observable curFoodId = ''
+  curFoodId = ''
+
   static navigationOptions = {
   //   // header: null,
   //   // title: 'Home',
@@ -74,6 +86,7 @@ export default class FoodScreen extends React.Component {
     // data: this._getTotalFoods()
     data: []
   };
+
 
   // 참고 LifeCycle
   // 컴포넌트 생성시 constructor -> componentWillMount -> render -> componentDidMount
@@ -196,6 +209,10 @@ export default class FoodScreen extends React.Component {
     //   }
     // });
     // this.props.navigation.dispatch(navigateAction);
+
+    this.curFoodId = index;
+    console.log('curFoodId : (' + this.curFoodId + ')');
+
   }
 
   _onPressCook = (index) => {
@@ -290,6 +307,8 @@ export default class FoodScreen extends React.Component {
 
 
   render() {
+    const { curFoodId } = this
+
     console.log('call render');
     
     return (
@@ -351,7 +370,7 @@ export default class FoodScreen extends React.Component {
                         number={this.props.number}
                         onPress={() => this._onPressIngredient(index)}/>
                       <InformationIcon 
-                        // name='Cook'
+                        // name='Coo'
                         name={Language.Cook[this.state.language]}
                         iconSrc={require('./assets/icons/contents/chef.png')}
                         onPress={() => this._onPressCook(index)}/>
@@ -378,7 +397,7 @@ export default class FoodScreen extends React.Component {
                       <Text 
                         style={styles.ContentHeaderText}> 
                         {/* {item.title_local + " [" + item.title_phonetic + "]" + "\r\n" + ": " + item.title}  */}
-                        {`${item.title_local} [${item.title_phonetic}] \r\n : ${item.title}`} 
+                        {`${item.title_local} [${item.title_phonetic}] ${this.curFoodId} \r\n : ${item.title}`} 
                       </Text>
                       {/* <Text 
                         ellipsizeMode='tail' 
@@ -590,3 +609,12 @@ const styles = StyleSheet.create({
     // backgroundColor:'#aaf',
   },
 });
+
+// decorate(FoodScreen, {
+//   curFoodId: observable,
+//   // increase: action,
+//   // decrease: action
+// })
+
+export default FoodScreen;
+// export default observer(FoodScreen);
