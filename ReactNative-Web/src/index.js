@@ -11,13 +11,31 @@
 // // Learn more about service workers: https://bit.ly/CRA-PWA
 // serviceWorker.unregister();
 
-import { AppRegistry } from "react-native";
-// import App from "./HelpScreen";
-import App from "./FoodScreen";
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 
+import { AppRegistry } from 'react-native';
+// import Food from "./screens/FoodScreen";
+// import App from "./TestScreen";
+import Router from './Router';
+import { Provider } from 'mobx-react';
 
-AppRegistry.registerComponent("App", () => App);
+import RootStore from './stores';
 
-AppRegistry.runApplication("App", {
-  rootTag: document.getElementById("root")
+const root = new RootStore();
+
+export const App = () => {
+	return (
+		<Provider {...root}>
+			<View>
+				<Router />
+			</View>
+		</Provider>
+	);
+};
+
+AppRegistry.registerComponent('App', () => App);
+
+AppRegistry.runApplication('App', {
+	rootTag: document.getElementById('root'),
 });

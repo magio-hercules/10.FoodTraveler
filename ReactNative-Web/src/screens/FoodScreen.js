@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, 
   Platform,
   FlatList, 
@@ -17,11 +17,11 @@ import { StyleSheet,
 import { create } from 'apisauce'
 import PropTypes from 'prop-types';
 
-import LayoutInfo from './constants/Layout';
-import Language from './constants/Language';
+import LayoutInfo from '../constants/Layout';
+import Language from '../constants/Language';
 
-import InformationIcon from './components/InformationIcon';
-import CommunityIcon from './components/CommunityIcon';
+import InformationIcon from '../components/InformationIcon';
+import CommunityIcon from '../components/CommunityIcon';
 
 // import CookScreen from './information/CookScreen';
 
@@ -34,10 +34,8 @@ import CommunityIcon from './components/CommunityIcon';
 
 // const windowWidth = Dimensions.get('window').width;
 
-// import { observable, action } from 'mobx'
-// import { decorate, observable, action } from 'mobx';
-// import { observer } from 'mobx-react'
-// import { observer } from "mobx-react-lite";
+import { decorate, observable, action } from 'mobx';
+import { observer, inject } from 'mobx-react';
 // import { FoodStoreContext } from './stores/FoodStore';
 
 
@@ -51,7 +49,7 @@ const api = create({
 //     return (
 //       <View style={{ flex: 1, flexDirection: 'row' }}>
 //         <Image
-//           source={require('./assets/icons/spiro.png')}
+//           source={require('../assets/icons/spiro.png')}
 //           style={{ width: 30, height: 30, marginLeft: 10, marginTop: 5 }}
 //         />
 //         <Text style={{ marginLeft: 10, fontSize:27, color: '#fff' }}> FoodTraveler </Text>
@@ -62,13 +60,14 @@ const api = create({
 
 
 
+// @inject("testStore")
 // @observer
-class FoodScreen extends React.Component {
+class FoodScreen extends Component {
 // export default class FoodScreen extends React.Component {
 // default class FoodScreen extends React.Component {
 
   // @observable curFoodId = ''
-  curFoodId = ''
+  curFoodId = -1;
 
   static navigationOptions = {
   //   // header: null,
@@ -81,7 +80,7 @@ class FoodScreen extends React.Component {
 
   state = {
     refreshing: false,
-    language: 'ko',
+    language: '',
     // data: randomCards(20),
     // data: this._getTotalFoods()
     data: []
@@ -96,6 +95,7 @@ class FoodScreen extends React.Component {
   constructor(props){
     super(props);
     console.log("FoodScreen constructor");
+
   }
 
   componentWillMount () {
@@ -135,9 +135,10 @@ class FoodScreen extends React.Component {
       .then((data) => {
         // console.log(data);
         console.log("count : " + data.length);
-
+        console.log("!!!!! this.props.profileStore.language : " + this.props.profileStore.language);
+        
         let _title, _desc;
-        switch (this.state.language) {
+        switch (this.props.profileStore.language) {
           case 'ko':
             _title = "title_ko";
             _desc = "desc_ko";
@@ -192,6 +193,15 @@ class FoodScreen extends React.Component {
       });
   }
 
+  increase = () => {
+    console.log('increase');
+    this.curFoodId++;
+  }
+
+  decrease = () => {
+    console.log('decrease');
+    this.curFoodId--;
+  }
 
   // information
   _onPressIngredient = (index) => {
@@ -209,10 +219,13 @@ class FoodScreen extends React.Component {
     //   }
     // });
     // this.props.navigation.dispatch(navigateAction);
-
-    this.curFoodId = index;
-    console.log('curFoodId : (' + this.curFoodId + ')');
-
+    
+    this.props.routerStore.screen = 'Ingredient';
+    this.props.foodStore.foodId = index;
+    this.props.foodStore.ingredient_list = ingredient_list;
+    console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
+    console.log('this.props.foodStore.foodId : (' + this.props.foodStore.foodId + ')');
+    console.log('this.props.foodStore.ingredient_list : (' + this.props.foodStore.ingredient_list + ')');
   }
 
   _onPressCook = (index) => {
@@ -229,6 +242,13 @@ class FoodScreen extends React.Component {
     //   }
     // });
     // this.props.navigation.dispatch(navigateAction);
+    
+    this.props.routerStore.screen = 'Cook';
+    this.props.foodStore.foodId = index;
+    this.props.foodStore.cook_list = cook_list;
+    console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
+    console.log('this.props.foodStore.foodId : (' + this.props.foodStore.foodId + ')');
+    console.log('this.props.foodStore.cook_list : (' + this.props.foodStore.cook_list + ')'); 
   }
 
   _onPressEat = (index) => {
@@ -245,6 +265,12 @@ class FoodScreen extends React.Component {
     //   }
     // });
     // this.props.navigation.dispatch(navigateAction);
+    this.props.routerStore.screen = 'Eat';
+    this.props.foodStore.foodId = index;
+    this.props.foodStore.eat_list = eat_list;
+    console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
+    console.log('this.props.foodStore.foodId : (' + this.props.foodStore.foodId + ')');
+    console.log('this.props.foodStore.eat_list : (' + this.props.foodStore.eat_list + ')');
   }
 
   _onPressHistory = (index) => {
@@ -261,6 +287,12 @@ class FoodScreen extends React.Component {
     //   }
     // });
     // this.props.navigation.dispatch(navigateAction);
+    this.props.routerStore.screen = 'History';
+    this.props.foodStore.foodId = index;
+    this.props.foodStore.history_list = history_list;
+    console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
+    console.log('this.props.foodStore.foodId : (' + this.props.foodStore.foodId + ')');
+    console.log('this.props.foodStore.history_list : (' + this.props.foodStore.history_list + ')');
   }
 
   _onPressCaution = (index) => {
@@ -277,6 +309,12 @@ class FoodScreen extends React.Component {
     //   }
     // });
     // this.props.navigation.dispatch(navigateAction);
+    this.props.routerStore.screen = 'Caution';
+    this.props.foodStore.foodId = index;
+    this.props.foodStore.caution_list = caution_list;
+    console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
+    console.log('this.props.foodStore.foodId : (' + this.props.foodStore.foodId + ')');
+    console.log('this.props.foodStore.caution_list : (' + this.props.foodStore.caution_list + ')');
   }
 
   
@@ -307,32 +345,32 @@ class FoodScreen extends React.Component {
 
 
   render() {
-    const { curFoodId } = this
+    // const { curFoodId } = this
 
     console.log('call render');
     
     return (
       <View style={styles.RootView}>
           {/* <Text style={styles.TitleContainer}> FoodTraveler </Text> */}
-          <View style={styles.headerContainer}>
+          
+          {/* <View style={styles.headerContainer}>
             <View style={styles.header}>
               <View style={styles.headerCenter}>
                 <Image
-                  source={require('./assets/icons/spiro.png')}
+                  source={require('../assets/icons/spiro.png')}
                   style={{ width: 25, height: 25, marginLeft: 0, marginTop: 0, marginRight: 10, tintColor: '#2f95dc' }}
                 />
                 <Text accessibilityRole="heading" aria-level="3" style={styles.title}>FoodTraveler</Text>
               </View>
               <React.Fragment>
                 <View style={styles.headerLeft}>
-                  {/* <Button style={{ backgroundColor: "#FAFAFA" }} title="MENU" onPress={this._handleBack} /> */}
                   <TouchableHighlight 
                     style={styles.Button}
                     underlayColor='#448AFF'
                     onPress={this._handleBack}>
                     <View >
                         <Text style={styles.ButtonText}>
-                          MENU
+                          MENU {this.props.foodStore.foodId}
                         </Text>
                     </View>
                   </TouchableHighlight>
@@ -341,7 +379,7 @@ class FoodScreen extends React.Component {
                 </View>
               </React.Fragment>
             </View>
-          </View>
+          </View> */}
           
           <View style={styles.container}>
             <FlatList style={styles.listContainer}
@@ -364,30 +402,32 @@ class FoodScreen extends React.Component {
                     <View style={[styles.ImagePartOverlay]}>
                       <InformationIcon 
                         // name='Ingredient'
-                        name={Language.Ingredient[this.state.language]}
-                        iconSrc={require('./assets/icons/contents/ingredients.png')}
+                        name={Language.Ingredient[this.props.profileStore.language]}
+                        iconSrc={require('../assets/icons/contents/ingredients.png')}
                         // onPress={this._onPressIngredient}/>
                         number={this.props.number}
-                        onPress={() => this._onPressIngredient(index)}/>
+                        onPress={() => this._onPressIngredient(index)}
+                        />
                       <InformationIcon 
                         // name='Coo'
-                        name={Language.Cook[this.state.language]}
-                        iconSrc={require('./assets/icons/contents/chef.png')}
-                        onPress={() => this._onPressCook(index)}/>
+                        name={Language.Cook[this.props.profileStore.language]}
+                        iconSrc={require('../assets/icons/contents/chef.png')}
+                        onPress={() => this._onPressCook(index)}
+                        />
                       <InformationIcon 
                         // name='Eat'
-                        name={Language.Eat[this.state.language]}
-                        iconSrc={require('./assets/icons/contents/eat.png')}
+                        name={Language.Eat[this.props.profileStore.language]}
+                        iconSrc={require('../assets/icons/contents/eat.png')}
                         onPress={() => this._onPressEat(index)}/>
                       <InformationIcon 
                         // name='History'
-                        name={Language.History[this.state.language]}
-                        iconSrc={require('./assets/icons/contents/history.png')}
+                        name={Language.History[this.props.profileStore.language]}
+                        iconSrc={require('../assets/icons/contents/history.png')}
                         onPress={() => this._onPressHistory(index)}/>
                       <InformationIcon 
                         // name='Caution'
-                        name={Language.Caution[this.state.language]}
-                        iconSrc={require('./assets/icons/contents/caution.png')}
+                        name={Language.Caution[this.props.profileStore.language]}
+                        iconSrc={require('../assets/icons/contents/caution.png')}
                         onPress={() => this._onPressCaution(index)}/>
                     </View>
                   </ImageBackground>
@@ -397,7 +437,10 @@ class FoodScreen extends React.Component {
                       <Text 
                         style={styles.ContentHeaderText}> 
                         {/* {item.title_local + " [" + item.title_phonetic + "]" + "\r\n" + ": " + item.title}  */}
-                        {`${item.title_local} [${item.title_phonetic}] ${this.curFoodId} \r\n : ${item.title}`} 
+                        {`${item.title_local} [${item.title_phonetic}] \r\n : ${item.title}`} 
+                      </Text>
+                      <Text 
+                        style={styles.ContentHeaderText}> 
                       </Text>
                       {/* <Text 
                         ellipsizeMode='tail' 
@@ -406,16 +449,16 @@ class FoodScreen extends React.Component {
                       </Text> */}
                       <View style={styles.IconPart} >
                         <CommunityIcon 
-                          iconSrc={item.favorite ? require('./assets/icons/heart_3.png') : require('./assets/icons/heart_2.png')}
+                          iconSrc={item.favorite ? require('../assets/icons/heart_3.png') : require('../assets/icons/heart_2.png')}
                           tintColor={item.favorite ? '#f44336' : 'rgb(50, 50, 50)'}
                           // onPress={() => this._onPressHeart(index)}/>
                           />
                         <CommunityIcon 
-                          iconSrc={require('./assets/icons/message.png')}
+                          iconSrc={require('../assets/icons/message.png')}
                           // onPress={() => this._onPressMessage(index)}/>
                           onPlus={this.props.increment}/>
                         <CommunityIcon 
-                          iconSrc={require('./assets/icons/share.png')}
+                          iconSrc={require('../assets/icons/share.png')}
                           // onPress={() => this._onPressShare(index)}/>
                           onPlus={this.props.decrement}
                           />
@@ -610,11 +653,14 @@ const styles = StyleSheet.create({
   },
 });
 
-// decorate(FoodScreen, {
-//   curFoodId: observable,
-//   // increase: action,
-//   // decrease: action
-// })
+decorate(FoodScreen, {
+  curFoodId: observable,
+  increase: action,
+  decrease: action,
+  setFoodId: action,
+})
 
-export default FoodScreen;
+// export default FoodScreen;
 // export default observer(FoodScreen);
+// export default inject('rootStore')(observer(FoodScreen));
+export default inject('profileStore', 'foodStore', 'routerStore')(observer(FoodScreen));

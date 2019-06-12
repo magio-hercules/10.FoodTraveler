@@ -1,8 +1,28 @@
+// import { createContext } from "react";
+import { decorate, observable, action } from 'mobx';
 
 class FoodStore {
-    // @observable foodId = -1;
-    foodId = -1;
+	// @observable foodId = -1;
+	foodId = -1;
+	ingredient_list = [];
+	cook_list = [];
+	eat_list = [];
+	history_list = [];
+	caution_list = [];
+
+	constructor(root) {
+		this.root = root;
+	}
 }
+
+decorate(FoodStore, {
+	foodId: observable,
+	ingredient_list: observable,
+	cook_list: observable,
+	eat_list: observable,
+	history_list: observable,
+	caution_list: observable,
+});
 
 // export const FoodStoreContext = createContext(new FoodStore());
 export default FoodStore;

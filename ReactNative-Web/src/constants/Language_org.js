@@ -113,12 +113,12 @@ export default {
     'jp': 'City',
   },
   // Food //
-  Food: {
-    'ko': '음식',
-    'en': 'Food',
-    'zh': 'Food',
-    'jp': 'Food',
-  },
+  // Food: {
+  //   'ko': '음식',
+  //   'en': 'Food',
+  //   'zh': 'Food',
+  //   'jp': 'Food',
+  // },
   Rice: {
     'ko': '밥',
     'en': 'Rice',

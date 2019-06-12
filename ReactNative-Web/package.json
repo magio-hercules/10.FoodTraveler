@@ -1,47 +1,56 @@
 {
-  "name": "TestApp",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest",
-    "start-android": "react-native run-android",
-    "start-ios": "react-native run-ios",
-    "start-web": "react-scripts start",
-    "build": "react-scripts build",
-    "test-web": "react-scripts test --env=jsdom",
-    "eject-web": "react-scripts eject"
-  },
-  "dependencies": {
-    "@react-navigation/core": "^3.0.0-alpha.17",
-    "@react-navigation/web": "^1.0.0-alpha.7",
-    "apisauce": "^1.0.2",
-    "mobx": "^5.10.1",
-    "mobx-react-lite": "^1.4.0",
-    "prop-types": "^15.6.0",
-    "react": "16.8.3",
-    "react-art": "16.8.6",
-    "react-dom": "16.8.4",
-    "react-native": "0.59.8",
-    "react-native-web": "0.11.x",
-    "react-scripts": "2.1.8",
-    "typescript": "^3.5.1"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.4.4",
-    "@babel/runtime": "^7.4.4",
-    "babel-jest": "^23.6.0",
-    "jest": "^23.6.0",
-    "metro-react-native-babel-preset": "^0.54.0",
-    "react-test-renderer": "16.8.3"
-  },
-  "jest": {
-    "preset": "react-native"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+	"name": "FoodTraveler_WEB",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"start": "node node_modules/react-native/local-cli/cli.js start",
+		"test": "jest",
+		"start-android": "react-native run-android",
+		"start-ios": "react-native run-ios",
+		"start-web": "react-scripts start",
+		"build": "react-scripts build",
+		"build-tsc": "tsc",
+		"test-web": "react-scripts test --env=jsdom",
+		"eject-web": "react-scripts eject"
+	},
+	"dependencies": {
+		"@material-ui/core": "^4.1.0",
+		"@react-navigation/core": "^3.0.0-alpha.17",
+		"@react-navigation/web": "^1.0.0-alpha.7",
+		"apisauce": "^1.0.2",
+		"lodash": "^4.17.11",
+		"mobx": "^5.10.1",
+		"mobx-react": "^6.0.3",
+		"mobx-react-lite": "^1.4.0",
+		"prop-types": "^15.6.0",
+		"react": "16.8.3",
+		"react-art": "16.8.6",
+		"react-dom": "16.8.4",
+		"react-native": "0.59.8",
+		"react-native-web": "0.11.x",
+		"react-router-dom": "4.3.1",
+		"react-router-native": "4.3.0",
+		"react-scripts": "2.1.8",
+		"typescript": "^3.5.1"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.4.4",
+		"@babel/plugin-proposal-decorators": "^7.4.4",
+		"@babel/plugin-transform-runtime": "^7.4.4",
+		"@babel/runtime": "^7.4.4",
+		"babel-jest": "^23.6.0",
+		"babel-preset-react-native": "5.0.2",
+		"jest": "^23.6.0",
+		"metro-react-native-babel-preset": "^0.54.0",
+		"react-test-renderer": "16.8.3"
+	},
+	"jest": {
+		"preset": "react-native"
+	},
+	"browserslist": [
+		">0.2%",
+		"not dead",
+		"not ie <= 11",
+		"not op_mini all"
+	]
 }
