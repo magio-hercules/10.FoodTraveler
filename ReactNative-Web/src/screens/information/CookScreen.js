@@ -38,9 +38,10 @@ class CookScreen extends React.Component {
 
 		// let params = this.props.navigation.state.params;
 		// let _data = await this._getCook(params.cook_list);
-		let params = this.props.foodStore.cook_list;
-		console.log('params : ' + params);
-		let _data = await this._getCook(params);
+		// let params = this.props.foodStore.cook_list;
+		let food_id = this.props.foodStore.food_id;
+		console.log('food_id : ' + food_id);
+		let _data = await this._getCook(food_id);
 		this.setState({ data: _data });
 	}
 
@@ -99,14 +100,14 @@ class CookScreen extends React.Component {
 		);
 	} // end of render
 
-	_getCook(list) {
+	_getCook(food_id) {
 		console.log('call _getCook');
-		console.log('list : ' + list);
-		let array = [];
-		array.push(list);
+		console.log('food_id : ' + food_id);
+		// let array = [];
+		// array.push(list);
 
 		return api
-			.post('/cook', { cook_list: array })
+			.post('/cook', { food_id: food_id })
 			.then(response => response.data)
 			.then(data => {
 				console.log('cook_list count : ' + data.length);
@@ -153,7 +154,7 @@ class CookScreen extends React.Component {
 			.catch(err => {
 				console.error(err);
 			});
-	} // end of _getCook(list)
+	} // end of _getCook(food_id)
 }
 
 const styles = StyleSheet.create({

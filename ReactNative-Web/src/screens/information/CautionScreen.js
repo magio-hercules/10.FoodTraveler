@@ -40,9 +40,10 @@ class CautionScreen extends React.Component {
 
 		// let params = this.props.navigation.state.params;
 		// let _data = await this._getCaution(params.caution_list);
-		let params = this.props.foodStore.caution_list;
-		console.log('params : ' + params);
-		let _data = await this._getCaution(params);
+		// let params = this.props.foodStore.caution_list;
+		let food_id = this.props.foodStore.food_id;
+		console.log('food_id : ' + food_id);
+		let _data = await this._getCaution(food_id);
 		this.setState({ data: _data });
 	}
 
@@ -103,14 +104,14 @@ class CautionScreen extends React.Component {
 		);
 	} // end of render
 
-	_getCaution(list) {
+	_getCaution(food_id) {
 		console.log('call _getCaution');
-		console.log('list : ' + list);
-		let array = [];
-		array.push(list);
+		console.log('food_id : ' + food_id);
+		// let array = [];
+		// array.push(list);
 
 		return api
-			.post('/caution', { caution_list: array })
+			.post('/caution', { food_id: food_id })
 			.then(response => response.data)
 			.then(data => {
 				console.log('caution_list count : ' + data.length);
@@ -154,7 +155,7 @@ class CautionScreen extends React.Component {
 			.catch(err => {
 				console.error(err);
 			});
-	} // end of _getCaution(list)
+	} // end of _getCaution(food_id)
 }
 
 const styles = StyleSheet.create({

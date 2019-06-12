@@ -221,10 +221,10 @@ class FoodScreen extends Component {
     // this.props.navigation.dispatch(navigateAction);
     
     this.props.routerStore.screen = 'Ingredient';
-    this.props.foodStore.foodId = index;
+    this.props.foodStore.food_id = _key;
     this.props.foodStore.ingredient_list = ingredient_list;
     console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
-    console.log('this.props.foodStore.foodId : (' + this.props.foodStore.foodId + ')');
+    console.log('this.props.foodStore.foodId : (' + this.props.foodStore.food_id + ')');
     console.log('this.props.foodStore.ingredient_list : (' + this.props.foodStore.ingredient_list + ')');
   }
 
@@ -244,10 +244,10 @@ class FoodScreen extends Component {
     // this.props.navigation.dispatch(navigateAction);
     
     this.props.routerStore.screen = 'Cook';
-    this.props.foodStore.foodId = index;
+    this.props.foodStore.food_id = _key;
     this.props.foodStore.cook_list = cook_list;
     console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
-    console.log('this.props.foodStore.foodId : (' + this.props.foodStore.foodId + ')');
+    console.log('this.props.foodStore.food_id : (' + this.props.foodStore.food_id + ')');
     console.log('this.props.foodStore.cook_list : (' + this.props.foodStore.cook_list + ')'); 
   }
 
@@ -266,10 +266,10 @@ class FoodScreen extends Component {
     // });
     // this.props.navigation.dispatch(navigateAction);
     this.props.routerStore.screen = 'Eat';
-    this.props.foodStore.foodId = index;
+    this.props.foodStore.food_id = _key;
     this.props.foodStore.eat_list = eat_list;
     console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
-    console.log('this.props.foodStore.foodId : (' + this.props.foodStore.foodId + ')');
+    console.log('this.props.foodStore.food_id : (' + this.props.foodStore.food_id + ')');
     console.log('this.props.foodStore.eat_list : (' + this.props.foodStore.eat_list + ')');
   }
 
@@ -288,10 +288,10 @@ class FoodScreen extends Component {
     // });
     // this.props.navigation.dispatch(navigateAction);
     this.props.routerStore.screen = 'History';
-    this.props.foodStore.foodId = index;
+    this.props.foodStore.food_id = _key;
     this.props.foodStore.history_list = history_list;
     console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
-    console.log('this.props.foodStore.foodId : (' + this.props.foodStore.foodId + ')');
+    console.log('this.props.foodStore.food_id : (' + this.props.foodStore.food_id + ')');
     console.log('this.props.foodStore.history_list : (' + this.props.foodStore.history_list + ')');
   }
 
@@ -310,10 +310,10 @@ class FoodScreen extends Component {
     // });
     // this.props.navigation.dispatch(navigateAction);
     this.props.routerStore.screen = 'Caution';
-    this.props.foodStore.foodId = index;
+    this.props.foodStore.food_id = _key;
     this.props.foodStore.caution_list = caution_list;
     console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
-    console.log('this.props.foodStore.foodId : (' + this.props.foodStore.foodId + ')');
+    console.log('this.props.foodStore.food_id : (' + this.props.foodStore.food_id + ')');
     console.log('this.props.foodStore.caution_list : (' + this.props.foodStore.caution_list + ')');
   }
 
@@ -370,7 +370,7 @@ class FoodScreen extends Component {
                     onPress={this._handleBack}>
                     <View >
                         <Text style={styles.ButtonText}>
-                          MENU {this.props.foodStore.foodId}
+                          MENU {this.props.foodStore.food_id}
                         </Text>
                     </View>
                   </TouchableHighlight>

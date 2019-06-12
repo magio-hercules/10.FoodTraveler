@@ -38,9 +38,10 @@ class HistoryScreen extends React.Component {
 
 		// let params = this.props.navigation.state.params;
 		// let _data = await this._getHistory(params.history_list);
-		let params = this.props.foodStore.history_list;
-		console.log('params : ' + params);
-		let _data = await this._getHistory(params);
+		// let params = this.props.foodStore.history_list;
+		let food_id = this.props.foodStore.food_id;
+		console.log('food_id : ' + food_id);
+		let _data = await this._getHistory(food_id);
 		this.setState({ data: _data });
 	}
 
@@ -97,14 +98,14 @@ class HistoryScreen extends React.Component {
 		);
 	} // end of render
 
-	_getHistory(list) {
+	_getHistory(food_id) {
 		console.log('call _getHistory');
-		console.log('list : ' + list);
-		let array = [];
-		array.push(list);
+		console.log('food_id : ' + food_id);
+		// let array = [];
+		// array.push(list);
 
 		return api
-			.post('/history', { history_list: array })
+			.post('/history', { food_id: food_id })
 			.then(response => response.data)
 			.then(data => {
 				console.log('history_list count : ' + data.length);
@@ -152,7 +153,7 @@ class HistoryScreen extends React.Component {
 			.catch(err => {
 				console.error(err);
 			});
-	} // end of _getHistory(list)
+	} // end of _getHistory(food_id)
 }
 
 const styles = StyleSheet.create({
