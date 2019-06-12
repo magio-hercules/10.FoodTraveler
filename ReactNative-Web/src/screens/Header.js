@@ -6,7 +6,7 @@ import {
 	View,
 	Text,
 	TextInput,
-	Button,
+	// Button,
 	Image,
 	Picker,
 	TouchableHighlight,
@@ -23,37 +23,98 @@ import Language from '../constants/Language';
 import InformationIcon from '../components/InformationIcon';
 import CommunityIcon from '../components/CommunityIcon';
 
+import DrawerScreen from './DrawerScreen';
+
 import { decorate, observable, action } from 'mobx';
 import { observer, inject } from 'mobx-react';
+
+import { Drawer, MuiThemeProvider, getMuiTheme } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+// const { Drawer, RaisedButton, MuiThemeProvider, getMuiTheme } = MaterialUI;
 
 class Header extends Component {
 	state = {};
 
-	_handleBack = () => {
-		// this._handleAction(RNTesterActions.Back());
-		console.log('_handleBack');
+	constructor(props) {
+		super(props);
+		this.state = { drawerOpen: false };
+	}
+
+	_handleLogo = () => {
+		console.log('_handleLogo');
 		this.props.routerStore.screen = 'Food';
+	};
+
+	_handleBack = () => {
+		console.log('_handleBack');
+		this.setState({ drawerOpen: false });
+	};
+
+	_handleMenu = () => {
+		// this._handleAction(RNTesterActions.Back());
+		console.log('_handleMenu');
+		// this.props.routerStore.screen = 'Food';
+
+		this.setState({ drawerOpen: true });
 	};
 
 	render() {
 		console.log('call render');
 
+		// const contentStyle = { transition: 'margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)' };
+		// if (this.state.drawerOpen) {
+		// 	contentStyle.marginLeft = 256;
+		// }
+
 		return (
 			<View style={styles.RootView}>
+				<Drawer open={this.state.drawerOpen}>
+					<div style={{ textAlign: 'right', width: 300, height: 50 }}>
+						<Button
+							style={{
+								width: 90,
+								height: 40,
+								backgroundColor: '#42A5F5',
+								borderRadius: 10,
+								color: '#FFF',
+								fontSize: 20,
+								margin: 5,
+							}}
+							onClick={() => this.setState({ drawerOpen: false })}
+						>
+							CLOSE
+						</Button>
+					</div>
+					{/* <View style={{ alignItems: 'right', width: 300 }}>
+						<TouchableHighlight
+							style={styles.CloseButton}
+							underlayColor="#448AFF"
+							onPress={this._handleBack}
+						>
+							<View>
+								<Text style={styles.ButtonText}>CLOSE</Text>
+							</View>
+						</TouchableHighlight>
+					</View> */}
+
+					<DrawerScreen />
+				</Drawer>
 				<View style={styles.headerContainer}>
 					<View style={styles.header}>
 						<View style={styles.headerCenter}>
-							<Image
-								source={require('../assets/icons/spiro.png')}
-								style={{
-									width: 25,
-									height: 25,
-									marginLeft: 0,
-									marginTop: 0,
-									marginRight: 10,
-									tintColor: '#2f95dc',
-								}}
-							/>
+							<TouchableHighlight onPress={this._handleLogo} underlayColor="#F5F5F6">
+								<Image
+									source={require('../assets/icons/spiro.png')}
+									style={{
+										width: 25,
+										height: 25,
+										marginLeft: 0,
+										marginTop: 0,
+										marginRight: 10,
+										tintColor: '#2f95dc',
+									}}
+								/>
+							</TouchableHighlight>
 							<Text accessibilityRole="heading" aria-level="3" style={styles.title}>
 								FoodTraveler
 							</Text>
@@ -62,9 +123,9 @@ class Header extends Component {
 							<View style={styles.headerLeft}>
 								{/* <Button style={{ backgroundColor: "#FAFAFA" }} title="MENU" onPress={this._handleBack} /> */}
 								<TouchableHighlight
-									style={styles.Button}
+									style={styles.MenuButton}
 									underlayColor="#448AFF"
-									onPress={this._handleBack}
+									onPress={this._handleMenu}
 								>
 									<View>
 										<Text style={styles.ButtonText}>MENU</Text>
@@ -77,7 +138,7 @@ class Header extends Component {
 				</View>
 			</View>
 		);
-	}
+	} // end of render()
 }
 
 const styles = StyleSheet.create({
@@ -129,13 +190,22 @@ const styles = StyleSheet.create({
 		fontWeight: '600',
 		textAlign: 'center',
 	},
-	Button: {
-		width: 100,
-		height: 50,
+	MenuButton: {
+		width: 90,
+		height: 40,
 		borderRadius: 10,
 		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: '#42A5F5',
+	},
+	CloseButton: {
+		width: 90,
+		height: 40,
+		borderRadius: 10,
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: '#42A5F5',
+		// textAlign: 'right',
 	},
 	ButtonText: {
 		color: '#FFF',

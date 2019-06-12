@@ -39,7 +39,7 @@ export default class AvatarIcon extends Component {
 						src={this.props.imageSrc}
 						// activeOpacity={this.props.activeOpacity}
 						onPress={this.props.onPress}
-						overlayContainerStyle={{ backgroundColor: 'white' }}
+						// overlayContainerStyle={{ backgroundColor: 'white' }}
 					/>
 					<Text style={styles.AvatarText}>{this.props.title} </Text>
 				</View>
