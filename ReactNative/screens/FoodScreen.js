@@ -198,6 +198,7 @@ class FoodScreen extends React.Component {
     const navigateAction = NavigationActions.navigate({
       routeName: "Cook",
       params: {
+        food_id: _key,
         cook_list: cook_list,
       }
     });
@@ -214,6 +215,7 @@ class FoodScreen extends React.Component {
     const navigateAction = NavigationActions.navigate({
       routeName: "Eat",
       params: {
+        food_id: _key,
         eat_list: eat_list,
       }
     });
@@ -230,6 +232,7 @@ class FoodScreen extends React.Component {
     const navigateAction = NavigationActions.navigate({
       routeName: "History",
       params: {
+        food_id: _key,
         history_list: history_list,
       }
     });
@@ -246,6 +249,7 @@ class FoodScreen extends React.Component {
     const navigateAction = NavigationActions.navigate({
       routeName: "Caution",
       params: {
+        food_id: _key,
         caution_list: caution_list,
       }
     });

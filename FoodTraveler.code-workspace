@@ -5,6 +5,12 @@
 		},
 		{
 			"path": "BackEnd"
+		},
+		{
+			"path": "react-web"
+		},
+		{
+			"path": "TestApp"
 		}
 	],
 	"settings": {}

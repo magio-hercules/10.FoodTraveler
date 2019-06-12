@@ -1,7 +1,17 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button, TouchableHighlight, Picker, TextInput } from 'react-native';
+import { 
+  StyleSheet, 
+  View, 
+  Text, 
+  Button, 
+  TouchableHighlight, 
+  Picker,
+  TextInput, 
+  KeyboardAvoidingView 
+} from 'react-native';
 
 import { Table, Row, Rows } from 'react-native-table-component';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import Language from '../constants/Language';
 
@@ -19,9 +29,9 @@ export default class HelpScreen extends React.Component {
       status: "Conversation",
       place: "",
       myCountry: "",
-      myPrice: "금액 입력",
+      myPrice: "",
       travelCountry: "",
-      travelPrice: "금액 입력",
+      travelPrice: "",
       tableHead: ['여행자 언어', '여행지 언어\n[발음기호(영어)]', 'TTS'],
       tableData: [
         ['점원 부를때', '여기요~', '☞'],
@@ -64,7 +74,11 @@ export default class HelpScreen extends React.Component {
     console.log('current status : ' + state.status);
 
     return (
-      <View style={styles.Container}>
+      <KeyboardAwareScrollView behavior='padding'
+        style={styles.Container} 
+        resetScrollToCoords={{ x: 0, y: 0 }}
+        scrollEnabled={false}
+      >
         <View style={styles.ButtonContainer}> 
           <TouchableHighlight 
             style={styles.Button}
@@ -160,9 +174,10 @@ export default class HelpScreen extends React.Component {
                 </View>
                 <View style={styles.PickerContainerExchange}>
                   <TextInput
-                    style={styles.ExchangeMyPrice}
+                    style={styles.ExchangeRatePrice}
                     onChangeText={(text) => this.setState({myPrice: text})}
                     value={this.state.myPrice}
+                    placeholder="금액 입력"
                   />
                 </View>
               </View>
@@ -188,9 +203,10 @@ export default class HelpScreen extends React.Component {
                 </View>
                 <View style={styles.PickerContainerExchange}>
                   <TextInput
-                    style={styles.ExchangeMyPrice}
-                    onChangeText={(text) => this.setState({myPrice: text})}
-                    value={this.state.myPrice}
+                    style={styles.ExchangeRatePrice}
+                    onChangeText={(text) => this.setState({travelPrice: text})}
+                    value={this.state.travelPrice}
+                    placeholder="금액 입력"
                   />
                 </View>
               </View>
@@ -199,7 +215,7 @@ export default class HelpScreen extends React.Component {
           {/* end of <View style={styles.ExchangeRateLayout}>  */} 
 
         </View>
-      </View>
+      </KeyboardAwareScrollView>
     );
   }
 }
@@ -235,6 +251,7 @@ const styles = StyleSheet.create({
     // backgroundColor:'#a1a',
   }, 
   ButtonContainer: {
+    // flex: 1,
     flexDirection: 'row', 
     justifyContent:'space-around',
     alignItems: 'center',
@@ -297,13 +314,6 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     // backgroundColor: "#ffF2FD",
   },
-  ExchangeMyPrice: {
-    height: 40,
-    alignSelf: 'flex-end',
-    marginRight: 10,
-    borderColor: 'gray',
-    borderWidth: 1,
-  },
   ContentsLayout: {
     flex: 1,
     flexDirection: 'column', 
@@ -346,5 +356,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     padding: 10,
     // backgroundColor:'#773',
+  },
+  ExchangeRatePrice: {
+    height: 40,
+    alignSelf: 'flex-end',
+    textAlign: 'right', 
+    marginRight: 10,
+    // borderColor: 'gray',
+    // borderWidth: 1,
   },
 });

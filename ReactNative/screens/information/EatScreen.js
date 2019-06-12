@@ -32,7 +32,7 @@ export default class Eatcreen extends React.Component {
     console.log("call componentWillMount");
 
     let params = this.props.navigation.state.params;
-    let _data = await this._getEat(params.eat_list);
+    let _data = await this._getEat(params.food_id);
     this.setState({data: _data});
   }
 
@@ -85,14 +85,14 @@ export default class Eatcreen extends React.Component {
   } // end of render
 
 
-  _getEat(list) {
+  _getEat(food_id) {
     console.log("call _getEat");
-    console.log("list : " + list);
-    let array = [];
-    array.push(list);
+    console.log("food_id : " + food_id);
+    // let array = [];
+    // array.push(list);
 
     return api
-            .post('/eat', { "eat_list": array })
+            .post('/eat', { food_id: food_id })
             .then(response => response.data)
             .then((data) => {
               console.log("eat_list count : " + data.length);
@@ -139,7 +139,7 @@ export default class Eatcreen extends React.Component {
             .catch((err) => {
               console.error(err);
             });
-  } // end of _getEat(list)
+  } // end of _getEat(food_id)
 }
 
 
