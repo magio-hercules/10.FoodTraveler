@@ -49,6 +49,12 @@ class DrawerScreen extends Component {
 
 	_onLanguage = () => {
 		console.log('_onLanguage');
+
+		if (this.props.profileStore.language == 'ko') {
+			this.props.profileStore.language = 'en';
+		} else if (this.props.profileStore.language == 'en') {
+			this.props.profileStore.language = 'ko';
+		}
 	};
 
 	_onNation = () => {

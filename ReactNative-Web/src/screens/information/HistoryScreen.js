@@ -9,7 +9,7 @@ import _mapKeys from 'lodash/mapKeys';
 
 import LayoutInfo from '../../constants/Layout';
 
-import { decorate, observable, action } from 'mobx';
+import { autorun } from 'mobx';
 import { observer, inject } from 'mobx-react';
 
 // import { Divider, Avatar } from 'react-native-elements';
@@ -25,6 +25,7 @@ const api = create({
 class HistoryScreen extends React.Component {
 	state = {
 		data: [],
+		language: '',
 		typeArray: {},
 	};
 
@@ -43,6 +44,36 @@ class HistoryScreen extends React.Component {
 		console.log('food_id : ' + food_id);
 		let _data = await this._getHistory(food_id);
 		this.setState({ data: _data });
+
+		this.setState({ language: this.props.profileStore.language });
+		console.log('curLanguage : ' + this.props.profileStore.language);
+
+		autorun(() => {
+			console.log('autorun');
+			console.log('this.state.language : ' + this.state.language);
+			console.log('this.props.profileStore.language : ' + this.props.profileStore.language);
+			if (this.state.language == this.props.profileStore.language) {
+				console.log('this.state.language == this.props.profileStore.language');
+			} else {
+				console.log('this.state.language != this.props.profileStore.language');
+
+				console.log('params : ' + this.props.foodStore.food_id);
+				this._getHistory(this.props.foodStore.food_id).then(
+					_data => {
+						console.log('_data : ' + _data);
+						this.setState({ data: _data });
+						console.log('after setState({ data: _data })');
+						console.log('this.props.profileStore.language : ' + this.props.profileStore.language);
+					},
+					error => {
+						console.log('after then error : ');
+						console.log(error);
+					}
+				);
+				console.log('this.state.language : ' + this.state.language);
+				this.setState({ language: this.props.profileStore.language });
+			}
+		});
 	}
 
 	render() {

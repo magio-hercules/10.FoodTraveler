@@ -7,6 +7,7 @@ import _forEach from 'lodash/forEach';
 import _values from 'lodash/values';
 import _mapKeys from 'lodash/mapKeys';
 
+import { autorun } from 'mobx';
 import { observer, inject } from 'mobx-react';
 
 import LayoutInfo from '../../constants/Layout';
@@ -30,6 +31,7 @@ class IngredientScreen extends React.Component {
 	state = {
 		// params: this.props.navigation.state.params,
 		data: [],
+		language: '',
 		typeArray: {},
 	};
 
@@ -43,14 +45,39 @@ class IngredientScreen extends React.Component {
 
 		// let params = this.props.navigation.state.params;
 		// let _data = await this._getInfoIngredient(params.ingredient_list);
-		let params = this.props.foodStore.ingredient_list;
-		console.log('params : ' + params);
-		let _data = await this._getInfoIngredient(params);
-
-		// console.log("_data : " + _data);
-		// console.log("_data : ");
-		// console.log(_data);
+		console.log('params : ' + this.props.foodStore.ingredient_list);
+		let _data = await this._getInfoIngredient(this.props.foodStore.ingredient_list);
 		this.setState({ data: _data });
+
+		this.setState({ language: this.props.profileStore.language });
+		console.log('curLanguage : ' + this.props.profileStore.language);
+
+		autorun(() => {
+			console.log('autorun');
+			console.log('this.state.language : ' + this.state.language);
+			console.log('this.props.profileStore.language : ' + this.props.profileStore.language);
+			if (this.state.language == this.props.profileStore.language) {
+				console.log('this.state.language == this.props.profileStore.language');
+			} else {
+				console.log('this.state.language != this.props.profileStore.language');
+
+				console.log('params : ' + this.props.foodStore.ingredient_list);
+				this._getInfoIngredient(this.props.foodStore.ingredient_list).then(
+					_data => {
+						console.log('_data : ' + _data);
+						this.setState({ data: _data });
+						console.log('after setState({ data: _data })');
+						console.log('this.props.profileStore.language : ' + this.props.profileStore.language);
+					},
+					error => {
+						console.log('after then error : ');
+						console.log(error);
+					}
+				);
+				console.log('this.state.language : ' + this.state.language);
+				this.setState({ language: this.props.profileStore.language });
+			}
+		});
 	}
 
 	render() {

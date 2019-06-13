@@ -34,7 +34,7 @@ import CommunityIcon from '../components/CommunityIcon';
 
 // const windowWidth = Dimensions.get('window').width;
 
-import { decorate, observable, action } from 'mobx';
+import { decorate, observable, observe, action, when, computed, autorun, runInAction } from 'mobx';
 import { observer, inject } from 'mobx-react';
 // import { FoodStoreContext } from './stores/FoodStore';
 
@@ -95,12 +95,13 @@ class FoodScreen extends Component {
   constructor(props){
     super(props);
     console.log("FoodScreen constructor");
-
   }
 
-  componentWillMount () {
+  async componentWillMount () {
     console.log("call componentWillMount");
   }
+
+  
 
   async componentDidMount() {
     console.log("call componentDidMount");
@@ -108,6 +109,36 @@ class FoodScreen extends Component {
     let _data = await this._getTotalFoods();
     console.log("_data : " + _data);
     this.setState({data: _data});
+
+    this.setState({ language: this.props.profileStore.language });
+    console.log("curLanguage : " + this.props.profileStore.language);
+    
+    autorun(() => {
+      console.log("autorun");
+      console.log("this.state.language : " + this.state.language);
+      console.log("this.props.profileStore.language : " + this.props.profileStore.language);
+      if (this.state.language == this.props.profileStore.language) {
+        console.log("this.state.language == this.props.profileStore.language");
+      } else {
+        console.log("this.state.language != this.props.profileStore.language");
+
+        // let _data = this._getTotalFoods();
+        this._getTotalFoods().then(
+          _data => {
+            this.setState({ data: _data });
+            console.log("_data : " + _data);
+            console.log("after setState({ data: _data })");
+            console.log("this.props.profileStore.language : " + this.props.profileStore.language);
+          },
+          error => {
+            console.log('after then error : ');
+            console.log(error);
+          }
+        );
+        console.log("this.state.language : " + this.state.language);
+        this.setState({ language: this.props.profileStore.language });
+      }
+    });
 
     console.log("end componentDidMount");
   }
@@ -135,7 +166,7 @@ class FoodScreen extends Component {
       .then((data) => {
         // console.log(data);
         console.log("count : " + data.length);
-        console.log("!!!!! this.props.profileStore.language : " + this.props.profileStore.language);
+        // console.log("this.props.profileStore.language : " + this.props.profileStore.language);
         
         let _title, _desc;
         switch (this.props.profileStore.language) {
@@ -330,8 +361,20 @@ class FoodScreen extends Component {
     // console.log('_onPressHeart 변경 후 : ' + tempData[index].favorite);
   }
 
+  get lan() {
+    // correct; computed property will track the `user.name` property
+    return this.props.profileStore.language
+  }
+
   _onPressMessage = (index) => {
     console.log('_onPressMessage');
+
+    // if (this.props.profileStore.language == 'ko') {
+    //   this.props.profileStore.language = 'en';
+    // } else if (this.props.profileStore.language == 'en') {
+    //   this.props.profileStore.language = 'ko';
+    // }
+
   }
 
   _onPressShare = (index) => {
@@ -437,7 +480,7 @@ class FoodScreen extends Component {
                       <Text 
                         style={styles.ContentHeaderText}> 
                         {/* {item.title_local + " [" + item.title_phonetic + "]" + "\r\n" + ": " + item.title}  */}
-                        {`${item.title_local} [${item.title_phonetic}] \r\n : ${item.title}`} 
+                          {`${item.title_local} [${item.title_phonetic}] \r\n : ${item.title}`} 
                       </Text>
                       <Text 
                         style={styles.ContentHeaderText}> 
@@ -455,8 +498,9 @@ class FoodScreen extends Component {
                           />
                         <CommunityIcon 
                           iconSrc={require('../assets/icons/message.png')}
-                          // onPress={() => this._onPressMessage(index)}/>
-                          onPlus={this.props.increment}/>
+                          onPress={() => this._onPressMessage(index)}
+                          // onPlus={this.props.increment}/>
+                          />
                         <CommunityIcon 
                           iconSrc={require('../assets/icons/share.png')}
                           // onPress={() => this._onPressShare(index)}/>
@@ -658,6 +702,7 @@ decorate(FoodScreen, {
   increase: action,
   decrease: action,
   setFoodId: action,
+  lan: computed
 })
 
 // export default FoodScreen;
