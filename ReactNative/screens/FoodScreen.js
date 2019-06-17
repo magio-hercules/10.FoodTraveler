@@ -16,10 +16,14 @@ import CommunityIcon from '../components/CommunityIcon';
 import { create } from 'apisauce'
 // import CookScreen from './information/CookScreen';
 
-// for redux
+
+/* #type1, redux
 import { connect } from 'react-redux';
 // import * as actions from '../actions';
 import * as counterActions from '../reducers/counter';
+*/
+import { decorate, observable, observe, action, when, computed, autorun, runInAction } from 'mobx';
+import { observer, inject } from 'mobx-react';
 
 
 // import cloneDeep from 'lodash/cloneDeep';
@@ -62,6 +66,7 @@ class FoodScreen extends React.Component {
 
   state = {
     refreshing: false,
+    language: '',
     // data: randomCards(20),
     // data: this._getTotalFoods()
     data: []
@@ -87,6 +92,36 @@ class FoodScreen extends React.Component {
     let _data = await this._getTotalFoods();
     console.log("_data : " + _data);
     this.setState({data: _data});
+    
+    this.setState({ language: this.props.profileStore.language });
+    console.log("curLanguage : " + this.props.profileStore.language);
+    
+     autorun(() => {
+      console.log("autorun");
+      console.log("this.state.language : " + this.state.language);
+      console.log("this.props.profileStore.language : " + this.props.profileStore.language);
+      if (this.state.language == this.props.profileStore.language) {
+        console.log("this.state.language == this.props.profileStore.language");
+      } else {
+        console.log("this.state.language != this.props.profileStore.language");
+
+        // let _data = this._getTotalFoods();
+        this._getTotalFoods().then(
+          _data => {
+            this.setState({ data: _data });
+            console.log("_data : " + _data);
+            console.log("after setState({ data: _data })");
+            console.log("this.props.profileStore.language : " + this.props.profileStore.language);
+          },
+          error => {
+            console.log('after then error : ');
+            console.log(error);
+          }
+        );
+        console.log("this.state.language : " + this.state.language);
+        this.setState({ language: this.props.profileStore.language });
+      }
+    });
 
     console.log("end componentDidMount");
   }
@@ -116,7 +151,7 @@ class FoodScreen extends React.Component {
         console.log("count : " + data.length);
 
         let _title, _desc;
-        switch (global.language) {
+        switch (this.props.profileStore.language) {
           case 'ko':
             _title = "title_ko";
             _desc = "desc_ko";
@@ -178,12 +213,19 @@ class FoodScreen extends React.Component {
     console.log('_onPressIngredient : food_id(' + _key + ')');
     console.log('_onPressIngredient : ingredient_list(' + ingredient_list + ')');
     
+    this.props.routerStore.screen = 'Ingredient';
+    this.props.foodStore.food_id = _key;
+    this.props.foodStore.ingredient_list = ingredient_list;
+    console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
+    console.log('this.props.foodStore.foodId : (' + this.props.foodStore.food_id + ')');
+    console.log('this.props.foodStore.ingredient_list : (' + this.props.foodStore.ingredient_list + ')');
+
     const navigateAction = NavigationActions.navigate({
       routeName: "Ingredient",
-      params: {
-        // index: this.state.index,
-        ingredient_list: ingredient_list,
-      }
+      // params: {
+      //   // index: this.state.index,
+      //   ingredient_list: ingredient_list,
+      // }
     });
     this.props.navigation.dispatch(navigateAction);
   }
@@ -195,12 +237,19 @@ class FoodScreen extends React.Component {
     console.log('_onPressCook : food_id(' + _key + ')');
     console.log('_onPressCook : cook_list(' + cook_list + ')');
     
+    this.props.routerStore.screen = 'Cook';
+    this.props.foodStore.food_id = _key;
+    this.props.foodStore.cook_list = cook_list;
+    console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
+    console.log('this.props.foodStore.food_id : (' + this.props.foodStore.food_id + ')');
+    console.log('this.props.foodStore.cook_list : (' + this.props.foodStore.cook_list + ')'); 
+
     const navigateAction = NavigationActions.navigate({
       routeName: "Cook",
-      params: {
-        food_id: _key,
-        cook_list: cook_list,
-      }
+      // params: {
+      //   food_id: _key,
+      //   cook_list: cook_list,
+      // }
     });
     this.props.navigation.dispatch(navigateAction);
   }
@@ -212,12 +261,19 @@ class FoodScreen extends React.Component {
     console.log('_onPressEat : food_id(' + _key + ')');
     console.log('_onPressEat : eat_list(' + eat_list + ')');
     
+    this.props.routerStore.screen = 'Eat';
+    this.props.foodStore.food_id = _key;
+    this.props.foodStore.eat_list = eat_list;
+    console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
+    console.log('this.props.foodStore.food_id : (' + this.props.foodStore.food_id + ')');
+    console.log('this.props.foodStore.eat_list : (' + this.props.foodStore.eat_list + ')');
+
     const navigateAction = NavigationActions.navigate({
       routeName: "Eat",
-      params: {
-        food_id: _key,
-        eat_list: eat_list,
-      }
+      // params: {
+      //   food_id: _key,
+      //   eat_list: eat_list,
+      // }
     });
     this.props.navigation.dispatch(navigateAction);
   }
@@ -229,12 +285,19 @@ class FoodScreen extends React.Component {
     console.log('_onPressHistory : food_id(' + _key + ')');
     console.log('_onPressHistory : history_list(' + history_list + ')');
     
+    this.props.routerStore.screen = 'History';
+    this.props.foodStore.food_id = _key;
+    this.props.foodStore.history_list = history_list;
+    console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
+    console.log('this.props.foodStore.food_id : (' + this.props.foodStore.food_id + ')');
+    console.log('this.props.foodStore.history_list : (' + this.props.foodStore.history_list + ')');
+
     const navigateAction = NavigationActions.navigate({
       routeName: "History",
-      params: {
-        food_id: _key,
-        history_list: history_list,
-      }
+      // params: {
+      //   food_id: _key,
+      //   history_list: history_list,
+      // }
     });
     this.props.navigation.dispatch(navigateAction);
   }
@@ -246,12 +309,19 @@ class FoodScreen extends React.Component {
     console.log('_onPressCaution : food_id(' + _key + ')');
     console.log('_onPressCaution : caution_list(' + caution_list + ')');
     
+    this.props.routerStore.screen = 'Caution';
+    this.props.foodStore.food_id = _key;
+    this.props.foodStore.caution_list = caution_list;
+    console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
+    console.log('this.props.foodStore.food_id : (' + this.props.foodStore.food_id + ')');
+    console.log('this.props.foodStore.caution_list : (' + this.props.foodStore.caution_list + ')');
+
     const navigateAction = NavigationActions.navigate({
       routeName: "Caution",
-      params: {
-        food_id: _key,
-        caution_list: caution_list,
-      }
+      // params: {
+      //   food_id: _key,
+      //   caution_list: caution_list,
+      // }
     });
     this.props.navigation.dispatch(navigateAction);
   }
@@ -306,29 +376,29 @@ class FoodScreen extends React.Component {
               <View style={[styles.ImagePartOverlay]}>
                 <InformationIcon 
                   // name='Ingredient'
-                  name={Language.Ingredient[global.language]}
+                  name={Language.Ingredient[this.props.profileStore.language]}
                   iconSrc={require('../assets/icons/contents/ingredients.png')}
                   // onPress={this._onPressIngredient}/>
                   number={this.props.number}
                   onPress={() => this._onPressIngredient(index)}/>
                 <InformationIcon 
                   // name='Cook'
-                  name={Language.Cook[global.language]}
+                  name={Language.Cook[this.props.profileStore.language]}
                   iconSrc={require('../assets/icons/contents/chef.png')}
                   onPress={() => this._onPressCook(index)}/>
                 <InformationIcon 
                   // name='Eat'
-                  name={Language.Eat[global.language]}
+                  name={Language.Eat[this.props.profileStore.language]}
                   iconSrc={require('../assets/icons/contents/eat.png')}
                   onPress={() => this._onPressEat(index)}/>
                 <InformationIcon 
                   // name='History'
-                  name={Language.History[global.language]}
+                  name={Language.History[this.props.profileStore.language]}
                   iconSrc={require('../assets/icons/contents/history.png')}
                   onPress={() => this._onPressHistory(index)}/>
                 <InformationIcon 
                   // name='Caution'
-                  name={Language.Caution[global.language]}
+                  name={Language.Caution[this.props.profileStore.language]}
                   iconSrc={require('../assets/icons/contents/caution.png')}
                   onPress={() => this._onPressCaution(index)}/>
               </View>
@@ -383,6 +453,7 @@ FoodScreen.propTypes = {
 };
 
 
+/* #type1, redux
 const mapStateToProps = (state) => {
   return {
       number: state.counter.number
@@ -423,6 +494,18 @@ export default connect(mapStateToProps, mapDispatchProps)(FoodScreen);
 //     decrement: () => dispatch(counterActions.decrement())
 //   })
 // )(CounterContainer);
+*/
+
+// decorate(FoodScreen, {
+//   curFoodId: observable,
+//   increase: action,
+//   decrease: action,
+//   setFoodId: action,
+//   lan: computed
+// })
+
+export default inject('profileStore', 'foodStore', 'routerStore')(observer(FoodScreen));
+
 
 
 const styles = StyleSheet.create({
