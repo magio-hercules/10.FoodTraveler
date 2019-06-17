@@ -241,7 +241,14 @@ class FoodScreen extends Component {
     let ingredient_list = this.state.data[index].ingredient_list;
     console.log('_onPressIngredient : food_id(' + _key + ')');
     console.log('_onPressIngredient : ingredient_list(' + ingredient_list + ')');
-    
+
+    this.props.routerStore.screen = 'Ingredient';
+    this.props.foodStore.food_id = _key;
+    this.props.foodStore.ingredient_list = ingredient_list;
+    console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
+    console.log('this.props.foodStore.foodId : (' + this.props.foodStore.food_id + ')');
+    console.log('this.props.foodStore.ingredient_list : (' + this.props.foodStore.ingredient_list + ')');
+
     // const navigateAction = NavigationActions.navigate({
     //   routeName: "Ingredient",
     //   params: {
@@ -250,13 +257,6 @@ class FoodScreen extends Component {
     //   }
     // });
     // this.props.navigation.dispatch(navigateAction);
-    
-    this.props.routerStore.screen = 'Ingredient';
-    this.props.foodStore.food_id = _key;
-    this.props.foodStore.ingredient_list = ingredient_list;
-    console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
-    console.log('this.props.foodStore.foodId : (' + this.props.foodStore.food_id + ')');
-    console.log('this.props.foodStore.ingredient_list : (' + this.props.foodStore.ingredient_list + ')');
   }
 
   _onPressCook = (index) => {
@@ -265,7 +265,14 @@ class FoodScreen extends Component {
     let cook_list = this.state.data[index].cook_list;
     console.log('_onPressCook : food_id(' + _key + ')');
     console.log('_onPressCook : cook_list(' + cook_list + ')');
-    
+
+    this.props.routerStore.screen = 'Cook';
+    this.props.foodStore.food_id = _key;
+    this.props.foodStore.cook_list = cook_list;
+    console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
+    console.log('this.props.foodStore.food_id : (' + this.props.foodStore.food_id + ')');
+    console.log('this.props.foodStore.cook_list : (' + this.props.foodStore.cook_list + ')'); 
+
     // const navigateAction = NavigationActions.navigate({
     //   routeName: "Cook",
     //   params: {
@@ -273,13 +280,6 @@ class FoodScreen extends Component {
     //   }
     // });
     // this.props.navigation.dispatch(navigateAction);
-    
-    this.props.routerStore.screen = 'Cook';
-    this.props.foodStore.food_id = _key;
-    this.props.foodStore.cook_list = cook_list;
-    console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
-    console.log('this.props.foodStore.food_id : (' + this.props.foodStore.food_id + ')');
-    console.log('this.props.foodStore.cook_list : (' + this.props.foodStore.cook_list + ')'); 
   }
 
   _onPressEat = (index) => {
@@ -288,7 +288,14 @@ class FoodScreen extends Component {
     let eat_list = this.state.data[index].eat_list;
     console.log('_onPressEat : food_id(' + _key + ')');
     console.log('_onPressEat : eat_list(' + eat_list + ')');
-    
+
+    this.props.routerStore.screen = 'Eat';
+    this.props.foodStore.food_id = _key;
+    this.props.foodStore.eat_list = eat_list;
+    console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
+    console.log('this.props.foodStore.food_id : (' + this.props.foodStore.food_id + ')');
+    console.log('this.props.foodStore.eat_list : (' + this.props.foodStore.eat_list + ')');
+
     // const navigateAction = NavigationActions.navigate({
     //   routeName: "Eat",
     //   params: {
@@ -296,12 +303,6 @@ class FoodScreen extends Component {
     //   }
     // });
     // this.props.navigation.dispatch(navigateAction);
-    this.props.routerStore.screen = 'Eat';
-    this.props.foodStore.food_id = _key;
-    this.props.foodStore.eat_list = eat_list;
-    console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
-    console.log('this.props.foodStore.food_id : (' + this.props.foodStore.food_id + ')');
-    console.log('this.props.foodStore.eat_list : (' + this.props.foodStore.eat_list + ')');
   }
 
   _onPressHistory = (index) => {
@@ -311,19 +312,20 @@ class FoodScreen extends Component {
     console.log('_onPressHistory : food_id(' + _key + ')');
     console.log('_onPressHistory : history_list(' + history_list + ')');
     
-    // const navigateAction = NavigationActions.navigate({
-    //   routeName: "History",
-    //   params: {
-    //     history_list: history_list,
-    //   }
-    // });
-    // this.props.navigation.dispatch(navigateAction);
     this.props.routerStore.screen = 'History';
     this.props.foodStore.food_id = _key;
     this.props.foodStore.history_list = history_list;
     console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
     console.log('this.props.foodStore.food_id : (' + this.props.foodStore.food_id + ')');
     console.log('this.props.foodStore.history_list : (' + this.props.foodStore.history_list + ')');
+
+    // const navigateAction = NavigationActions.navigate({
+    //   routeName: "History",
+    //   params: {
+    //     history_list: history_list,
+    //   }
+    // });
+    // this.props.navigation.dispatch(navigateAction);    
   }
 
   _onPressCaution = (index) => {
@@ -333,6 +335,13 @@ class FoodScreen extends Component {
     console.log('_onPressCaution : food_id(' + _key + ')');
     console.log('_onPressCaution : caution_list(' + caution_list + ')');
     
+    this.props.routerStore.screen = 'Caution';
+    this.props.foodStore.food_id = _key;
+    this.props.foodStore.caution_list = caution_list;
+    console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
+    console.log('this.props.foodStore.food_id : (' + this.props.foodStore.food_id + ')');
+    console.log('this.props.foodStore.caution_list : (' + this.props.foodStore.caution_list + ')');
+    
     // const navigateAction = NavigationActions.navigate({
     //   routeName: "Caution",
     //   params: {
@@ -340,12 +349,6 @@ class FoodScreen extends Component {
     //   }
     // });
     // this.props.navigation.dispatch(navigateAction);
-    this.props.routerStore.screen = 'Caution';
-    this.props.foodStore.food_id = _key;
-    this.props.foodStore.caution_list = caution_list;
-    console.log('this.props.routerStore.screen : (' + this.props.routerStore.screen + ')');
-    console.log('this.props.foodStore.food_id : (' + this.props.foodStore.food_id + ')');
-    console.log('this.props.foodStore.caution_list : (' + this.props.foodStore.caution_list + ')');
   }
 
   
