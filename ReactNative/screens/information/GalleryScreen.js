@@ -43,20 +43,21 @@ class GalleryScreen extends React.Component {
 
 	async componentDidMount() {
 		console.log('call componentDidMount');
-
 		console.log('store_id : ' + this.props.foodStore.store_id);
-		let _data = await this._getGallery(this.props.foodStore.store_id);
+		console.log('class_id : ' + this.props.foodStore.class_id);
+
+		let _data = await this._getGallery(this.props.foodStore.store_id, this.props.foodStore.class_id);
 		console.log('_data : ' + _data);
 		this.setState({ data: _data });
 
 		console.log('end componentDidMount');
 	}
 
-	_getGallery(store_id) {
+	_getGallery(store_id, class_id) {
 		console.log('call _getGallery');
 
 		return api
-			.post('/gallery', { store_id: store_id })
+			.post('/gallery', { store_id: store_id, class_id: class_id })
 			.then(response => response.data)
 			.then(data => {
 				console.log('gallery count : ' + data.length);

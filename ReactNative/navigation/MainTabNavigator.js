@@ -74,7 +74,7 @@ const _navigationOptions = (navigation, bHeaderLeft = true) => {
 	// console.log("global.language : " + global.language);
 	// const headerTitle = navigation.state.routeName;
 	if (Language[_routeName] == null || Language[_routeName] == undefined) {
-		console.warn('_navigationOptions is not defined : _routeName(' + _routeName + ')');
+		console.log('_navigationOptions is not defined : _routeName(' + _routeName + ')');
 		return;
 	}
 
@@ -243,35 +243,92 @@ FoodStack.navigationOptions = ({ navigation }) => {
 // }
 // inject('profileStore', 'foodStore', 'routerStore')(observer(LikeStack));
 
+// const LikeStack = createStackNavigator(
+// 	{
+// 		Like: LikeScreen,
+// 	},
+// 	{
+// 		// headerMode: 'none'
+// 		defaultNavigationOptions: ({ navigation }) => _navigationOptions(navigation),
+// 	}
+// );
+
+// LikeStack.navigationOptions = ({ navigation }) => {
+// 	console.log('LikeStack.navigationOptions');
+// 	console.log('global.language : ' + global.language);
+// 	console.log('Language.Like[global.language] : ' + Language.Like[global.language]);
+// 	console.log('Language.Like : ' + Language.Like);
+// 	// console.log('!!! Language.Like : ' + this.props.store.language);
+
+// 	return {
+// 		// tabBarLabel: 'Like',
+// 		tabBarLabel: Language.Like[global.language],
+// 		tabBarOptions: _tabBarOptions(),
+// 		// lazy: false,
+// 		tabBarIcon: ({ focused }) => (
+// 			// <TabBarIcon
+// 			//   focused={focused}
+// 			//   name={Platform.OS === 'ios' ? 'ios-heart' : 'md-heart'}
+// 			// />
+// 			<TabBarIcon focused={focused} iconSrc={require('../assets/icons/tab/like.png')} />
+// 		),
+// 	};
+// };
+
 const LikeStack = createStackNavigator(
 	{
-		Like: LikeScreen,
+		Like: {
+			screen: FoodScreen,
+			navigationOptions: ({ navigation }) => ({
+				headerTitle: Language.Like[global.language],
+				headerLeft: (
+					<TouchableOpacity
+						onPress={() => {
+							navigation.dispatch(DrawerActions.toggleDrawer());
+						}}
+					>
+						<MenuImage navigation={navigation} />
+					</TouchableOpacity>
+				),
+			}),
+		},
+		Ingredient: IngredientScreen,
+		Cook: CookScreen,
+		Eat: EatScreen,
+		History: HistoryScreen,
+		Caution: CautionScreen,
 	},
 	{
-		// headerMode: 'none'
-		defaultNavigationOptions: ({ navigation }) => _navigationOptions(navigation),
+		defaultNavigationOptions: ({ navigation }) => _navigationOptions(navigation, false),
+		transitionConfig: () => ({
+			transitionSpec: {
+				duration: 500,
+				easing: Easing.out(Easing.poly(4)),
+				timing: Animated.timing,
+			},
+			screenInterpolator: sceneProps => {
+				const { layout, position, scene } = sceneProps;
+				const { index } = scene;
+				const width = layout.initWidth;
+				const translateX = position.interpolate({
+					inputRange: [index - 1, index],
+					outputRange: [width, 0],
+				});
+
+				return { /*opacity,*/ transform: [{ translateX }] };
+			},
+		}),
 	}
 );
 
 LikeStack.navigationOptions = ({ navigation }) => {
+	let tabBarVisible = navigation.state.index > 0 ? false : true;
 	console.log('LikeStack.navigationOptions');
-	console.log('global.language : ' + global.language);
-	console.log('Language.Like[global.language] : ' + Language.Like[global.language]);
-	console.log('Language.Like : ' + Language.Like);
-	// console.log('!!! Language.Like : ' + this.props.store.language);
-
 	return {
-		// tabBarLabel: 'Like',
+		tabBarVisible,
 		tabBarLabel: Language.Like[global.language],
 		tabBarOptions: _tabBarOptions(),
-		// lazy: false,
-		tabBarIcon: ({ focused }) => (
-			// <TabBarIcon
-			//   focused={focused}
-			//   name={Platform.OS === 'ios' ? 'ios-heart' : 'md-heart'}
-			// />
-			<TabBarIcon focused={focused} iconSrc={require('../assets/icons/tab/like.png')} />
-		),
+		tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} iconSrc={require('../assets/icons/tab/like.png')} />,
 	};
 };
 
@@ -348,31 +405,91 @@ RestaurantStack.navigationOptions = ({ navigation }) => {
 	};
 };
 
+// const ClassStack = createStackNavigator(
+// 	{
+// 		Class: ClassScreen,
+// 	},
+// 	{
+// 		// headerMode: 'none'
+// 		defaultNavigationOptions: ({ navigation }) => _navigationOptions(navigation),
+// 	}
+// );
+
+// ClassStack.navigationOptions = ({ navigation }) => {
+// 	console.log('ClassStack.navigationOptions');
+// 	console.log('global.language : ' + global.language);
+// 	console.log('Language.Class[global.language] : ' + Language.Class[global.language]);
+// 	console.log('Language.Class : ' + Language.Class);
+
+// 	return {
+// 		// tabBarLabel: 'Class',
+// 		tabBarLabel: Language.Class[global.language],
+// 		tabBarOptions: _tabBarOptions(),
+// 		tabBarIcon: ({ focused }) => (
+// 			// <TabBarIcon
+// 			//   focused={focused}
+// 			//   name={Platform.OS === 'ios' ? 'ios-pin' : 'md-pin'}
+// 			// />
+// 			<TabBarIcon focused={focused} iconSrc={require('../assets/icons/tab/class.png')} />
+// 		),
+// 	};
+// };
 const ClassStack = createStackNavigator(
 	{
-		Class: ClassScreen,
+		Class: {
+			screen: ClassScreen,
+			navigationOptions: ({ navigation }) => ({
+				headerTitle: Language.Class[global.language],
+				headerLeft: (
+					<TouchableOpacity
+						onPress={() => {
+							navigation.dispatch(DrawerActions.toggleDrawer());
+						}}
+					>
+						<MenuImage navigation={navigation} />
+					</TouchableOpacity>
+				),
+			}),
+		},
+
+		Detail: DetailScreen,
+		Gallery: GalleryScreen,
+		Map: MapScreen,
 	},
 	{
-		// headerMode: 'none'
-		defaultNavigationOptions: ({ navigation }) => _navigationOptions(navigation),
+		defaultNavigationOptions: ({ navigation }) => _navigationOptions(navigation, false),
+		transitionConfig: () => ({
+			transitionSpec: {
+				duration: 500,
+				easing: Easing.out(Easing.poly(4)),
+				timing: Animated.timing,
+			},
+			screenInterpolator: sceneProps => {
+				const { layout, position, scene } = sceneProps;
+				const { index } = scene;
+				const width = layout.initWidth;
+				const translateX = position.interpolate({
+					inputRange: [index - 1, index],
+					outputRange: [width, 0],
+				});
+
+				return { /*opacity,*/ transform: [{ translateX }] };
+			},
+		}),
 	}
 );
 
 ClassStack.navigationOptions = ({ navigation }) => {
 	console.log('ClassStack.navigationOptions');
-	console.log('global.language : ' + global.language);
-	console.log('Language.Class[global.language] : ' + Language.Class[global.language]);
-	console.log('Language.Class : ' + Language.Class);
+	console.log('navigation.state.index : ' + navigation.state.index);
+
+	let tabBarVisible = navigation.state.index > 0 ? false : true;
 
 	return {
-		// tabBarLabel: 'Class',
+		tabBarVisible,
 		tabBarLabel: Language.Class[global.language],
 		tabBarOptions: _tabBarOptions(),
 		tabBarIcon: ({ focused }) => (
-			// <TabBarIcon
-			//   focused={focused}
-			//   name={Platform.OS === 'ios' ? 'ios-pin' : 'md-pin'}
-			// />
 			<TabBarIcon focused={focused} iconSrc={require('../assets/icons/tab/class.png')} />
 		),
 	};

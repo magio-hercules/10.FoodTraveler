@@ -60,7 +60,7 @@ async function requestLocationPermission() {
 			console.log('Location permission else');
 		}
 	} catch (err) {
-		console.warn(err);
+		console.log(err);
 	}
 }
 
