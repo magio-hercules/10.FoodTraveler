@@ -134,7 +134,8 @@ class RestaurantScreen extends React.Component {
 						image_url: data[i].image_url,
 					});
 				}
-				// console.log(arr);
+				console.log('total_stores');
+				console.log(arr);
 				return arr;
 			})
 			.catch(err => {
@@ -148,6 +149,8 @@ class RestaurantScreen extends React.Component {
 		let _key = this.state.data[index].key;
 		console.log('_onPressDetail : store_id(' + _key + ')');
 
+		this.props.foodStore.store_id = _key;
+		console.log('this.props.foodStore.store_id : (' + _key + ')');
 		const navigateAction = NavigationActions.navigate({
 			routeName: 'Detail',
 			params: {
@@ -164,6 +167,8 @@ class RestaurantScreen extends React.Component {
 		let _key = this.state.data[index].key;
 		console.log('_onPressGallery : store_id(' + _key + ')');
 
+		this.props.foodStore.store_id = _key;
+		console.log('this.props.foodStore.store_id : (' + _key + ')');
 		const navigateAction = NavigationActions.navigate({
 			routeName: 'Gallery',
 			params: {
@@ -180,10 +185,12 @@ class RestaurantScreen extends React.Component {
 		console.log('_onPressMap : store_id(' + _key + ')');
 		console.log('_onPressMap : position(' + position + ')');
 
+		this.props.foodStore.store_id = _key;
+		console.log('this.props.foodStore.store_id : (' + _key + ')');
 		const navigateAction = NavigationActions.navigate({
 			routeName: 'Map',
 			params: {
-				// position: position,
+				position: position,
 			},
 		});
 		this.props.navigation.dispatch(navigateAction);

@@ -93,7 +93,8 @@ export default class LoginScreen extends React.Component {
 			console.log('profile.id : ' + this.state.profile.id);
 			console.log('profile.avatar : ' + this.state.profile.avatar);
 
-			let str = this.state.profile.name + '님 환영합니다.';
+			let _name = this.state.profile.name;
+			let str = (_name == undefined ? 'GUEST' : _name) + ' 님 환영합니다.';
 			ToastAndroid.show(str, ToastAndroid.SHORT);
 
 			const navigateAction = NavigationActions.navigate({
