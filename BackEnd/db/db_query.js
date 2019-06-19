@@ -12,6 +12,10 @@ module.exports = function() {
 			// .../total_stores
 			return 'SELECT * FROM t_stores order by id asc';
 		},
+		getTotalClasses: function() {
+			// .../total_classes
+			return 'SELECT * FROM t_classes order by id asc';
+		},
 
 		//////////
 		// POST //

@@ -13,6 +13,12 @@ exports.getTotalStores = function(req, res) {
 	common.doQuery(req, res, query);
 };
 
+exports.getTotalClasses = function(req, res) {
+	console.log('[====] call getTotalClasses');
+	var query = mysql_query.getTotalClasses();
+	common.doQuery(req, res, query);
+};
+
 //////////
 // POST //
 //////////
@@ -32,7 +38,9 @@ exports.postGallery = function(req, res) {
 
 	var query = mysql_query.postGallery();
 	var params = [];
-	query = _checkParams(query, params, req.body.store_id, 'store_id');
+	// query = _checkParams(query, params, req.body.store_id, 'store_id');
+	query = _searchParams(query, params, req.body.store_id, 'store_id');
+	query = _searchParams(query, params, req.body.class_id, 'class_id', true);
 
 	bFirst = true;
 	common.doQuery(req, res, query, params);

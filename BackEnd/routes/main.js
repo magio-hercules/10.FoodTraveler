@@ -31,6 +31,9 @@ router.get('/total_foods', controller_food.getTotalFoods);
 // store //
 router.get('/total_stores', controller_store.getTotalStores);
 
+// store //
+router.get('/total_classes', controller_store.getTotalClasses);
+
 //////////
 // POST //
 //////////
