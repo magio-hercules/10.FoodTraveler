@@ -30,12 +30,13 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		145251C1816D970189B6A2A1 /* libPods-FoodTraveler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8D01EB46E8F4A0F21C1DBA8 /* libPods-FoodTraveler.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		1B532CFD2276AADA00E9C7BA /* netmarbleL.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B532CCE2276AAD900E9C7BA /* netmarbleL.ttf */; };
-		1B532CFE2276AADA00E9C7BA /* netmarbleB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B532CFB2276AAD900E9C7BA /* netmarbleB.ttf */; };
-		1B532CFF2276AADA00E9C7BA /* netmarbleM.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B532CFC2276AADA00E9C7BA /* netmarbleM.ttf */; };
 		249B5D3394524221B676467B /* libRNVectorIcons-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6838E7F37BE246FAA871AA83 /* libRNVectorIcons-tvOS.a */; };
 		25A5F8AF52A94F6F90946D66 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87ADB9EF9E5E4B6EB21FF28E /* EvilIcons.ttf */; };
 		25FA0622681745188DBDD910 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 947E30DCD3F645589323BB62 /* FontAwesome5_Brands.ttf */; };
+		2A160226227A922800CC0ABF /* netmarbleL.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A160223227A922800CC0ABF /* netmarbleL.ttf */; };
+		2A160227227A922800CC0ABF /* netmarbleM.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A160224227A922800CC0ABF /* netmarbleM.ttf */; };
+		2A160228227A922800CC0ABF /* netmarbleB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A160225227A922800CC0ABF /* netmarbleB.ttf */; };
+		2A1602E7227A9BBC00CC0ABF /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 2A1602E6227A9BBC00CC0ABF /* fonts */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -68,6 +69,7 @@
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
 		F2F7E54310DD43D39B1B53BC /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAAF3519FCAC40D0A18A54C6 /* libRNVectorIcons.a */; };
+		F9D1F5C9588A45AF9C8F0FED /* SpaceMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD65E4B325364AF280DE13B4 /* SpaceMono-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -416,12 +418,13 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = FoodTraveler/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = FoodTraveler/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
-		1B532CCE2276AAD900E9C7BA /* netmarbleL.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = netmarbleL.ttf; path = ../android/app/src/main/assets/fonts/netmarbleL.ttf; sourceTree = "<group>"; };
-		1B532CFB2276AAD900E9C7BA /* netmarbleB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = netmarbleB.ttf; path = ../android/app/src/main/assets/fonts/netmarbleB.ttf; sourceTree = "<group>"; };
-		1B532CFC2276AADA00E9C7BA /* netmarbleM.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = netmarbleM.ttf; path = ../android/app/src/main/assets/fonts/netmarbleM.ttf; sourceTree = "<group>"; };
 		1DA600E84A8E46249498CA75 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		1DD313B94705A9061EA724F1 /* Pods-FoodTravelerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodTravelerTests.debug.xcconfig"; path = "Target Support Files/Pods-FoodTravelerTests/Pods-FoodTravelerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		28BEDC160EEA0FBD6AA6EFE0 /* Pods-FoodTraveler-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodTraveler-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-FoodTraveler-tvOSTests/Pods-FoodTraveler-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		2A160223227A922800CC0ABF /* netmarbleL.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = netmarbleL.ttf; path = ../assets/fonts/netmarbleL.ttf; sourceTree = "<group>"; };
+		2A160224227A922800CC0ABF /* netmarbleM.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = netmarbleM.ttf; path = ../assets/fonts/netmarbleM.ttf; sourceTree = "<group>"; };
+		2A160225227A922800CC0ABF /* netmarbleB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = netmarbleB.ttf; path = ../assets/fonts/netmarbleB.ttf; sourceTree = "<group>"; };
+		2A1602E6227A9BBC00CC0ABF /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../assets/fonts; sourceTree = "<group>"; };
 		2BF4F71FBC7F4C45A76EEC2E /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGestureHandler.xcodeproj; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* FoodTraveler-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FoodTraveler-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* FoodTraveler-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FoodTraveler-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -464,6 +467,7 @@
 		F65433BC12132EEA9E432CB8 /* Pods-FoodTraveler-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodTraveler-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-FoodTraveler-tvOSTests/Pods-FoodTraveler-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F8D01EB46E8F4A0F21C1DBA8 /* libPods-FoodTraveler.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FoodTraveler.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAAF3519FCAC40D0A18A54C6 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
+		FD65E4B325364AF280DE13B4 /* SpaceMono-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SpaceMono-Regular.ttf"; path = "../assets/fonts/SpaceMono-Regular.ttf"; sourceTree = "<group>"; };
 		FF63E116B1A241328E14638B /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -615,6 +619,7 @@
 		13B07FAE1A68108700A75B9A /* FoodTraveler */ = {
 			isa = PBXGroup;
 			children = (
+				2A1602E6227A9BBC00CC0ABF /* fonts */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -754,10 +759,10 @@
 		79E41743C6FA4786BD285005 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2A160225227A922800CC0ABF /* netmarbleB.ttf */,
+				2A160223227A922800CC0ABF /* netmarbleL.ttf */,
+				2A160224227A922800CC0ABF /* netmarbleM.ttf */,
 				5BE83DD4A9EE40CD8B7E35CA /* AntDesign.ttf */,
-				1B532CFB2276AAD900E9C7BA /* netmarbleB.ttf */,
-				1B532CCE2276AAD900E9C7BA /* netmarbleL.ttf */,
-				1B532CFC2276AADA00E9C7BA /* netmarbleM.ttf */,
 				FF63E116B1A241328E14638B /* Entypo.ttf */,
 				87ADB9EF9E5E4B6EB21FF28E /* EvilIcons.ttf */,
 				D693818C4CA64D5EB364DC3A /* Feather.ttf */,
@@ -772,6 +777,7 @@
 				A7355A06972142588BD08693 /* Octicons.ttf */,
 				A4000B64D57A462F8DE98782 /* SimpleLineIcons.ttf */,
 				5199E5A38D2C429E990D7E48 /* Zocial.ttf */,
+				FD65E4B325364AF280DE13B4 /* SpaceMono-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -937,15 +943,20 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 3F26L65LF9;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 3F26L65LF9;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					2D02E48F1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = 3F26L65LF9;
+						ProvisioningStyle = Manual;
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
 					};
 				};
@@ -1365,17 +1376,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B532CFE2276AADA00E9C7BA /* netmarbleB.ttf in Resources */,
-				1B532CFD2276AADA00E9C7BA /* netmarbleL.ttf in Resources */,
+				2A160226227A922800CC0ABF /* netmarbleL.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				E98AD57516B1438EB9546406 /* AntDesign.ttf in Resources */,
-				1B532CFF2276AADA00E9C7BA /* netmarbleM.ttf in Resources */,
 				B3E8DFFABBFF4B87A1180145 /* Entypo.ttf in Resources */,
 				25A5F8AF52A94F6F90946D66 /* EvilIcons.ttf in Resources */,
+				2A160227227A922800CC0ABF /* netmarbleM.ttf in Resources */,
 				D69F4791F8084B4DA1B5ACCC /* Feather.ttf in Resources */,
 				88839FB6B0514204BAC8B1CA /* FontAwesome.ttf in Resources */,
 				25FA0622681745188DBDD910 /* FontAwesome5_Brands.ttf in Resources */,
+				2A160228227A922800CC0ABF /* netmarbleB.ttf in Resources */,
+				2A1602E7227A9BBC00CC0ABF /* fonts in Resources */,
 				B674712EEB294FC69C205016 /* FontAwesome5_Regular.ttf in Resources */,
 				E55215F0280A4CFDA62AFAD5 /* FontAwesome5_Solid.ttf in Resources */,
 				469BE7B54C6E4455B114C818 /* Foundation.ttf in Resources */,
@@ -1385,6 +1397,7 @@
 				3AC069D2E3E94AEC8670EBD4 /* Octicons.ttf in Resources */,
 				4145A6EF43894D42B81F90A0 /* SimpleLineIcons.ttf in Resources */,
 				0C7D041C5CDB47E89D70C36D /* Zocial.ttf in Resources */,
+				F9D1F5C9588A45AF9C8F0FED /* SpaceMono-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1614,6 +1627,7 @@
 			baseConfigurationReference = 1DD313B94705A9061EA724F1 /* Pods-FoodTravelerTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 3F26L65LF9;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1654,6 +1668,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 3F26L65LF9;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-gesture-handlerios/**",
@@ -1691,6 +1706,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = 3F26L65LF9;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-gesture-handlerios/**",
@@ -1708,6 +1724,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = FoodTraveler;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1718,6 +1735,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3F26L65LF9;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-gesture-handlerios/**",
@@ -1735,6 +1753,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = FoodTraveler;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -1749,7 +1768,9 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
@@ -1777,6 +1798,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.FoodTraveler-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
@@ -1793,8 +1815,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1821,6 +1845,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.FoodTraveler-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
@@ -1836,7 +1861,9 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 3F26L65LF9;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
@@ -1864,6 +1891,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.FoodTraveler-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FoodTraveler-tvOS.app/FoodTraveler-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
@@ -1879,8 +1907,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3F26L65LF9;
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1907,6 +1937,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.FoodTraveler-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FoodTraveler-tvOS.app/FoodTraveler-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
