@@ -3,6 +3,7 @@ import { decorate, observable, action } from 'mobx';
 
 class FoodStore {
 	food_id = -1;
+	store_id = -1;
 	ingredient_list = [];
 	cook_list = [];
 	eat_list = [];
@@ -16,6 +17,7 @@ class FoodStore {
 
 decorate(FoodStore, {
 	food_id: observable,
+	store_id: observable,
 	ingredient_list: observable,
 	cook_list: observable,
 	eat_list: observable,
