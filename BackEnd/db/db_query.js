@@ -38,8 +38,11 @@ module.exports = function() {
 			return 'SELECT * FROM t_stores';
 		},
 		// gallery
-		postGallery: function() {
-			return 'SELECT * FROM d_gallery';
+		postStoreGallery: function() {
+			return 'SELECT * FROM d_gallery_store';
+		},
+		postClassGallery: function() {
+			return 'SELECT * FROM d_gallery_class';
 		},
 
 		// information //

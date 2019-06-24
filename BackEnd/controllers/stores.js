@@ -33,14 +33,25 @@ exports.postStore = function(req, res) {
 	common.doQuery(req, res, query, params);
 };
 
-exports.postGallery = function(req, res) {
-	console.log('[====] call postGallery');
+exports.postStoreGallery = function(req, res) {
+	console.log('[====] call postStoreGallery');
 
-	var query = mysql_query.postGallery();
+	var query = mysql_query.postStoreGallery();
 	var params = [];
 	// query = _checkParams(query, params, req.body.store_id, 'store_id');
-	query = _searchParams(query, params, req.body.store_id, 'store_id');
-	query = _searchParams(query, params, req.body.class_id, 'class_id', true);
+	query = _checkParams(query, params, req.body.store_id, 'store_id');
+
+	bFirst = true;
+	common.doQuery(req, res, query, params);
+};
+
+exports.postClassGallery = function(req, res) {
+	console.log('[====] call postClassGallery');
+
+	var query = mysql_query.postClassGallery();
+	var params = [];
+	// query = _checkParams(query, params, req.body.class_id, 'class_id');
+	query = _checkParams(query, params, req.body.class_id, 'class_id');
 
 	bFirst = true;
 	common.doQuery(req, res, query, params);

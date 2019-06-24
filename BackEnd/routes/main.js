@@ -44,7 +44,8 @@ router.post('/description', controller_food.postDescription);
 
 // store //
 router.post('/store', controller_store.postStore);
-router.post('/gallery', controller_store.postGallery);
+router.post('/gallery_store', controller_store.postStoreGallery);
+router.post('/gallery_class', controller_store.postClassGallery);
 
 // info //
 router.post('/ingredient', controller_info.postIngredient);
