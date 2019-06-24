@@ -146,14 +146,21 @@ class DrawerScreen extends Component {
 								// title="Profile"
 								title={Language.Profile[this.props.profileStore.language]}
 								icon={{ name: 'user', type: 'font-awesome' }} // https://fontawesome.com/
-								imageSrc={require('../assets/icons/test/profile.png')}
+								// imageSrc={require('../assets/icons/test/profile.png')}
+								imageSrc={require('../assets/icons/test/profile.jpg')}
 								onPress={this._onProfile}
+								rounded
 							/>
 							<AvatarIcon
 								// title="Language"
 								title={Language.Language[this.props.profileStore.language]}
 								icon={{ name: 'language', type: 'font-awesome' }}
-								imageSrc={require('../assets/icons/test/language.png')}
+								// imageSrc={require('../assets/icons/test/language.png')}
+								imageSrc={
+									this.props.profileStore.language == 'ko'
+										? require('../assets/icons/test/lan_icon_ko.png')
+										: require('../assets/icons/test/lan_icon_en.png')
+								}
 								onPress={this._onLanguage}
 							/>
 						</View>
@@ -194,36 +201,59 @@ class DrawerScreen extends Component {
 								/>
 								<AvatarIcon
 									// title="Noodle"
-									title={Language.Noodle[this.props.profileStore.language]}
-									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/test/noodles.png')}
-									onPress={this._onFood}
-								/>
-								<AvatarIcon
-									// title="Seafood"
-									title={Language.Seafood[this.props.profileStore.language]}
-									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/test/seafood.png')}
-									onPress={this._onFood}
-								/>
-							</View>
-							<View style={styles.foodSection}>
-								<AvatarIcon
-									// title="Meat"
-									title={Language.Meat[this.props.profileStore.language]}
-									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/test/meat.png')}
-									onPress={this._onFood}
-								/>
-								<AvatarIcon
-									// title="Soup"
 									title={Language.Soup[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
 									imageSrc={require('../assets/icons/test/soup.png')}
 									onPress={this._onFood}
 								/>
 								<AvatarIcon
+									// title="Seafood"
+									title={Language.Noodle[this.props.profileStore.language]}
+									icon={{ name: 'spoon', type: 'font-awesome' }}
+									imageSrc={require('../assets/icons/test/noodle.png')}
+									onPress={this._onFood}
+								/>
+							</View>
+							<View style={styles.foodSection}>
+								<AvatarIcon
+									// title="Meat"
+									title={Language.Bread[this.props.profileStore.language]}
+									icon={{ name: 'spoon', type: 'font-awesome' }}
+									imageSrc={require('../assets/icons/test/bread.png')}
+									onPress={this._onFood}
+								/>
+								<AvatarIcon
+									// title="Soup"
+									title={Language.Pizza[this.props.profileStore.language]}
+									icon={{ name: 'spoon', type: 'font-awesome' }}
+									imageSrc={require('../assets/icons/test/pizza.png')}
+									onPress={this._onFood}
+								/>
+								<AvatarIcon
 									// title="Vegetable"
+									title={Language.Pasta[this.props.profileStore.language]}
+									icon={{ name: 'spoon', type: 'font-awesome' }}
+									imageSrc={require('../assets/icons/test/pasta.png')}
+									onPress={this._onFood}
+								/>
+							</View>
+							<View style={styles.foodSection}>
+								<AvatarIcon
+									// title="Dessert"
+									title={Language.Meat[this.props.profileStore.language]}
+									icon={{ name: 'spoon', type: 'font-awesome' }}
+									imageSrc={require('../assets/icons/test/meat.png')}
+									onPress={this._onFood}
+								/>
+								<AvatarIcon
+									// title="Drink"
+									title={Language.Seafood[this.props.profileStore.language]}
+									icon={{ name: 'spoon', type: 'font-awesome' }}
+									imageSrc={require('../assets/icons/test/seafood.png')}
+									onPress={this._onFood}
+								/>
+								<AvatarIcon
+									// title="Drink"
 									title={Language.Vegetable[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
 									imageSrc={require('../assets/icons/test/vegetable.png')}
@@ -232,17 +262,21 @@ class DrawerScreen extends Component {
 							</View>
 							<View style={styles.foodSection}>
 								<AvatarIcon
-									// title="Dessert"
 									title={Language.Dessert[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
 									imageSrc={require('../assets/icons/test/dessert.png')}
 									onPress={this._onFood}
 								/>
 								<AvatarIcon
-									// title="Drink"
 									title={Language.Drink[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
 									imageSrc={require('../assets/icons/test/drink.png')}
+									onPress={this._onFood}
+								/>
+								<AvatarIcon
+									title={Language.Alcohol[this.props.profileStore.language]}
+									icon={{ name: 'spoon', type: 'font-awesome' }}
+									imageSrc={require('../assets/icons/test/alcohol.png')}
 									onPress={this._onFood}
 								/>
 							</View>
@@ -267,7 +301,7 @@ const styles = StyleSheet.create({
 		paddingVertical: 5,
 		paddingHorizontal: 10,
 		color: '#FFF',
-		marginTop: StatusBar.currentHeight,
+		// marginTop: StatusBar.currentHeight,
 		fontFamily: 'netmarbleL',
 		fontSize: 18,
 	},

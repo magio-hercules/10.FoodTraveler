@@ -34,6 +34,7 @@ export default class AvatarIcon extends Component {
 				<View style={styles.AvatarPart}>
 					<Avatar
 						// rounded
+						rounded={this.props.rounded ? true : false}
 						size={this.props.size}
 						// title={this.props.title}
 						icon={this.props.icon}

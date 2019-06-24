@@ -23,7 +23,7 @@ const DrawerNavigator = createDrawerNavigator(
 		initialRouteName: 'Home',
 		contentComponent: DrawerScreen,
 		drawerWidth: Layout.drawerWidth,
-		drawerPosition: 'left',
+		drawerPosition: 'right',
 		// drawerType: 'push-screen',
 		drawerType: 'slide',
 	}
