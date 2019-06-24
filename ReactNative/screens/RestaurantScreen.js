@@ -167,6 +167,7 @@ class RestaurantScreen extends React.Component {
 		let _key = this.state.data[index].key;
 		console.log('_onPressGallery : store_id(' + _key + ')');
 
+		this.props.foodStore.gallery_type = 'store';
 		this.props.foodStore.store_id = _key;
 		console.log('this.props.foodStore.store_id : (' + _key + ')');
 		const navigateAction = NavigationActions.navigate({

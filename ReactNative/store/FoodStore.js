@@ -5,6 +5,7 @@ class FoodStore {
 	food_id = -1;
 	store_id = -1;
 	class_id = -1;
+	gallery_type = '';
 	ingredient_list = [];
 	cook_list = [];
 	eat_list = [];
@@ -20,6 +21,7 @@ decorate(FoodStore, {
 	food_id: observable,
 	store_id: observable,
 	class_id: observable,
+	gallery_type: observable,
 	ingredient_list: observable,
 	cook_list: observable,
 	eat_list: observable,

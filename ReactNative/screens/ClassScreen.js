@@ -184,6 +184,7 @@ class ClassScreen extends React.Component {
 		let _key = this.state.data[index].key;
 		console.log('_onPressGallery : class_id(' + _key + ')');
 
+		this.props.foodStore.gallery_type = 'class';
 		this.props.foodStore.class_id = _key;
 		console.log('this.props.foodStore.class_id : (' + _key + ')');
 		const navigateAction = NavigationActions.navigate({
