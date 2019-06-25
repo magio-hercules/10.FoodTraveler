@@ -36,11 +36,11 @@ const MenuImage = ({ navigation }) => {
 		return (
 			<Image
 				source={require('../assets/icons/spiro.png')}
-				style={{ width: 30, height: 30, marginRight: 10, marginTop: 0 }}
+				style={{ width: 30, height: 30, marginLeft: 10, marginTop: 0 }}
 			/>
 		);
 	} else {
-		return <Text style={{ width: 35, height: 30, marginRight: 10, marginTop: 10, color: '#fff' }}>Back</Text>;
+		return <Text style={{ width: 35, height: 30, marginLeft: 10, marginTop: 10, color: '#fff' }}>Back</Text>;
 	}
 };
 
@@ -65,8 +65,8 @@ class NavigationDrawerStructure extends Component {
 	}
 }
 
-// bHeaderRight가 false인 경우 뒤로가기 버튼 표시.
-const _navigationOptions = (navigation, bHeaderRight = true) => {
+// bHeaderLeft가 false인 경우 뒤로가기 버튼 표시.
+const _navigationOptions = (navigation, bHeaderLeft = true) => {
 	console.log('_navigationOptions : ' + navigation.state.routeName);
 
 	let _routeName = navigation.state.routeName;
@@ -80,7 +80,7 @@ const _navigationOptions = (navigation, bHeaderRight = true) => {
 
 	const headerTitle = Language[_routeName][global.language];
 
-	const headerRight = bHeaderRight ? (
+	const headerLeft = bHeaderLeft ? (
 		<TouchableOpacity
 			onPress={() => {
 				navigation.dispatch(DrawerActions.toggleDrawer());
@@ -101,7 +101,7 @@ const _navigationOptions = (navigation, bHeaderRight = true) => {
 
 	return {
 		headerTitle,
-		headerRight,
+		headerLeft,
 		// headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
 		headerStyle: {
 			backgroundColor: '#ada',
@@ -132,7 +132,7 @@ const FoodStack = createStackNavigator(
 			screen: FoodScreen,
 			navigationOptions: ({ navigation }) => ({
 				headerTitle: `FoodTraveler`,
-				headerRight: (
+				headerLeft: (
 					<TouchableOpacity
 						onPress={() => {
 							navigation.dispatch(DrawerActions.toggleDrawer());
@@ -281,7 +281,7 @@ const LikeStack = createStackNavigator(
 			screen: FoodScreen,
 			navigationOptions: ({ navigation }) => ({
 				headerTitle: Language.Like[global.language],
-				headerRight: (
+				headerLeft: (
 					<TouchableOpacity
 						onPress={() => {
 							navigation.dispatch(DrawerActions.toggleDrawer());
@@ -339,7 +339,7 @@ const RestaurantStack = createStackNavigator(
 			screen: RestaurantScreen,
 			navigationOptions: ({ navigation }) => ({
 				headerTitle: Language.Restaurant[global.language],
-				headerRight: (
+				headerLeft: (
 					<TouchableOpacity
 						onPress={() => {
 							navigation.dispatch(DrawerActions.toggleDrawer());
@@ -440,7 +440,7 @@ const ClassStack = createStackNavigator(
 			screen: ClassScreen,
 			navigationOptions: ({ navigation }) => ({
 				headerTitle: Language.Class[global.language],
-				headerRight: (
+				headerLeft: (
 					<TouchableOpacity
 						onPress={() => {
 							navigation.dispatch(DrawerActions.toggleDrawer());
