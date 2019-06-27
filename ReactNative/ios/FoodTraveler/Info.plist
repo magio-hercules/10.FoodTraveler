@@ -55,6 +55,10 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>fonts/NanumSquare_acL.ttf</string>
+		<string>fonts/NanumSquare_acR.ttf</string>
+		<string>fonts/NanumSquare_acB.ttf</string>
+		<string>fonts/NanumSquare_acEB.ttf</string>
 		<string>fonts/netmarbleB.ttf</string>
 		<string>fonts/netmarbleL.ttf</string>
 		<string>fonts/netmarbleM.ttf</string>

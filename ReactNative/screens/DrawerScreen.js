@@ -16,13 +16,22 @@ class DrawerScreen extends Component {
 	constructor(props) {
 		super(props);
 		console.log('[DRAWER] constructor');
+		console.log(this.props.navigation.state.params);
 
-		let params = this.props.navigation.state.params;
-		console.log('profile : ' + params.profile);
+		if (this.props.navigation.state.params == undefined || this.props.navigation.state.params == null) {
+			console.log('params is undefined');
 
-		this.state = {
-			profile: params.profile,
-		};
+			this.state = {
+				profile: { name: 'guest', avatar: null },
+			};
+		} else {
+			let params = this.props.navigation.state.params;
+			console.log('profile : ' + params.profile);
+
+			this.state = {
+				profile: params.profile,
+			};
+		}
 
 		console.log('this.props.profileStore.language : ' + this.props.profileStore.language);
 	}

@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
-import { Platform, Easing, Animated, TouchableOpacity, Image, Text, StyleSheet, View } from 'react-native';
+import {
+	Platform,
+	Easing,
+	Animated,
+	TouchableOpacity,
+	Image,
+	Text,
+	StyleSheet,
+	View,
+	ImageBackground,
+} from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, DrawerActions } from 'react-navigation';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 import { decorate, observable, observe, action, when, computed, autorun, runInAction } from 'mobx';
 import { observer, inject } from 'mobx-react';
+
+import LayoutInfo from '../constants/Layout';
 
 import Language from '../constants/Language';
 import TabBarIcon from '../components/TabBarIcon';
@@ -35,8 +49,8 @@ const MenuImage = ({ navigation }) => {
 	if (!navigation.state.isDrawerOpen) {
 		return (
 			<Image
-				source={require('../assets/icons/spiro.png')}
-				style={{ width: 30, height: 30, marginLeft: 10, marginTop: 0 }}
+				source={require('../assets/icons/menu.png')}
+				style={{ width: 10, height: 15, marginLeft: 15, marginTop: 1 }}
 			/>
 		);
 	} else {
@@ -56,7 +70,7 @@ class NavigationDrawerStructure extends Component {
 				<TouchableOpacity onPress={this.toggleDrawer.bind(this)}>
 					{/*Donute Button Image */}
 					<Image
-						source={require('../assets/icons/spiro.png')}
+						source={require('../assets/icons/menu.png')}
 						style={{ width: 30, height: 30, marginLeft: 10, marginTop: 0 }}
 					/>
 				</TouchableOpacity>
@@ -78,7 +92,18 @@ const _navigationOptions = (navigation, bHeaderLeft = true) => {
 		return;
 	}
 
+	console.log('LayoutInfo.logoHeight');
+	console.log(LayoutInfo.logoHeight);
+
 	const headerTitle = Language[_routeName][global.language];
+	// let _title = Language[_routeName][global.language];
+	// const headerTitle = (
+	// 	<ImageBackground style={[styles.ImagePart]} source={require('../assets/images/logo_bar.png')}>
+	// 		<View>
+	// 			<Text>{_title}</Text>
+	// 		</View>
+	// 	</ImageBackground>
+	// );
 
 	const headerLeft = bHeaderLeft ? (
 		<TouchableOpacity
@@ -100,20 +125,24 @@ const _navigationOptions = (navigation, bHeaderLeft = true) => {
 	// const headerLeft = <NavigationDrawerStructure navigationProps={navigation} />;
 
 	return {
-		headerTitle,
+		// headerTitle,
 		headerLeft,
 		// headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
-		headerStyle: {
-			backgroundColor: '#ada',
-		},
-		headerTintColor: '#fff',
-		headerTitleStyle: {
-			fontFamily: 'netmarbleB',
-			fontWeight: undefined,
-			fontSize: 27,
-			marginLeft: 10,
-			marginTop: 5,
-		},
+		// headerStyle: {
+		// 	backgroundColor: '#ada',
+		// },
+		// headerStyle: {
+		// 	height: 62,
+		// },
+		// headerTintColor: '#fff',
+		// headerTitleStyle: {
+		// 	fontFamily: 'netmarbleB',
+		// 	fontWeight: undefined,
+		// 	fontSize: 27,
+		// 	marginLeft: 10,
+		// 	marginTop: 5,
+		// },
+		headerBackground: <Image style={[styles.ImagePart]} source={require('../assets/images/logo_bar.png')} />,
 	};
 };
 
@@ -131,7 +160,7 @@ const FoodStack = createStackNavigator(
 		Food: {
 			screen: FoodScreen,
 			navigationOptions: ({ navigation }) => ({
-				headerTitle: `FoodTraveler`,
+				// headerTitle: `FoodTraveler`,
 				headerLeft: (
 					<TouchableOpacity
 						onPress={() => {
@@ -280,7 +309,7 @@ const LikeStack = createStackNavigator(
 		Like: {
 			screen: FoodScreen,
 			navigationOptions: ({ navigation }) => ({
-				headerTitle: Language.Like[global.language],
+				// headerTitle: Language.Like[global.language],
 				headerLeft: (
 					<TouchableOpacity
 						onPress={() => {
@@ -338,7 +367,7 @@ const RestaurantStack = createStackNavigator(
 		Restaurant: {
 			screen: RestaurantScreen,
 			navigationOptions: ({ navigation }) => ({
-				headerTitle: Language.Restaurant[global.language],
+				// headerTitle: Language.Restaurant[global.language],
 				headerLeft: (
 					<TouchableOpacity
 						onPress={() => {
@@ -439,7 +468,7 @@ const ClassStack = createStackNavigator(
 		Class: {
 			screen: ClassScreen,
 			navigationOptions: ({ navigation }) => ({
-				headerTitle: Language.Class[global.language],
+				// headerTitle: Language.Class[global.language],
 				headerLeft: (
 					<TouchableOpacity
 						onPress={() => {
@@ -524,6 +553,25 @@ HelpStack.navigationOptions = ({ navigation }) => {
 		),
 	};
 };
+
+const styles = StyleSheet.create({
+	container: {
+		backgroundColor: 'white',
+	},
+	ImagePartLayout: {
+		width: LayoutInfo.width,
+		height: LayoutInfo.size.imagePart,
+		// position: 'absolute',
+	},
+	ImagePart: {
+		resizeMode: 'cover',
+		width: LayoutInfo.width,
+		// width: 100,
+
+		height: 62,
+		// height: hp('8.4%'),
+	},
+});
 
 // class TabNav extends React.Component {
 // 	render() {

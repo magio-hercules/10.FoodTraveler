@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, FlatList, View, Text, Image, TouchableHighlight, ImageBackground } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 // import { Tile, Button, Icon } from 'react-native-elements';
 // import { randomCards } from '../temp/tile';
 import PropTypes from 'prop-types';
@@ -39,7 +40,7 @@ class LogoTitle extends React.Component {
 		return (
 			<View style={{ flex: 1, flexDirection: 'row' }}>
 				<Image
-					source={require('../assets/icons/spiro.png')}
+					source={require('../assets/icons/menu.png')}
 					style={{ width: 30, height: 30, marginLeft: 10, marginTop: 5 }}
 				/>
 				<Text style={{ marginLeft: 10, fontSize: 27, color: '#fff' }}> FoodTraveler </Text>
@@ -404,20 +405,16 @@ class FoodScreen extends React.Component {
 
 							<View style={[styles.ContentPart]}>
 								<View style={styles.ContentHeader}>
-									<Text style={styles.ContentHeaderText}>
-										{item.title_local +
-											' [' +
-											item.title_phonetic +
-											']' +
-											'\r\n' +
-											': ' +
-											item.title}
-									</Text>
-									{/* <Text 
-                  ellipsizeMode='tail' 
-                  style={styles.ContentHeaderText}> 
-                  {' / ' + item.title} 
-                </Text> */}
+									<View style={styles.ContentHeaderTextSection}>
+										<View style={styles.ContentHeaderTextSectionInner}>
+											<Text style={styles.ContentHeaderText}>
+												{item.title_local + ' [' + item.title_phonetic + ']'}
+											</Text>
+										</View>
+										<View style={styles.ContentHeaderTextSectionInner}>
+											<Text style={styles.ContentHeaderTextDesc}>{': ' + item.title}</Text>
+										</View>
+									</View>
 									<View style={styles.IconPart}>
 										<CommunityIcon
 											iconSrc={
@@ -441,7 +438,7 @@ class FoodScreen extends React.Component {
 									</View>
 								</View>
 
-								<Text style={styles.ContentText} numberOfLines={5} ellipsizeMode="tail">
+								<Text style={styles.ContentText} numberOfLines={4} ellipsizeMode="tail">
 									{' '}
 									{item.description}{' '}
 								</Text>
@@ -527,10 +524,12 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 		top: LayoutInfo.imagePartIconSectionTop,
-		opacity: 0.8,
+		// opacity: 0.8,
+		opacity: 1.0,
 		width: LayoutInfo.width,
 		height: LayoutInfo.imagePartIconSection,
-		backgroundColor: 'white',
+		// backgroundColor: 'white',
+		backgroundColor: 'rgba(0,0,0, 0.1)',
 	},
 	ContentPart: {
 		flex: 1,
@@ -538,26 +537,46 @@ const styles = StyleSheet.create({
 		backgroundColor: 'white',
 		// justifyContent: 'space-between',
 		// justifyContent: 'center',
-		paddingLeft: 5,
-		paddingRight: 5,
+		// paddingLeft: 15,
+		// paddingRight: 15,
+		padding: 15,
 	},
 	ContentHeader: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
-		paddingTop: 5,
+		// paddingTop: 5,
 		// paddingBottom: 5,
 		// backgroundColor:'#a1a',
+	},
+	ContentHeaderTextSection: {
+		flex: 8,
+		// height: 55,
+		height: '100%',
+		flexDirection: 'column',
+		// backgroundColor: '#ffa',
+	},
+	ContentHeaderTextSectionInner: {
+		height: 25,
 	},
 	ContentHeaderText: {
 		flex: 8,
 		fontSize: 18,
-		alignItems: 'center',
-		fontFamily: 'netmarbleM',
+		fontFamily: 'NanumSquare_acEB',
+		// backgroundColor: '#afa',
+	},
+	ContentHeaderTextDesc: {
+		flex: 8,
+		fontSize: 16,
+		marginTop: 2,
+		fontFamily: 'NanumSquare_acB',
+		// backgroundColor: '#aaf',
 	},
 	ContentText: {
-		fontFamily: 'netmarbleL',
-		marginTop: 5,
+		fontSize: 14,
+		marginTop: 8,
+		fontFamily: 'NanumSquare_acL',
+		// backgroundColor: '#f1f',
 	},
 	IconPart: {
 		flex: 3,

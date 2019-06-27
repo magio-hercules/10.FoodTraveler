@@ -29,19 +29,6 @@ const DrawerNavigator = createDrawerNavigator(
 	}
 );
 
-const MenuImage = ({ navigation }) => {
-	if (!navigation.state.isDrawerOpen) {
-		return (
-			<Image
-				source={require('../assets/icons/spiro.png')}
-				style={{ width: 30, height: 30, marginLeft: 10, marginTop: 0 }}
-			/>
-		);
-	} else {
-		return <Text style={{ width: 35, height: 30, marginLeft: 10, marginTop: 10, color: '#fff' }}>Back</Text>;
-	}
-};
-
 const StackNavigator = createStackNavigator(
 	{
 		//important: key and screen name (i.e. DrawerNavigator) should be same while using the drawer navigator inside stack navigator.
@@ -81,7 +68,8 @@ const SwitchNavigator = createSwitchNavigator(
 	},
 	{
 		// initialRouteName: isLoggedIn ? "MainNavigator" : "LoginNavigator"
-		initialRouteName: 'LoginNavigator',
+		// initialRouteName: 'LoginNavigator',
+		initialRouteName: 'DrawerNavigator',
 		// headerMode: 'none'
 	}
 );
