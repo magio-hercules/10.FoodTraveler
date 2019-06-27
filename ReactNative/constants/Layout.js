@@ -13,7 +13,7 @@ export default {
 		imagePart: width,
 		contentPart: 160,
 	},
-	drawerWidth: 250,
+	drawerWidth: 300,
 	imagePartIconSectionTop: width - 55,
 	imagePartIconSection: 55,
 	imagePartIconSize: 30,

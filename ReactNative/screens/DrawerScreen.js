@@ -3,12 +3,14 @@ import { NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
 import { StyleSheet, ScrollView, Text, View, Image, TouchableHighlight, StatusBar } from 'react-native';
 import { DrawerActions } from 'react-navigation';
+import { Divider, Avatar } from 'react-native-elements';
 
 import { observer, inject } from 'mobx-react';
 
 import Styles from '../constants/Styles';
 import Colors from '../constants/Colors';
 import Language from '../constants/Language';
+import Layout from '../constants/Layout';
 
 import AvatarIcon from '../components/AvatarIcon';
 
@@ -81,6 +83,14 @@ class DrawerScreen extends Component {
 		}
 	};
 
+	_onProfileImage = () => {
+		console.log('_onProfileImage');
+	};
+
+	_onClick = () => {
+		console.log('_onClick');
+	};
+
 	_onNation = () => {
 		console.log('_onNation');
 	};
@@ -111,94 +121,123 @@ class DrawerScreen extends Component {
 			<View style={styles.defaultFont}>
 				<ScrollView>
 					<View>
-						{/* Profile section */}
-						<View
-							style={[
-								styles.profileSectionHeader,
-								{ backgroundColor: Colors.drawerSectionHeader1 },
-								{ flex: 1, flexDirection: 'row' },
-							]}
-						>
-							<View style={[{ color: Colors.WHITE }, { flex: 1, flexDirection: 'column' }]}>
-								<Text
-									style={[styles.profileSectionHeaderText, { color: Colors.WHITE }, { fontSize: 18 }]}
-								>
-									{/* 김종민 */}
-									장영훈
-								</Text>
-								<Text style={[styles.profileSectionHeaderText, { color: Colors.WHITE }]}>
-									{/* kjmhercules@gmail.com */}
-									cool0huny@naver.com
-								</Text>
-							</View>
-							<TouchableHighlight
+						{/* Name section */}
+						<View style={[styles.sectionName, {}]}>
+							<AvatarIcon
 								style={{
-									width: 40,
-									height: 40,
-									marginLeft: 0,
-									marginTop: 0,
-									alignSelf: 'center',
-									padding: 10,
+									flex: 1,
+									justifyContent: 'center',
+									alignItems: 'center',
 								}}
-								onPress={this._onPressShutdown}
-								underlayColor="#ada"
-							>
-								<Image
-									source={require('../assets/icons/shutdown.png')}
-									style={[{ width: 30, height: 30, marginLeft: -4, marginTop: -4 }]}
-								/>
-							</TouchableHighlight>
-						</View>
-
-						<View style={styles.profileSection}>
-							<AvatarIcon
-								// title="Profile"
-								title={Language.Profile[this.props.profileStore.language]}
-								icon={{ name: 'user', type: 'font-awesome' }} // https://fontawesome.com/
-								// imageSrc={require('../assets/icons/test/profile.png')}
 								imageSrc={require('../assets/icons/test/profile.jpg')}
-								onPress={this._onProfile}
+								size="medium"
 								rounded
+								onPress={this._onProfileImage}
 							/>
-							<AvatarIcon
-								// title="Language"
-								title={Language.Language[this.props.profileStore.language]}
-								icon={{ name: 'language', type: 'font-awesome' }}
-								// imageSrc={require('../assets/icons/test/language.png')}
-								imageSrc={
-									this.props.profileStore.language == 'ko'
-										? require('../assets/icons/test/lan_icon_ko.png')
-										: require('../assets/icons/test/lan_icon_en.png')
-								}
-								onPress={this._onLanguage}
-							/>
+							<View style={styles.profileSectionHeader}>
+								<Text style={[styles.profileSectionHeaderText]}>장영훈</Text>
+								<Text style={[styles.profileSectionHeaderText]}>cool0huny@naver.com</Text>
+							</View>
 						</View>
+						<Divider style={styles.drawerDivider} />
 
-						{/* Travel section */}
-						<Text style={[styles.travelSectionHeader, { backgroundColor: Colors.drawerSectionHeader2 }]}>
-							Travel
-						</Text>
-						<View style={styles.travelSection}>
-							<AvatarIcon
-								// title="Nation"
-								title={Language.Nation[this.props.profileStore.language]}
-								icon={{ name: 'globe', type: 'font-awesome' }}
-								imageSrc={require('../assets/icons/test/south-korea.png')}
-								onPress={this._onNation}
-							/>
-							<AvatarIcon
-								// title="City"
-								title={Language.City[this.props.profileStore.language]}
-								icon={{ name: 'plane', type: 'font-awesome' }}
-								imageSrc={require('../assets/icons/test/seoul.png')}
-								onPress={this._onCity}
-							/>
+						{/* Profile section */}
+						<View style={[styles.sectionProfile]}>
+							{/* 프로필 */}
+							<View style={styles.sectionProfileRow}>
+								<View style={styles.sectionProfileRowIcon}>
+									<Avatar
+										rounded
+										size="medium"
+										overlayContainerStyle={{ backgroundColor: 'white' }}
+										source={require('../assets/icons/test/profile.png')}
+										onPress={this.props.onPress}
+									/>
+								</View>
+								<View style={styles.sectionProfileRowText}>
+									<Text>{Language.Profile[this.props.profileStore.language]}</Text>
+								</View>
+								<TouchableHighlight
+									style={styles.sectionProfileRowButton}
+									onPress={this.props._onClick}
+								>
+									<Image style={styles.iconImage} source={require('../assets/icons/share.png')} />
+								</TouchableHighlight>
+							</View>
+							{/* 언어 */}
+							<View style={styles.sectionProfileRow}>
+								<View style={styles.sectionProfileRowIcon}>
+									<Avatar
+										rounded
+										size="medium"
+										overlayContainerStyle={{ backgroundColor: 'white' }}
+										source={
+											this.props.profileStore.language == 'ko'
+												? require('../assets/icons/test/lan_icon_ko.png')
+												: require('../assets/icons/test/lan_icon_en.png')
+										}
+										onPress={this.props.onPress}
+									/>
+								</View>
+								<View style={styles.sectionProfileRowText}>
+									<Text>{Language.Language[this.props.profileStore.language]}</Text>
+								</View>
+								<TouchableHighlight
+									style={styles.sectionProfileRowButton}
+									onPress={this.props._onClick}
+								>
+									<Image style={styles.iconImage} source={require('../assets/icons/share.png')} />
+								</TouchableHighlight>
+							</View>
+							{/* 국가 */}
+							<View style={styles.sectionProfileRow}>
+								<View style={styles.sectionProfileRowIcon}>
+									<Avatar
+										rounded
+										size="medium"
+										overlayContainerStyle={{ backgroundColor: 'white' }}
+										source={require('../assets/icons/test/south-korea.png')}
+										onPress={this.props.onPress}
+									/>
+								</View>
+								<View style={styles.sectionProfileRowText}>
+									<Text>{Language.Nation[this.props.profileStore.language]}</Text>
+								</View>
+								<TouchableHighlight
+									style={styles.sectionProfileRowButton}
+									onPress={this.props._onClick}
+								>
+									<Image style={styles.iconImage} source={require('../assets/icons/share.png')} />
+								</TouchableHighlight>
+							</View>
+							{/* 도시 */}
+							<View style={styles.sectionProfileRow}>
+								<View style={styles.sectionProfileRowIcon}>
+									<Avatar
+										rounded
+										size="medium"
+										overlayContainerStyle={{ backgroundColor: 'white' }}
+										source={require('../assets/icons/test/seoul.png')}
+										onPress={this.props.onPress}
+									/>
+								</View>
+								<View style={styles.sectionProfileRowText}>
+									<Text>{Language.City[this.props.profileStore.language]}</Text>
+								</View>
+								<TouchableHighlight
+									style={styles.sectionProfileRowButton}
+									onPress={this.props._onClick}
+								>
+									<Image style={styles.iconImage} source={require('../assets/icons/share.png')} />
+								</TouchableHighlight>
+							</View>
 						</View>
+						<Divider style={styles.drawerDivider} />
 
 						{/* FoodType section */}
-						<Text style={[styles.foodSectionHeader, { backgroundColor: Colors.drawerSectionHeader3 }]}>
-							Food
-						</Text>
+						<Text style={styles.foodSectionHeader}>{Language.Food[this.props.profileStore.language]}</Text>
+						<Divider style={styles.drawerDivider} />
+
 						<View style={{ flexDirection: 'column' }}>
 							<View style={styles.foodSection}>
 								<AvatarIcon
@@ -303,47 +342,78 @@ DrawerScreen.propTypes = {
 
 const styles = StyleSheet.create({
 	defaultFont: {
-		fontFamily: 'netmarbleL',
+		fontFamily: 'NanumSquare_acL',
 	},
-	profileSectionHeader: {
-		backgroundColor: '#A5D6A7',
-		paddingVertical: 5,
-		paddingHorizontal: 10,
-		color: '#FFF',
-		// marginTop: StatusBar.currentHeight,
-		fontFamily: 'netmarbleL',
-		fontSize: 18,
+	drawerDivider: {
+		marginLeft: 15,
+		marginRight: 15,
+		height: 1,
+		backgroundColor: 'gray',
 	},
-	profileSection: {
+	sectionName: {
+		flex: 1,
 		flexDirection: 'row',
-		alignItems: 'center',
+		paddingVertical: 20,
+		paddingHorizontal: 20,
+		height: 100,
+		color: '#000',
+		fontFamily: 'NanumSquare_acEB',
+		fontSize: 18,
+		backgroundColor: Colors.WHITE,
+		// backgroundColor: '#A5D6A7',
+	},
+	sectionProfile: {
+		flexDirection: 'column',
+		// alignItems: 'center',
 		justifyContent: 'space-around',
 		// padding: 10,
-		backgroundColor: 'white',
+		// backgroundColor: '#a32',
 	},
-	profileSectionHeaderText: {
-		fontFamily: 'netmarbleL',
-	},
-	travelSectionHeader: {
-		backgroundColor: '#A5D6A7',
-		paddingVertical: 5,
-		paddingHorizontal: 10,
-		color: '#FFF',
-		fontFamily: 'netmarbleL',
-		fontSize: 18,
-	},
-	travelSection: {
+	sectionProfileRow: {
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-around',
-		backgroundColor: 'white',
+		height: 75,
+		// backgroundColor: '#2a7',
 	},
+	sectionProfileRowIcon: {
+		flex: 4,
+		justifyContent: 'center',
+		alignItems: 'center',
+		// backgroundColor: '#aaf',
+	},
+	sectionProfileRowText: {
+		flex: 4,
+		fontSize: 17,
+		fontFamily: 'NanumSquare_acL',
+	},
+	sectionProfileRowButton: {
+		flex: 3,
+	},
+	iconImage: {
+		width: 22,
+		height: 22,
+		// backgroundColor:'#afa',
+	},
+
+	profileSectionHeader: {
+		marginLeft: 15,
+		flex: 9,
+		flexDirection: 'column',
+		justifyContent: 'center',
+		// backgroundColor: '#aa1',
+	},
+	profileSectionHeaderText: {
+		fontFamily: 'NanumSquare_acL',
+		color: Colors.BLACK,
+	},
+
 	foodSectionHeader: {
-		backgroundColor: '#A5D6A7',
-		paddingVertical: 5,
-		paddingHorizontal: 10,
-		color: '#FFF',
-		fontFamily: 'netmarbleL',
+		// backgroundColor: '#A5D6A7',
+		paddingTop: 15,
+		paddingHorizontal: 25,
+		color: '#000',
+		fontFamily: 'NanumSquare_acB',
 		fontSize: 18,
 	},
 	foodSection: {
