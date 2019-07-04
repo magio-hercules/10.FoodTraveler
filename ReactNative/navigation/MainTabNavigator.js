@@ -64,7 +64,7 @@ const HeaderLeft = ({ navigation }) => {
 				margin: 6,
 				alignItems: 'center',
 				justifyContent: 'center',
-				// backgroundColor: '#a1a',
+				// backgroundColor: '#11a',
 			}}
 			onPress={() => {
 				navigation.dispatch(DrawerActions.toggleDrawer());
@@ -154,7 +154,7 @@ const _navigationOptions = (navigation, bHeaderLeft = true) => {
 		// headerStyle: {
 		// 	height: 62,
 		// },
-		// headerTintColor: '#fff',
+		headerTintColor: '#fff',
 		// headerTitleStyle: {
 		// 	fontFamily: 'NanumSquare_acB',
 		// 	fontWeight: undefined,
@@ -639,8 +639,9 @@ const styles = StyleSheet.create({
 		resizeMode: 'cover',
 		width: LayoutInfo.width,
 		// width: 100,
-
-		height: 62,
+		// height: (Platform.OS === 'ios' ? 93 : 62),
+		height: (Platform.OS === 'ios' ? 62 : 62),
+		marginTop: (Platform.OS === 'ios' ? 35 : 0),
 		// height: hp('8.4%'),
 	},
 });

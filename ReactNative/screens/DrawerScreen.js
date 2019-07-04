@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
-import { StyleSheet, ScrollView, Text, View, Image, TouchableHighlight, StatusBar } from 'react-native';
+import { Platform, StyleSheet, ScrollView, Text, View, Image, TouchableHighlight, StatusBar } from 'react-native';
 import { DrawerActions } from 'react-navigation';
 import { Divider, Avatar } from 'react-native-elements';
 
@@ -155,7 +155,7 @@ class DrawerScreen extends Component {
 
 	render() {
 		return (
-			<View style={styles.defaultFont}>
+			<View style={styles.container}>
 				<ScrollView>
 					<View>
 						{/* Name section */}
@@ -400,8 +400,9 @@ DrawerScreen.propTypes = {
 };
 
 const styles = StyleSheet.create({
-	defaultFont: {
+	container: {
 		fontFamily: 'NanumSquare_acL',
+		marginTop: (Platform.OS === 'ios' ? 35 : 0),
 	},
 	drawerDivider: {
 		marginLeft: 15,

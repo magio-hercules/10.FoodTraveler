@@ -83,4 +83,8 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: '#fff',
 	},
+	statusBar: {
+		height: (Platform.OS === 'ios' ? 35 : StatusBar.currentHeight),
+		backgroundColor: '#ED5605'
+	}
 });

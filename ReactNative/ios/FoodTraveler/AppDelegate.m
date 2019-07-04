@@ -12,6 +12,7 @@
 #import <React/RCTRootView.h>
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+//#import "RNSplashScreen.h"
 
 @implementation AppDelegate
 
@@ -34,6 +35,9 @@
   [[FBSDKApplicationDelegate sharedInstance] application:application
                            didFinishLaunchingWithOptions:launchOptions];
   
+//  [RNSplashScreen show];
+  // or
+  //[RNSplashScreen showSplash:@"LaunchScreen" inRootView:rootView];
   return YES;
 }
 

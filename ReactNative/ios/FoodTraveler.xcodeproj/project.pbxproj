@@ -36,6 +36,17 @@
 		2A160227227A922800CC0ABF /* netmarbleM.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A160224227A922800CC0ABF /* netmarbleM.ttf */; };
 		2A160228227A922800CC0ABF /* netmarbleB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A160225227A922800CC0ABF /* netmarbleB.ttf */; };
 		2A1602E7227A9BBC00CC0ABF /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 2A1602E6227A9BBC00CC0ABF /* fonts */; };
+		2A48FF2822CDD11100ED8200 /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A48FF2722CDCF7600ED8200 /* libRNSound.a */; };
+		2A48FF3322CDD1CE00ED8200 /* tts4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2A48FF2922CDD1CD00ED8200 /* tts4.wav */; };
+		2A48FF3422CDD1CE00ED8200 /* tts8.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2A48FF2A22CDD1CD00ED8200 /* tts8.wav */; };
+		2A48FF3522CDD1CE00ED8200 /* tts9.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2A48FF2B22CDD1CD00ED8200 /* tts9.wav */; };
+		2A48FF3622CDD1CE00ED8200 /* tts6.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2A48FF2C22CDD1CE00ED8200 /* tts6.wav */; };
+		2A48FF3722CDD1CE00ED8200 /* tts1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2A48FF2D22CDD1CE00ED8200 /* tts1.wav */; };
+		2A48FF3822CDD1CE00ED8200 /* tts5.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2A48FF2E22CDD1CE00ED8200 /* tts5.wav */; };
+		2A48FF3922CDD1CE00ED8200 /* tts2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2A48FF2F22CDD1CE00ED8200 /* tts2.wav */; };
+		2A48FF3A22CDD1CE00ED8200 /* tts7.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2A48FF3022CDD1CE00ED8200 /* tts7.wav */; };
+		2A48FF3B22CDD1CE00ED8200 /* tts10.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2A48FF3122CDD1CE00ED8200 /* tts10.wav */; };
+		2A48FF3C22CDD1CE00ED8200 /* tts3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2A48FF3222CDD1CE00ED8200 /* tts3.wav */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -211,6 +222,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 3D7682761D8E76B80014119E;
 			remoteInfo = SplashScreen;
+		};
+		2A48FF2622CDCF7600ED8200 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A48FF2222CDCF7600ED8200 /* RNSound.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 19825A1E1BD4A89800EE0337;
+			remoteInfo = RNSound;
 		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -424,6 +442,17 @@
 		2A160224227A922800CC0ABF /* netmarbleM.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = netmarbleM.ttf; path = ../assets/fonts/netmarbleM.ttf; sourceTree = "<group>"; };
 		2A160225227A922800CC0ABF /* netmarbleB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = netmarbleB.ttf; path = ../assets/fonts/netmarbleB.ttf; sourceTree = "<group>"; };
 		2A1602E6227A9BBC00CC0ABF /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../assets/fonts; sourceTree = "<group>"; };
+		2A48FF2222CDCF7600ED8200 /* RNSound.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSound.xcodeproj; path = "../node_modules/react-native-sound/RNSound.xcodeproj"; sourceTree = "<group>"; };
+		2A48FF2922CDD1CD00ED8200 /* tts4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = tts4.wav; path = ../android/app/src/main/res/raw/tts4.wav; sourceTree = "<group>"; };
+		2A48FF2A22CDD1CD00ED8200 /* tts8.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = tts8.wav; path = ../android/app/src/main/res/raw/tts8.wav; sourceTree = "<group>"; };
+		2A48FF2B22CDD1CD00ED8200 /* tts9.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = tts9.wav; path = ../android/app/src/main/res/raw/tts9.wav; sourceTree = "<group>"; };
+		2A48FF2C22CDD1CE00ED8200 /* tts6.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = tts6.wav; path = ../android/app/src/main/res/raw/tts6.wav; sourceTree = "<group>"; };
+		2A48FF2D22CDD1CE00ED8200 /* tts1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = tts1.wav; path = ../android/app/src/main/res/raw/tts1.wav; sourceTree = "<group>"; };
+		2A48FF2E22CDD1CE00ED8200 /* tts5.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = tts5.wav; path = ../android/app/src/main/res/raw/tts5.wav; sourceTree = "<group>"; };
+		2A48FF2F22CDD1CE00ED8200 /* tts2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = tts2.wav; path = ../android/app/src/main/res/raw/tts2.wav; sourceTree = "<group>"; };
+		2A48FF3022CDD1CE00ED8200 /* tts7.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = tts7.wav; path = ../android/app/src/main/res/raw/tts7.wav; sourceTree = "<group>"; };
+		2A48FF3122CDD1CE00ED8200 /* tts10.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = tts10.wav; path = ../android/app/src/main/res/raw/tts10.wav; sourceTree = "<group>"; };
+		2A48FF3222CDD1CE00ED8200 /* tts3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = tts3.wav; path = ../android/app/src/main/res/raw/tts3.wav; sourceTree = "<group>"; };
 		2BF4F71FBC7F4C45A76EEC2E /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGestureHandler.xcodeproj; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* FoodTraveler-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FoodTraveler-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* FoodTraveler-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FoodTraveler-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -484,7 +513,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A48FF2822CDD11100ED8200 /* libRNSound.a in Frameworks */,
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
+				824FF220FE5A4FC69763790A /* libSplashScreen.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -499,7 +530,6 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				031D4FC1CEE54049A639E0DA /* libRNGestureHandler.a in Frameworks */,
 				F2F7E54310DD43D39B1B53BC /* libRNVectorIcons.a in Frameworks */,
-				824FF220FE5A4FC69763790A /* libSplashScreen.a in Frameworks */,
 				5D849556E2304C2DAEFE4ADD /* libAirMaps.a in Frameworks */,
 				0D00DD3A8CD64BD1A0DF27F0 /* libRCTFBSDK.a in Frameworks */,
 				145251C1816D970189B6A2A1 /* libPods-FoodTraveler.a in Frameworks */,
@@ -708,6 +738,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		2A48FF2322CDCF7600ED8200 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2A48FF2722CDCF7600ED8200 /* libRNSound.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -758,6 +796,16 @@
 		79E41743C6FA4786BD285005 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2A48FF2D22CDD1CE00ED8200 /* tts1.wav */,
+				2A48FF2F22CDD1CE00ED8200 /* tts2.wav */,
+				2A48FF3222CDD1CE00ED8200 /* tts3.wav */,
+				2A48FF2922CDD1CD00ED8200 /* tts4.wav */,
+				2A48FF2E22CDD1CE00ED8200 /* tts5.wav */,
+				2A48FF2C22CDD1CE00ED8200 /* tts6.wav */,
+				2A48FF3022CDD1CE00ED8200 /* tts7.wav */,
+				2A48FF2A22CDD1CD00ED8200 /* tts8.wav */,
+				2A48FF2B22CDD1CD00ED8200 /* tts9.wav */,
+				2A48FF3122CDD1CE00ED8200 /* tts10.wav */,
 				2A160225227A922800CC0ABF /* netmarbleB.ttf */,
 				2A160223227A922800CC0ABF /* netmarbleL.ttf */,
 				2A160224227A922800CC0ABF /* netmarbleM.ttf */,
@@ -784,6 +832,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				2A48FF2222CDCF7600ED8200 /* RNSound.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -1034,6 +1083,10 @@
 					ProjectRef = 2BF4F71FBC7F4C45A76EEC2E /* RNGestureHandler.xcodeproj */;
 				},
 				{
+					ProductGroup = 2A48FF2322CDCF7600ED8200 /* Products */;
+					ProjectRef = 2A48FF2222CDCF7600ED8200 /* RNSound.xcodeproj */;
+				},
+				{
 					ProductGroup = 1BE4CA432266C31D00153EAF /* Products */;
 					ProjectRef = 3A5ED6FB57D8413B8FBD2F78 /* RNVectorIcons.xcodeproj */;
 				},
@@ -1184,6 +1237,13 @@
 			fileType = archive.ar;
 			path = libSplashScreen.a;
 			remoteRef = 1BE4CA5A2266C31E00153EAF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2A48FF2722CDCF7600ED8200 /* libRNSound.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSound.a;
+			remoteRef = 2A48FF2622CDCF7600ED8200 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		2D16E6721FA4F8DC00B85C8A /* libRCTBlob-tvOS.a */ = {
@@ -1375,6 +1435,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A48FF3A22CDD1CE00ED8200 /* tts7.wav in Resources */,
+				2A48FF3522CDD1CE00ED8200 /* tts9.wav in Resources */,
 				2A160226227A922800CC0ABF /* netmarbleL.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
@@ -1390,11 +1452,19 @@
 				B674712EEB294FC69C205016 /* FontAwesome5_Regular.ttf in Resources */,
 				E55215F0280A4CFDA62AFAD5 /* FontAwesome5_Solid.ttf in Resources */,
 				469BE7B54C6E4455B114C818 /* Foundation.ttf in Resources */,
+				2A48FF3422CDD1CE00ED8200 /* tts8.wav in Resources */,
+				2A48FF3C22CDD1CE00ED8200 /* tts3.wav in Resources */,
 				A5518071671843DCAC26409C /* Ionicons.ttf in Resources */,
+				2A48FF3322CDD1CE00ED8200 /* tts4.wav in Resources */,
+				2A48FF3622CDD1CE00ED8200 /* tts6.wav in Resources */,
+				2A48FF3822CDD1CE00ED8200 /* tts5.wav in Resources */,
 				119AD0CDB5264184B584647B /* MaterialCommunityIcons.ttf in Resources */,
+				2A48FF3B22CDD1CE00ED8200 /* tts10.wav in Resources */,
 				100FADC556A4438A8CEA105B /* MaterialIcons.ttf in Resources */,
 				3AC069D2E3E94AEC8670EBD4 /* Octicons.ttf in Resources */,
+				2A48FF3922CDD1CE00ED8200 /* tts2.wav in Resources */,
 				4145A6EF43894D42B81F90A0 /* SimpleLineIcons.ttf in Resources */,
+				2A48FF3722CDD1CE00ED8200 /* tts1.wav in Resources */,
 				0C7D041C5CDB47E89D70C36D /* Zocial.ttf in Resources */,
 				F9D1F5C9588A45AF9C8F0FED /* SpaceMono-Regular.ttf in Resources */,
 			);
@@ -1716,6 +1786,10 @@
 				);
 				INFOPLIST_FILE = FoodTraveler/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1745,6 +1819,10 @@
 				);
 				INFOPLIST_FILE = FoodTraveler/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
