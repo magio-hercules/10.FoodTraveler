@@ -68,8 +68,8 @@ const SwitchNavigator = createSwitchNavigator(
 	},
 	{
 		// initialRouteName: isLoggedIn ? "MainNavigator" : "LoginNavigator"
-		// initialRouteName: 'LoginNavigator',
-		initialRouteName: 'DrawerNavigator',
+		initialRouteName: 'LoginNavigator',
+		// initialRouteName: 'DrawerNavigator',
 		// headerMode: 'none'
 	}
 );
