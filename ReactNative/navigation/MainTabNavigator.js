@@ -47,15 +47,32 @@ const MenuImage = ({ navigation }) => {
 	console.log('MenuImage : ' + navigation.state.routeName);
 
 	if (!navigation.state.isDrawerOpen) {
-		return (
-			<Image
-				source={require('../assets/icons/menu.png')}
-				style={{ width: 10, height: 15, marginLeft: 15, marginTop: 1 }}
-			/>
-		);
+		return <Image source={require('../assets/icons/menu.png')} style={{ width: 10, height: 15 }} />;
 	} else {
 		return <Text style={{ width: 35, height: 30, marginLeft: 10, marginTop: 10, color: '#fff' }}>Back</Text>;
 	}
+};
+
+const HeaderLeft = ({ navigation }) => {
+	console.log('HeaderLeft navigation : ' + navigation);
+
+	return (
+		<TouchableOpacity
+			style={{
+				width: 40,
+				height: 40,
+				margin: 6,
+				alignItems: 'center',
+				justifyContent: 'center',
+				// backgroundColor: '#a1a',
+			}}
+			onPress={() => {
+				navigation.dispatch(DrawerActions.toggleDrawer());
+			}}
+		>
+			<MenuImage navigation={navigation} />
+		</TouchableOpacity>
+	);
 };
 
 class NavigationDrawerStructure extends Component {
@@ -67,7 +84,16 @@ class NavigationDrawerStructure extends Component {
 	render() {
 		return (
 			<View style={{ flexDirection: 'row' }}>
-				<TouchableOpacity onPress={this.toggleDrawer.bind(this)}>
+				<TouchableOpacity
+					style={{
+						width: 50,
+						height: 50,
+						alignItems: 'center',
+						justifyContent: 'center',
+						backgroundColor: '#a1a',
+					}}
+					onPress={this.toggleDrawer.bind(this)}
+				>
 					{/*Donute Button Image */}
 					<Image
 						source={require('../assets/icons/menu.png')}
@@ -106,13 +132,7 @@ const _navigationOptions = (navigation, bHeaderLeft = true) => {
 	// );
 
 	const headerLeft = bHeaderLeft ? (
-		<TouchableOpacity
-			onPress={() => {
-				navigation.dispatch(DrawerActions.toggleDrawer());
-			}}
-		>
-			<MenuImage navigation={navigation} />
-		</TouchableOpacity>
+		<HeaderLeft navigation={navigation} />
 	) : (
 		// <TouchableOpacity onPress={() => {navigation.toggleDrawer()} }>
 		//     <MenuImage navigation={navigation}/>
@@ -136,7 +156,7 @@ const _navigationOptions = (navigation, bHeaderLeft = true) => {
 		// },
 		// headerTintColor: '#fff',
 		// headerTitleStyle: {
-		// 	fontFamily: 'netmarbleB',
+		// 	fontFamily: 'NanumSquare_acB',
 		// 	fontWeight: undefined,
 		// 	fontSize: 27,
 		// 	marginLeft: 10,
@@ -148,8 +168,17 @@ const _navigationOptions = (navigation, bHeaderLeft = true) => {
 
 const _tabBarOptions = () => {
 	return {
+		style: {
+			// width: windowsWidth,
+			height: 60,
+		},
 		labelStyle: {
-			fontFamily: 'netmarbleL',
+			fontFamily: 'NanumSquare_acL',
+			fontSize: 12,
+		},
+		tabStyle: {
+			height: 60,
+			// backgroundColor: '#F6F6F7',
 		},
 	};
 };
@@ -161,15 +190,7 @@ const FoodStack = createStackNavigator(
 			screen: FoodScreen,
 			navigationOptions: ({ navigation }) => ({
 				// headerTitle: `FoodTraveler`,
-				headerLeft: (
-					<TouchableOpacity
-						onPress={() => {
-							navigation.dispatch(DrawerActions.toggleDrawer());
-						}}
-					>
-						<MenuImage navigation={navigation} />
-					</TouchableOpacity>
-				),
+				headerLeft: <HeaderLeft navigation={navigation} />,
 			}),
 		},
 		Ingredient: IngredientScreen,
@@ -223,14 +244,30 @@ FoodStack.navigationOptions = ({ navigation }) => {
 	return {
 		tabBarVisible,
 		// tabBarLabel: 'Food',
-		tabBarLabel: Language.Food[global.language],
+		initialLayout: { height: 60 },
+		// tabBarLabel: Language.Food[global.language],
+		tabBarLabel: ({ focused }) => (
+			<Text
+				style={{
+					fontSize: 11,
+					textAlign: 'center',
+					color: focused ? '#000' : '#808285',
+				}}
+			>
+				{Language.Food[global.language]}
+			</Text>
+		),
 		tabBarOptions: _tabBarOptions(),
 		tabBarIcon: ({ focused }) => (
 			// <TabBarIcon
 			//   focused={focused}
 			//   name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
 			// />
-			<TabBarIcon focused={focused} iconSrc={require('../assets/icons/tab/food.png')} />
+			<TabBarIcon
+				focused={focused}
+				iconSrc={require('../assets/icons/tab/food.png')}
+				iconSelSrc={require('../assets/icons/tab/food_sel.png')}
+			/>
 		),
 	};
 };
@@ -310,15 +347,7 @@ const LikeStack = createStackNavigator(
 			screen: FoodScreen,
 			navigationOptions: ({ navigation }) => ({
 				// headerTitle: Language.Like[global.language],
-				headerLeft: (
-					<TouchableOpacity
-						onPress={() => {
-							navigation.dispatch(DrawerActions.toggleDrawer());
-						}}
-					>
-						<MenuImage navigation={navigation} />
-					</TouchableOpacity>
-				),
+				headerLeft: <HeaderLeft navigation={navigation} />,
 			}),
 		},
 		Ingredient: IngredientScreen,
@@ -355,9 +384,26 @@ LikeStack.navigationOptions = ({ navigation }) => {
 	console.log('LikeStack.navigationOptions');
 	return {
 		tabBarVisible,
-		tabBarLabel: Language.Like[global.language],
+		// tabBarLabel: Language.Like[global.language],
+		tabBarLabel: ({ focused }) => (
+			<Text
+				style={{
+					fontSize: 11,
+					textAlign: 'center',
+					color: focused ? '#000' : '#808285',
+				}}
+			>
+				{Language.Like[global.language]}
+			</Text>
+		),
 		tabBarOptions: _tabBarOptions(),
-		tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} iconSrc={require('../assets/icons/tab/like.png')} />,
+		tabBarIcon: ({ focused }) => (
+			<TabBarIcon
+				focused={focused}
+				iconSrc={require('../assets/icons/tab/like.png')}
+				iconSelSrc={require('../assets/icons/tab/like_sel.png')}
+			/>
+		),
 	};
 };
 
@@ -368,15 +414,7 @@ const RestaurantStack = createStackNavigator(
 			screen: RestaurantScreen,
 			navigationOptions: ({ navigation }) => ({
 				// headerTitle: Language.Restaurant[global.language],
-				headerLeft: (
-					<TouchableOpacity
-						onPress={() => {
-							navigation.dispatch(DrawerActions.toggleDrawer());
-						}}
-					>
-						<MenuImage navigation={navigation} />
-					</TouchableOpacity>
-				),
+				headerLeft: <HeaderLeft navigation={navigation} />,
 			}),
 		},
 
@@ -417,7 +455,18 @@ RestaurantStack.navigationOptions = ({ navigation }) => {
 	return {
 		tabBarVisible,
 		// tabBarLabel: 'Restaurant',
-		tabBarLabel: Language.Restaurant[global.language],
+		// tabBarLabel: Language.Restaurant[global.language],
+		tabBarLabel: ({ focused }) => (
+			<Text
+				style={{
+					fontSize: 11,
+					textAlign: 'center',
+					color: focused ? '#000' : '#808285',
+				}}
+			>
+				{Language.Restaurant[global.language]}
+			</Text>
+		),
 		// tabBarLabel: Language.Food[global.language],
 		tabBarOptions: _tabBarOptions(),
 		tabBarIcon: ({ focused }) => (
@@ -428,6 +477,7 @@ RestaurantStack.navigationOptions = ({ navigation }) => {
 			<TabBarIcon
 				focused={focused}
 				iconSrc={require('../assets/icons/tab/restaurant.png')}
+				iconSelSrc={require('../assets/icons/tab/restaurant_sel.png')}
 				// iconSrc={require('../assets/icons/tab/location.png')}
 			/>
 		),
@@ -469,15 +519,7 @@ const ClassStack = createStackNavigator(
 			screen: ClassScreen,
 			navigationOptions: ({ navigation }) => ({
 				// headerTitle: Language.Class[global.language],
-				headerLeft: (
-					<TouchableOpacity
-						onPress={() => {
-							navigation.dispatch(DrawerActions.toggleDrawer());
-						}}
-					>
-						<MenuImage navigation={navigation} />
-					</TouchableOpacity>
-				),
+				headerLeft: <HeaderLeft navigation={navigation} />,
 			}),
 		},
 
@@ -516,10 +558,25 @@ ClassStack.navigationOptions = ({ navigation }) => {
 
 	return {
 		tabBarVisible,
-		tabBarLabel: Language.Class[global.language],
+		// tabBarLabel: Language.Class[global.language],
+		tabBarLabel: ({ focused }) => (
+			<Text
+				style={{
+					fontSize: 11,
+					textAlign: 'center',
+					color: focused ? '#000' : '#808285',
+				}}
+			>
+				{Language.Class[global.language]}
+			</Text>
+		),
 		tabBarOptions: _tabBarOptions(),
 		tabBarIcon: ({ focused }) => (
-			<TabBarIcon focused={focused} iconSrc={require('../assets/icons/tab/class.png')} />
+			<TabBarIcon
+				focused={focused}
+				iconSrc={require('../assets/icons/tab/class.png')}
+				iconSelSrc={require('../assets/icons/tab/class_sel.png')}
+			/>
 		),
 	};
 };
@@ -542,14 +599,29 @@ HelpStack.navigationOptions = ({ navigation }) => {
 
 	return {
 		// tabBarLabel: 'Help',
-		tabBarLabel: Language.Help[global.language],
+		// tabBarLabel: Language.Help[global.language],
+		tabBarLabel: ({ focused }) => (
+			<Text
+				style={{
+					fontSize: 11,
+					textAlign: 'center',
+					color: focused ? '#000' : '#808285',
+				}}
+			>
+				{Language.Help[global.language]}
+			</Text>
+		),
 		tabBarOptions: _tabBarOptions(),
 		tabBarIcon: ({ focused }) => (
 			// <TabBarIcon
 			//   focused={focused}
 			//   name={Platform.OS === 'ios' ? 'ios-settings' : 'md-settings'}
 			// />
-			<TabBarIcon focused={focused} iconSrc={require('../assets/icons/tab/help.png')} />
+			<TabBarIcon
+				focused={focused}
+				iconSrc={require('../assets/icons/tab/help.png')}
+				iconSelSrc={require('../assets/icons/tab/help_sel.png')}
+			/>
 		),
 	};
 };

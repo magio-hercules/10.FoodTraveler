@@ -126,13 +126,17 @@ class ClassScreen extends React.Component {
 						_title = 'title_en';
 						_desc = 'desc_en';
 						break;
+					case 'zh_cn':
+						_title = 'title_zh_cn';
+						_desc = 'desc_zh_cn';
+						break;
+					case 'zh_tw':
+						_title = 'title_zh_tw';
+						_desc = 'desc_zh_tw';
+						break;
 					case 'jp':
 						_title = 'title_jp';
 						_desc = 'desc_jp';
-						break;
-					case 'zh':
-						_title = 'title_zh';
-						_desc = 'desc_zh';
 						break;
 				}
 
@@ -258,13 +262,20 @@ class ClassScreen extends React.Component {
 							</ImageBackground>
 
 							<View style={[styles.ContentPart]}>
-								<View style={styles.ContentHeader}>
+								{/* <View style={styles.ContentHeader}>
 									<Text style={styles.ContentHeaderText}>{item.name}</Text>
 								</View>
-
 								<Text style={styles.ContentText} numberOfLines={6} ellipsizeMode="tail">
 									{' '}
 									{item.description}{' '}
+								</Text> */}
+								<View style={styles.ContentHeaderTextSection}>
+									<Text style={styles.ContentHeaderText}>{item.name}</Text>
+									{/* <View style={styles.ContentHeaderTextSectionInner}>
+									</View> */}
+								</View>
+								<Text style={styles.ContentText} numberOfLines={4} ellipsizeMode="tail">
+									{' ' + item.description}
 								</Text>
 							</View>
 						</View>
@@ -295,10 +306,12 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 		top: LayoutInfo.imagePartIconSectionTop,
-		opacity: 0.8,
+		// opacity: 0.8,
+		opacity: 1.0,
 		width: LayoutInfo.width,
 		height: LayoutInfo.imagePartIconSection,
-		backgroundColor: 'white',
+		// backgroundColor: 'white',
+		backgroundColor: 'rgba(0,0,0, 0.1)',
 	},
 	ContentPart: {
 		flex: 1,
@@ -306,8 +319,9 @@ const styles = StyleSheet.create({
 		backgroundColor: 'white',
 		// justifyContent: 'space-between',
 		// justifyContent: 'center',
-		paddingLeft: 5,
-		paddingRight: 5,
+		// paddingLeft: 5,
+		// paddingRight: 5,
+		padding: 15,
 	},
 	ContentHeader: {
 		flexDirection: 'row',
@@ -317,15 +331,28 @@ const styles = StyleSheet.create({
 		// paddingBottom: 5,
 		// backgroundColor:'#a1a',
 	},
+	ContentHeaderTextSection: {
+		// flex: 8,
+		height: 50,
+		// flexDirection: 'column',
+		justifyContent: 'center',
+		// alignItems: 'center',
+		// backgroundColor: '#faa',
+	},
+	// ContentHeaderTextSectionInner: {
+	// 	height: 80,
+	// },
 	ContentHeaderText: {
-		flex: 8,
+		// flex: 8,
 		fontSize: 18,
-		alignItems: 'center',
-		fontFamily: 'netmarbleM',
+		// alignItems: 'center',
+		fontFamily: 'NanumSquare_acB',
 	},
 	ContentText: {
-		fontFamily: 'netmarbleL',
-		marginTop: 5,
+		fontSize: 14,
+		marginTop: 8,
+		fontFamily: 'NanumSquare_acL',
+		// backgroundColor: '#ffa',
 	},
 });
 

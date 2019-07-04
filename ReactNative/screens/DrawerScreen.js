@@ -13,6 +13,7 @@ import Language from '../constants/Language';
 import Layout from '../constants/Layout';
 
 import AvatarIcon from '../components/AvatarIcon';
+import { switchCase } from '@babel/types';
 
 class DrawerScreen extends Component {
 	constructor(props) {
@@ -78,9 +79,41 @@ class DrawerScreen extends Component {
 			this.props.profileStore.language = 'en';
 			global.language = 'en';
 		} else if (this.props.profileStore.language == 'en') {
+			this.props.profileStore.language = 'zh_cn';
+			global.language = 'zh_cn';
+		} else if (this.props.profileStore.language == 'zh_cn') {
+			this.props.profileStore.language = 'zh_tw';
+			global.language = 'zh_tw';
+		} else if (this.props.profileStore.language == 'zh_tw') {
+			this.props.profileStore.language = 'jp';
+			global.language = 'jp';
+		} else if (this.props.profileStore.language == 'jp') {
 			this.props.profileStore.language = 'ko';
 			global.language = 'ko';
 		}
+	};
+
+	_getLanguageIcon = language => {
+		var source;
+
+		switch (language) {
+			case 'ko':
+				source = require('../assets/icons/drawer/language_ko.png');
+				break;
+			case 'en':
+				source = require('../assets/icons/drawer/language_en.png');
+				break;
+			case 'zh_cn':
+				source = require('../assets/icons/drawer/language_zh.png');
+				break;
+			case 'zh_tw':
+				source = require('../assets/icons/drawer/language_zh.png');
+				break;
+			case 'jp':
+				source = require('../assets/icons/drawer/language_jp.png');
+				break;
+		}
+		return source;
 	};
 
 	_onProfileImage = () => {
@@ -89,6 +122,10 @@ class DrawerScreen extends Component {
 
 	_onClick = () => {
 		console.log('_onClick');
+	};
+
+	_onReservation = () => {
+		console.log('_onReservation');
 	};
 
 	_onNation = () => {
@@ -143,94 +180,101 @@ class DrawerScreen extends Component {
 
 						{/* Profile section */}
 						<View style={[styles.sectionProfile]}>
-							{/* 프로필 */}
-							<View style={styles.sectionProfileRow}>
-								<View style={styles.sectionProfileRowIcon}>
-									<Avatar
-										rounded
-										size="medium"
-										overlayContainerStyle={{ backgroundColor: 'white' }}
-										source={require('../assets/icons/test/profile.png')}
-										onPress={this.props.onPress}
-									/>
+							{/* 프로필 -> 예약 */}
+							<TouchableHighlight onPress={this._onReservation} underlayColor="#ECEFF1">
+								<View style={styles.sectionProfileRow}>
+									<View style={styles.sectionProfileRowIcon}>
+										<Avatar
+											rounded
+											size="small"
+											overlayContainerStyle={{ backgroundColor: 'white' }}
+											source={require('../assets/icons/drawer/country_korea.png')}
+											onPress={this.props.onPress}
+										/>
+									</View>
+									<View style={styles.sectionProfileRowText}>
+										<Text>{Language.Reservation[this.props.profileStore.language]}</Text>
+									</View>
+									<View style={styles.sectionProfileRowButton}>
+										<Image
+											style={styles.iconImage}
+											source={require('../assets/icons/contents/arrow_right.png')}
+										/>
+									</View>
 								</View>
-								<View style={styles.sectionProfileRowText}>
-									<Text>{Language.Profile[this.props.profileStore.language]}</Text>
-								</View>
-								<TouchableHighlight
-									style={styles.sectionProfileRowButton}
-									onPress={this.props._onClick}
-								>
-									<Image style={styles.iconImage} source={require('../assets/icons/share.png')} />
-								</TouchableHighlight>
-							</View>
+							</TouchableHighlight>
 							{/* 언어 */}
-							<View style={styles.sectionProfileRow}>
-								<View style={styles.sectionProfileRowIcon}>
-									<Avatar
-										rounded
-										size="medium"
-										overlayContainerStyle={{ backgroundColor: 'white' }}
-										source={
-											this.props.profileStore.language == 'ko'
-												? require('../assets/icons/test/lan_icon_ko.png')
-												: require('../assets/icons/test/lan_icon_en.png')
-										}
-										onPress={this.props.onPress}
-									/>
+							<TouchableHighlight onPress={this._onLanguage} underlayColor="#ECEFF1">
+								<View style={styles.sectionProfileRow}>
+									<View style={styles.sectionProfileRowIcon}>
+										<Avatar
+											size="small"
+											overlayContainerStyle={{ backgroundColor: 'white' }}
+											source={
+												this._getLanguageIcon(this.props.profileStore.language)
+												// 	this.props.profileStore.language == 'ko'
+												// ? require('../assets/icons/drawer/language_ko.png')
+												// : require('../assets/icons/drawer/language_en.png')
+											}
+										/>
+									</View>
+									<View style={styles.sectionProfileRowText}>
+										<Text>{Language.Language[this.props.profileStore.language]}</Text>
+									</View>
+									<View style={styles.sectionProfileRowButton}>
+										<Image
+											style={styles.iconImage}
+											source={require('../assets/icons/contents/arrow_right.png')}
+										/>
+									</View>
 								</View>
-								<View style={styles.sectionProfileRowText}>
-									<Text>{Language.Language[this.props.profileStore.language]}</Text>
-								</View>
-								<TouchableHighlight
-									style={styles.sectionProfileRowButton}
-									onPress={this.props._onClick}
-								>
-									<Image style={styles.iconImage} source={require('../assets/icons/share.png')} />
-								</TouchableHighlight>
-							</View>
+							</TouchableHighlight>
 							{/* 국가 */}
-							<View style={styles.sectionProfileRow}>
-								<View style={styles.sectionProfileRowIcon}>
-									<Avatar
-										rounded
-										size="medium"
-										overlayContainerStyle={{ backgroundColor: 'white' }}
-										source={require('../assets/icons/test/south-korea.png')}
-										onPress={this.props.onPress}
-									/>
+							<TouchableHighlight onPress={this._onNation} underlayColor="#ECEFF1">
+								<View style={styles.sectionProfileRow}>
+									<View style={styles.sectionProfileRowIcon}>
+										<Avatar
+											rounded
+											size="small"
+											overlayContainerStyle={{ backgroundColor: 'white' }}
+											source={require('../assets/icons/drawer/country_korea.png')}
+											onPress={this.props.onPress}
+										/>
+									</View>
+									<View style={styles.sectionProfileRowText}>
+										<Text>{Language.Nation[this.props.profileStore.language]}</Text>
+									</View>
+									<View style={styles.sectionProfileRowButton}>
+										<Image
+											style={styles.iconImage}
+											source={require('../assets/icons/contents/arrow_right.png')}
+										/>
+									</View>
 								</View>
-								<View style={styles.sectionProfileRowText}>
-									<Text>{Language.Nation[this.props.profileStore.language]}</Text>
-								</View>
-								<TouchableHighlight
-									style={styles.sectionProfileRowButton}
-									onPress={this.props._onClick}
-								>
-									<Image style={styles.iconImage} source={require('../assets/icons/share.png')} />
-								</TouchableHighlight>
-							</View>
+							</TouchableHighlight>
 							{/* 도시 */}
-							<View style={styles.sectionProfileRow}>
-								<View style={styles.sectionProfileRowIcon}>
-									<Avatar
-										rounded
-										size="medium"
-										overlayContainerStyle={{ backgroundColor: 'white' }}
-										source={require('../assets/icons/test/seoul.png')}
-										onPress={this.props.onPress}
-									/>
+							<TouchableHighlight onPress={this._onCity} underlayColor="#ECEFF1">
+								<View style={styles.sectionProfileRow}>
+									<View style={styles.sectionProfileRowIcon}>
+										<Avatar
+											rounded
+											size="small"
+											overlayContainerStyle={{ backgroundColor: 'white' }}
+											source={require('../assets/icons/drawer/city_seoul.png')}
+											onPress={this.props.onPress}
+										/>
+									</View>
+									<View style={styles.sectionProfileRowText}>
+										<Text>{Language.City[this.props.profileStore.language]}</Text>
+									</View>
+									<View style={styles.sectionProfileRowButton}>
+										<Image
+											style={styles.iconImage}
+											source={require('../assets/icons/contents/arrow_right.png')}
+										/>
+									</View>
 								</View>
-								<View style={styles.sectionProfileRowText}>
-									<Text>{Language.City[this.props.profileStore.language]}</Text>
-								</View>
-								<TouchableHighlight
-									style={styles.sectionProfileRowButton}
-									onPress={this.props._onClick}
-								>
-									<Image style={styles.iconImage} source={require('../assets/icons/share.png')} />
-								</TouchableHighlight>
-							</View>
+							</TouchableHighlight>
 						</View>
 						<Divider style={styles.drawerDivider} />
 
@@ -241,91 +285,106 @@ class DrawerScreen extends Component {
 						<View style={{ flexDirection: 'column' }}>
 							<View style={styles.foodSection}>
 								<AvatarIcon
-									// title="Rice"
+									style={styles.foodSectionIcon}
 									title={Language.Rice[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/test/rice.png')}
+									imageSrc={require('../assets/icons/food/rice.png')}
 									onPress={this._onFood}
+									size="small"
 								/>
 								<AvatarIcon
-									// title="Noodle"
+									style={styles.foodSectionIcon}
 									title={Language.Soup[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/test/soup.png')}
+									imageSrc={require('../assets/icons/food/soup.png')}
 									onPress={this._onFood}
+									size="small"
 								/>
 								<AvatarIcon
-									// title="Seafood"
+									style={styles.foodSectionIcon}
 									title={Language.Noodle[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/test/noodle.png')}
+									imageSrc={require('../assets/icons/food/noodle.png')}
 									onPress={this._onFood}
+									size="small"
 								/>
 							</View>
 							<View style={styles.foodSection}>
 								<AvatarIcon
-									// title="Meat"
+									style={styles.foodSectionIcon}
 									title={Language.Bread[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/test/bread.png')}
+									imageSrc={require('../assets/icons/food/bread.png')}
 									onPress={this._onFood}
+									size="small"
 								/>
 								<AvatarIcon
-									// title="Soup"
+									style={styles.foodSectionIcon}
 									title={Language.Pizza[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/test/pizza.png')}
+									imageSrc={require('../assets/icons/food/pizza.png')}
 									onPress={this._onFood}
+									size="small"
 								/>
 								<AvatarIcon
-									// title="Vegetable"
+									style={styles.foodSectionIcon}
 									title={Language.Pasta[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/test/pasta.png')}
+									imageSrc={require('../assets/icons/food/pasta.png')}
 									onPress={this._onFood}
+									size="small"
 								/>
 							</View>
 							<View style={styles.foodSection}>
 								<AvatarIcon
-									// title="Dessert"
+									style={styles.foodSectionIcon}
 									title={Language.Meat[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/test/meat.png')}
+									imageSrc={require('../assets/icons/food/meat.png')}
 									onPress={this._onFood}
+									size="small"
 								/>
 								<AvatarIcon
-									// title="Drink"
+									style={styles.foodSectionIcon}
 									title={Language.Seafood[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/test/seafood.png')}
+									imageSrc={require('../assets/icons/food/seafood.png')}
 									onPress={this._onFood}
+									size="small"
 								/>
 								<AvatarIcon
-									// title="Drink"
+									style={styles.foodSectionIcon}
 									title={Language.Vegetable[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/test/vegetable.png')}
+									imageSrc={require('../assets/icons/food/vegetable.png')}
 									onPress={this._onFood}
+									size="small"
 								/>
 							</View>
 							<View style={styles.foodSection}>
 								<AvatarIcon
+									style={styles.foodSectionIcon}
 									title={Language.Dessert[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/test/dessert.png')}
+									imageSrc={require('../assets/icons/food/dessert.png')}
 									onPress={this._onFood}
+									size="small"
 								/>
 								<AvatarIcon
+									style={styles.foodSectionIcon}
 									title={Language.Drink[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/test/drink.png')}
+									imageSrc={require('../assets/icons/food/drink.png')}
 									onPress={this._onFood}
+									size="small"
 								/>
 								<AvatarIcon
+									style={styles.foodSectionIcon}
 									title={Language.Alcohol[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/test/alcohol.png')}
+									imageSrc={require('../assets/icons/food/alcohol.png')}
 									onPress={this._onFood}
+									size="small"
 								/>
 							</View>
 						</View>
@@ -355,7 +414,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		paddingVertical: 20,
 		paddingHorizontal: 20,
-		height: 100,
+		height: 90,
 		color: '#000',
 		fontFamily: 'NanumSquare_acEB',
 		fontSize: 18,
@@ -373,7 +432,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-around',
-		height: 75,
+		height: 55,
 		// backgroundColor: '#2a7',
 	},
 	sectionProfileRowIcon: {
@@ -386,13 +445,20 @@ const styles = StyleSheet.create({
 		flex: 4,
 		fontSize: 17,
 		fontFamily: 'NanumSquare_acL',
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	sectionProfileRowButton: {
 		flex: 3,
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	iconImage: {
-		width: 22,
-		height: 22,
+		// flex: 3,
+		// justifyContent: 'center',
+		// alignItems: 'center',
+		width: 20,
+		height: 20,
 		// backgroundColor:'#afa',
 	},
 
@@ -422,6 +488,10 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-around',
 		// padding: 10,
 		backgroundColor: 'white',
+	},
+	foodSectionIcon: {
+		width: 70,
+		// backgroundColor: '#fa1',
 	},
 });
 

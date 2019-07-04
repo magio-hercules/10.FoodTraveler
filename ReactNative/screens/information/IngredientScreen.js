@@ -112,50 +112,74 @@ class IngredientScreen extends React.Component {
 					switch (keys[index]) {
 						case 'Meat':
 						case '고기':
+						case '肉':
+						case 'お肉':
 							_imageSrc = require('../../assets/icons/ingredient/Meat.png');
 							break;
 						case 'Seafood':
 						case '해산물':
+						case '海鲜':
+						case 'シーフード':
 							_imageSrc = require('../../assets/icons/ingredient/Seafood.png');
 							break;
 						case 'Grain':
 						case '곡물':
+						case '糧食':
+						case '粒':
 							_imageSrc = require('../../assets/icons/ingredient/Grain.png');
 							break;
 						case 'Vegetable':
 						case '채소':
+						case '蔬菜':
+						case '野菜':
 							_imageSrc = require('../../assets/icons/ingredient/Vegetable.png');
 							break;
 						case 'Nut':
 						case '견과':
+						case '坚果':
+						case 'ナット':
 							_imageSrc = require('../../assets/icons/ingredient/Nut.png');
 							break;
 						case 'Bread':
 						case '빵':
+						case '面包':
+						case 'パン':
 							_imageSrc = require('../../assets/icons/ingredient/Bread.png');
 							break;
 						case 'Fruit':
 						case '과일':
+						case '水果':
+						case 'フルーツ':
 							_imageSrc = require('../../assets/icons/ingredient/Fruit.png');
 							break;
 						case 'Oil':
 						case '기름':
+						case '油':
+						case '油':
 							_imageSrc = require('../../assets/icons/ingredient/Oil.png');
 							break;
 						case 'Flavor':
 						case '조미료':
+						case '味道':
+						case '味':
 							_imageSrc = require('../../assets/icons/ingredient/Flavor.png');
 							break;
 						case 'Milk product':
 						case '유제품':
+						case '奶制品':
+						case '乳製品':
 							_imageSrc = require('../../assets/icons/ingredient/Milk product.png');
 							break;
 						case 'Drink':
 						case '음료':
+						case '喝':
+						case 'ドリンク':
 							_imageSrc = require('../../assets/icons/ingredient/Drink.png');
 							break;
 						case 'Liquor':
 						case '주류':
+						case '酒':
+						case 'お酒':
 							_imageSrc = require('../../assets/icons/ingredient/Liquor.png');
 							break;
 					}
@@ -201,7 +225,7 @@ class IngredientScreen extends React.Component {
 									{item}{' '}
 								</Text>
 							</View>
-							<Divider style={{ backgroundColor: 'blue' }} />
+							<Divider style={{ backgroundColor: 'white' }} />
 						</View>
 					);
 				}}
@@ -238,13 +262,17 @@ class IngredientScreen extends React.Component {
 							_type = 'type_en';
 							_lan = 'ingredient_en';
 							break;
+						case 'zh_cn':
+							_type = 'type_zh_cn';
+							_lan = 'ingredient_zh_cn';
+							break;
+						case 'zh_tw':
+							_type = 'type_zh_tw';
+							_lan = 'ingredient_zh_tw';
+							break;
 						case 'jp':
 							_type = 'type_jp';
 							_lan = 'ingredient_jp';
-							break;
-						case 'zh':
-							_type = 'type_zh';
-							_lan = 'ingredient_zh';
 							break;
 					}
 

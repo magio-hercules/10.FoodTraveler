@@ -54,8 +54,10 @@ const styles = StyleSheet.create({
 		// backgroundColor:'#afa',
 	},
 	IconImage: {
-		width: Layout.contentsPartIconSize,
-		height: Layout.contentsPartIconSize,
+		// width: Layout.contentsPartIconSize,
+		// height: Layout.contentsPartIconSize,
+		width: 25,
+		height: 25,
 		// backgroundColor:'#afa',
 	},
 });

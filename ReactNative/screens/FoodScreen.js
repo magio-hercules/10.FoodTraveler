@@ -157,13 +157,17 @@ class FoodScreen extends React.Component {
 							_title = 'title_en';
 							_desc = 'desc_en';
 							break;
+						case 'zh_cn':
+							_title = 'title_zh_cn';
+							_desc = 'desc_zh_cn';
+							break;
+						case 'zh_tw':
+							_title = 'title_zh_tw';
+							_desc = 'desc_zh_tw';
+							break;
 						case 'jp':
 							_title = 'title_jp';
 							_desc = 'desc_jp';
-							break;
-						case 'zh':
-							_title = 'title_zh';
-							_desc = 'desc_zh';
 							break;
 					}
 
@@ -417,21 +421,22 @@ class FoodScreen extends React.Component {
 									</View>
 									<View style={styles.IconPart}>
 										<CommunityIcon
-											iconSrc={
-												item.favorite
-													? require('../assets/icons/heart_3.png')
-													: require('../assets/icons/heart_2.png')
-											}
+											// iconSrc={
+											// 	item.favorite
+											// 		? require('../assets/icons/heart_3.png')
+											// 		: require('../assets/icons/heart_2.png')
+											// } community
+											iconSrc={require('../assets/icons/community/heart.png')}
 											tintColor={item.favorite ? '#f44336' : 'rgb(50, 50, 50)'}
 											onPress={() => this._onPressHeart(index)}
 										/>
 										<CommunityIcon
-											iconSrc={require('../assets/icons/message.png')}
+											iconSrc={require('../assets/icons/community/message.png')}
 											onPress={() => this._onPressMessage(index)}
 											// onPlus={this.props.increment}
 										/>
 										<CommunityIcon
-											iconSrc={require('../assets/icons/share.png')}
+											iconSrc={require('../assets/icons/community/share.png')}
 											onPress={() => this._onPressShare(index)}
 											// onPlus={this.props.decrement}
 										/>
@@ -554,7 +559,7 @@ const styles = StyleSheet.create({
 		// height: 55,
 		height: '100%',
 		flexDirection: 'column',
-		// backgroundColor: '#ffa',
+		// backgroundColor: '#faa',
 	},
 	ContentHeaderTextSectionInner: {
 		height: 25,

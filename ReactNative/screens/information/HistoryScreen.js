@@ -111,7 +111,7 @@ class HistoryScreen extends React.Component {
 									{item.desc}
 								</Text>
 							</View>
-							<Divider style={{ backgroundColor: 'blue' }} />
+							<Divider style={{ backgroundColor: 'white' }} />
 						</View>
 					);
 				}}

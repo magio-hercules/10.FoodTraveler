@@ -3,6 +3,7 @@ import {
 	StyleSheet,
 	View,
 	Text,
+	Image,
 	Button,
 	TouchableHighlight,
 	Picker,
@@ -12,15 +13,19 @@ import {
 
 import { Table, Row, Rows } from 'react-native-table-component';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Divider, Avatar } from 'react-native-elements';
 
 import { decorate, observable, observe, action, when, computed, autorun, runInAction } from 'mobx';
 import { observer, inject } from 'mobx-react';
 
 import Language from '../constants/Language';
 
+import TTSList from '../components/TTSList';
+import AvatarIcon from '../components/AvatarIcon';
+
 class HelpScreen extends React.Component {
 	static navigationOptions = {
-		title: 'Help',
+		// title: 'Help',
 	};
 
 	constructor(props) {
@@ -57,18 +62,6 @@ class HelpScreen extends React.Component {
 			} else {
 				console.log('this.state.language != this.props.profileStore.language');
 
-				// this._getTotalFoods().then(
-				// 	_data => {
-				// 		this.setState({ data: _data });
-				// 		console.log('_data : ' + _data);
-				// 		console.log('after setState({ data: _data })');
-				// 		console.log('this.props.profileStore.language : ' + this.props.profileStore.language);
-				// 	},
-				// 	error => {
-				// 		console.log('after then error : ');
-				// 		console.log(error);
-				// 	}
-				// );
 				console.log('this.state.language : ' + this.state.language);
 				this.setState({ language: this.props.profileStore.language });
 			}
@@ -104,26 +97,65 @@ class HelpScreen extends React.Component {
 			>
 				<View style={styles.ButtonContainer}>
 					<TouchableHighlight style={styles.Button} underlayColor="#ada" onPress={this._onPressConversation}>
-						<View>
+						<View
+							style={{
+								flexDirection: 'column',
+								alignItems: 'center',
+								justifyContent: 'center',
+							}}
+						>
+							<Avatar
+								size="medium"
+								overlayContainerStyle={{ backgroundColor: 'white' }}
+								source={
+									this.state.status == 'Conversation'
+										? require('../assets/icons/contents/Conversation_sel.png')
+										: require('../assets/icons/contents/Conversation.png')
+								}
+							/>
 							<Text style={styles.ButtonText}>
 								{Language.Conversation[this.props.profileStore.language]}
 							</Text>
 						</View>
 					</TouchableHighlight>
 					<TouchableHighlight style={styles.Button} underlayColor="#ada" onPress={this._onPressExchangeRate}>
-						<View>
+						<View
+							style={{
+								flexDirection: 'column',
+								alignItems: 'center',
+								justifyContent: 'center',
+							}}
+						>
+							<Avatar
+								size="medium"
+								overlayContainerStyle={{ backgroundColor: 'white' }}
+								source={
+									this.state.status == 'ExchangeRate'
+										? require('../assets/icons/contents/ExchangeRate_sel.png')
+										: require('../assets/icons/contents/ExchangeRate.png')
+								}
+							/>
 							<Text style={styles.ButtonText}>
 								{Language.ExchangeRate[this.props.profileStore.language]}
 							</Text>
 						</View>
 					</TouchableHighlight>
 				</View>
+				<Divider style={styles.drawerDivider} />
 
 				<View style={styles.ContentsLayout}>
 					{this.state.status == 'Conversation' && (
 						<View style={styles.ConversationLayout}>
-							<View style={styles.ConversationHeader}>
-								<Text style={styles.ConversationHeaderText}>※ 장소</Text>
+							<View style={styles.ConversationContents}>
+								<View style={styles.ContentsHeader}>
+									<Image
+										style={styles.ContentsHeaderIcon}
+										source={require('../assets/icons/contents/help_place.png')}
+									/>
+									<Text style={styles.ContentsHeaderText}>
+										{Language.Place[this.props.profileStore.language]}
+									</Text>
+								</View>
 
 								<View style={styles.PickerContainer}>
 									<Picker
@@ -151,15 +183,23 @@ class HelpScreen extends React.Component {
 								</View>
 							</View>
 
-							<View style={[styles.ConversationHeader, { marginTop: 10 }]}>
-								<Text style={styles.ConversationHeaderText}>※ TTS (Text to Speech)</Text>
-
-								<View style={styles.TableContainer}>
+							<View style={[styles.ConversationContents]}>
+								<View style={styles.ContentsHeader}>
+									<Image
+										style={styles.ContentsHeaderIcon}
+										source={require('../assets/icons/contents/help_tts.png')}
+									/>
+									<Text style={styles.ContentsHeaderText}>TTS (TEXT TO SPEECH)</Text>
+								</View>
+								<View style={styles.ListContents}>
+									<TTSList />
+								</View>
+								{/* <View style={styles.TableContainer}>
 									<Table borderStyle={{ borderWidth: 2, borderColor: '#c8e1ff' }}>
 										<Row data={state.tableHead} style={styles.head} textStyle={styles.text} />
 										<Rows data={state.tableData} textStyle={styles.text} />
 									</Table>
-								</View>
+								</View> */}
 							</View>
 						</View>
 					)}
@@ -167,8 +207,16 @@ class HelpScreen extends React.Component {
 
 					{this.state.status == 'ExchangeRate' && (
 						<View style={styles.ExchangeRateLayout}>
-							<View style={styles.ConversationHeader}>
-								<Text style={styles.ConversationHeaderText}>※ 나의 국가</Text>
+							<View style={styles.ConversationContents}>
+								<View style={styles.ContentsHeader}>
+									<Image
+										style={styles.ContentsHeaderIcon}
+										source={require('../assets/icons/contents/help_country.png')}
+									/>
+									<Text style={styles.ContentsHeaderText}>
+										{Language.MyCountry[this.props.profileStore.language]}
+									</Text>
+								</View>
 
 								<View style={[styles.PickerContainerExchange, , { marginTop: 4 }]}>
 									<Picker
@@ -194,8 +242,16 @@ class HelpScreen extends React.Component {
 								</View>
 							</View>
 
-							<View style={[styles.ConversationHeader, { marginTop: 10 }]}>
-								<Text style={styles.ConversationHeaderText}>※ 여행 국가</Text>
+							<View style={[styles.ConversationContents]}>
+								<View style={styles.ContentsHeader}>
+									<Image
+										style={styles.ContentsHeaderIcon}
+										source={require('../assets/icons/contents/help_country.png')}
+									/>
+									<Text style={styles.ContentsHeaderText}>
+										{Language.TravelCountry[this.props.profileStore.language]}
+									</Text>
+								</View>
 
 								<View style={[styles.PickerContainerExchange, , { marginTop: 4 }]}>
 									<Picker
@@ -230,6 +286,12 @@ class HelpScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+	drawerDivider: {
+		marginLeft: 15,
+		marginRight: 15,
+		height: 1,
+		backgroundColor: 'gray',
+	},
 	TableContainer: {
 		// flex: 1,
 		// padding: 6,
@@ -260,25 +322,28 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 		alignItems: 'center',
-		paddingTop: 5,
-		marginTop: 10,
+		margin: 15,
+		height: 100,
 		// paddingBottom: 5,
-		// backgroundColor:'#a1a',
+		// backgroundColor: '#a19',
 	},
 	Button: {
-		width: 100,
-		height: 50,
-		borderRadius: 10,
+		width: 120,
+		height: 100,
+		// borderRadius: 10,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#42A5F5',
+		// backgroundColor: '#42A5F5',
 	},
 	ButtonText: {
-		color: '#FFF',
-		fontFamily: 'netmarbleM',
-		fontSize: 20,
+		color: '#000',
+		fontFamily: 'NanumSquare_acEB',
+		fontSize: 18,
+		marginTop: 5,
 		justifyContent: 'center',
 		alignItems: 'center',
+		textAlign: 'center',
+		// backgroundColor: '#42A5F5',
 	},
 	PickerContainer: {
 		width: 200,
@@ -336,20 +401,35 @@ const styles = StyleSheet.create({
 		// borderColor: '#ffc8aa',
 		flexDirection: 'column',
 		alignSelf: 'center',
-		padding: 10,
-		// backgroundColor:'#773',
+		// padding: 10,
+		paddingLeft: 10,
+		paddingRight: 10,
+		// backgroundColor: '#733',
 	},
-	ConversationHeader: {
+	ConversationContents: {
 		flexDirection: 'column',
+		marginTop: 10,
 		// justifyContent:'space-between',
 		// alignItems: 'center',
 		// backgroundColor:'#1a3',
 	},
-	ConversationHeaderText: {
-		// flex: 8,
-		fontSize: 20,
+	ContentsHeader: {
+		flexDirection: 'row',
 		alignItems: 'center',
-		// fontFamily: 'netmarbleM'
+		// backgroundColor: '#a13',
+	},
+	ContentsHeaderIcon: {
+		width: 20,
+		height: 20,
+		// backgroundColor: '#1a3',
+	},
+	ContentsHeaderText: {
+		color: '#000',
+		fontSize: 17,
+		marginLeft: 10,
+		alignItems: 'center',
+		fontFamily: 'NanumSquare_acB',
+		// backgroundColor: '#13a',
 	},
 
 	ExchangeRateLayout: {
@@ -359,7 +439,9 @@ const styles = StyleSheet.create({
 		// borderColor: '#ffc8aa',
 		flexDirection: 'column',
 		alignSelf: 'center',
-		padding: 10,
+		// padding: 10,
+		paddingLeft: 10,
+		paddingRight: 10,
 		// backgroundColor:'#773',
 	},
 	ExchangeRatePrice: {
@@ -369,6 +451,11 @@ const styles = StyleSheet.create({
 		marginRight: 10,
 		// borderColor: 'gray',
 		// borderWidth: 1,
+	},
+	ListContents: {
+		width: '100%',
+		height: 310,
+		// backgroundColor: '#773',
 	},
 });
 

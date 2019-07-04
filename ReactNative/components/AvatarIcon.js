@@ -31,8 +31,12 @@ export default class AvatarIcon extends Component {
 	render() {
 		return (
 			<TouchableHighlight onPress={this.props.onPress} underlayColor="#fff">
-				<View style={styles.AvatarPart}>
+				<View style={[styles.AvatarPart, this.props.style]}>
 					<Avatar
+						// style={{
+						// 	width: this.props.iconSize != undefined ? this.props.iconSize : 50,
+						// 	height: this.props.iconSize != undefined ? this.props.iconSize : 50,
+						// }}
 						// rounded
 						rounded={this.props.rounded ? true : false}
 						size={this.props.size}
@@ -62,11 +66,16 @@ const styles = StyleSheet.create({
 		height: 80,
 		// backgroundColor: '#aad',
 	},
+	// AvatarImage: {
+	// 	width: this.props.iconSize != undefined ? this.props.iconSize : 50,
+	// 	height: this.props.iconSize != undefined ? this.props.iconSize : 50,
+	// },
 	AvatarText: {
 		fontSize: 12,
+		marginTop: 5,
 		justifyContent: 'center',
 		alignItems: 'center',
-		fontFamily: 'netmarbleL',
-		// backgroundColor: '#a1a'
+		fontFamily: 'NanumSquare_acL',
+		// backgroundColor: '#a1a',
 	},
 });
