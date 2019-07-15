@@ -113,7 +113,7 @@ class RestaurantScreen extends React.Component {
 						_title = 'title_zh_cn';
 						_desc = 'desc_zh_cn';
 						break;
-					case 'zh':
+					case 'zh_tw':
 						_title = 'title_zh_tw';
 						_desc = 'desc_zh_tw';
 						break;

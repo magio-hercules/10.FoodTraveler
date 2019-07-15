@@ -143,11 +143,14 @@ class HistoryScreen extends React.Component {
 					case 'en':
 						_lan = 'description_en';
 						break;
+					case 'zh_cn':
+						_lan = 'description_zh_cn';
+						break;
+					case 'zh_tw':
+						_lan = 'description_zh_tw';
+						break;
 					case 'jp':
 						_lan = 'description_jp';
-						break;
-					case 'zh':
-						_lan = 'description_zh';
 						break;
 				}
 
