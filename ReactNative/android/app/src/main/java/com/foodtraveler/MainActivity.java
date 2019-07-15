@@ -1,4 +1,4 @@
-package com.foodtraveler;
+package com.labis.foodtraveler;
 
 import android.os.Bundle; // here
 import com.facebook.react.ReactActivity;

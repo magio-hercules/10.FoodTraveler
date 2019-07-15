@@ -109,7 +109,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.foodtraveler"
+        applicationId "com.labis.foodtraveler"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
