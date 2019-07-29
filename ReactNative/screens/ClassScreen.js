@@ -35,8 +35,8 @@ import InformationIcon from '../components/InformationIcon';
 import CommunityIcon from '../components/CommunityIcon';
 
 const api = create({
-	// baseURL: 'http://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com:7000/FooTravel',
-	baseURL: 'https://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com:7443/FooTravel',
+	baseURL: 'http://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com:7000/FooTravel',
+	// baseURL: 'https://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com:7443/FooTravel',
 	headers: { 'Content-Type': 'application/json' },
 });
 

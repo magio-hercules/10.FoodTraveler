@@ -28,13 +28,64 @@ import { observer, inject } from 'mobx-react';
 import cloneDeep from 'lodash/cloneDeep';
 // const cloneDeep = require('clone-deep');
 
+import R from 'ramda';
+import RS from 'ramdasauce';
+
+import RNFetchBlob from 'rn-fetch-blob';
+// import RNFetchBlob from 'react-native-fetch-blob'
+
+// var https = require('https');
+// import https from 'https';
+// import { https } from 'https';
+
 const windowWidth = Dimensions.get('window').width;
 
 const api = create({
-	// baseURL: 'http://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com:7000/FooTravel',
-	baseURL: 'https://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com:7443/FooTravel',
+	baseURL: 'http://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com:7000/FooTravel',
 	headers: { 'Content-Type': 'application/json' },
+	// baseURL: 'https://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com/FooTravel',
+	// headers: { 'Content-Type': 'application/json' },
+	// headers: { Accept: 'application/vnd.github.v3+json' },
 });
+// const api = create({
+// 	// baseURL: 'http://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com:7000/FooTravel',
+// 	baseURL: 'https://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com/FooTravel',
+// 	headers: {
+// 		'Content-Type': 'application/json',
+// 		//  Accept: 'application/vnd.github.v3+json'
+// 	},
+// 	// headers: {
+// 	// 	'Content-Type': 'application/json',
+
+// 	// 	'User-Agent': 'PostmanRuntime/7.15.0',
+// 	// 	Accept: '*/*',
+// 	// 	'Cache-Control': 'no-cache',
+// 	// 	'Postman-Token': 'b5c73af5-8f8f-4d79-bd0e-d11374ef75d9',
+// 	// 	Host: 'ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com',
+// 	// 	'accept-encoding': 'gzip, deflate',
+// 	// 	Connection: 'keep-alive',
+// 	// },
+// 	// httpsAgent: new https.Agent({
+// 	// 	//public CER
+// 	// 	ca: 'cer-file.cer'
+// 	// }),
+// 	// httpsAgent: new https.Agent({
+// 	// 	// ca: fs.readFileSync(`${path}CA.pem`),
+// 	// 	cert: fs.readFileSync(require('../assets/key/server.cert')),
+// 	// 	key: fs.readFileSync(require('../assets/key/server.key')),
+// 	// 	rejectUnauthorized: false,
+// 	// }),
+// 	timeout: 10000,
+// });
+
+// attach a monitor that fires with each request
+// api.addMonitor(
+// 	R.pipe(
+// 		RS.dotPath('headers.x-ratelimit-remaining'),
+// 		R.concat('Calls remaining this hour: '),
+// 		console.log
+// 	)
+// );
 
 class LogoTitle extends React.Component {
 	render() {
@@ -134,77 +185,182 @@ class FoodScreen extends React.Component {
 	_getTotalFoods() {
 		console.log('call _getTotalFoods');
 
-		return (
-			api
-				.get('/total_foods')
-				// .then(console.log)
-				// .then(response => response.data)
-				.then(response => {
-					// console.log("!!!response!!!");
-					// console.log(response);
-					return response.data;
+		if (true)
+			return (
+				RNFetchBlob.config({
+					trusty: true,
 				})
-				.then(data => {
-					// console.log(data);
-					console.log('count : ' + data.length);
+					.fetch(
+						'GET',
+						// 'http://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com:7000/FooTravel/total_foods'
+						'https://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com/FooTravel/total_foods'
+					)
+					// .fetch('https://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com/FooTravel/total_foods')
 
-					let _title, _desc;
-					switch (this.props.profileStore.language) {
-						case 'ko':
-							_title = 'title_ko';
-							_desc = 'desc_ko';
-							break;
-						case 'en':
-							_title = 'title_en';
-							_desc = 'desc_en';
-							break;
-						case 'zh_cn':
-							_title = 'title_zh_cn';
-							_desc = 'desc_zh_cn';
-							break;
-						case 'zh_tw':
-							_title = 'title_zh_tw';
-							_desc = 'desc_zh_tw';
-							break;
-						case 'jp':
-							_title = 'title_jp';
-							_desc = 'desc_jp';
-							break;
-					}
+					// fetch('http://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com:7000/FooTravel/total_foods')
+					// fetch('https://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com/FooTravel/total_foods')
 
-					let count = data.length;
-					let arr = [];
-					for (let i = 0; i < count; i++) {
-						arr.push({
-							key: data[i].id,
-							title_local: data[i].title_local,
-							title_phonetic: data[i].title_phonetic,
-							// title: data[i].title_en,
-							// description: data[i].desc_en,
-							title: data[i][_title],
-							description: data[i][_desc],
-							favorite: true,
+					// fetch('https://facebook.github.io/react-native/movies.json')
+					// .then(response => response.json())
+					.then(response => {
+						console.log('!!!response!!!');
+						// console.log(response);
+						return response.json();
+						// console.log(response.data);
+						// return response.data;
+					})
+					// .then(response => {
+					// 	console.log('!!!!!!!!!!!!!!!!');
+					// 	console.log(response.status);
+					// 	console.log(response);
 
-							description_id: data[i].description_id,
-							food_type_list: data[i].food_type_list,
-							ingredient_list: data[i].ingredient_list,
-							cook_list: data[i].cook_list,
-							eat_list: data[i].eat_list,
-							history_list: data[i].history_list,
-							caution_list: data[i].caution_list,
+					// 	if (response.status === 200) {
+					// 		console.log('response.status === 200');
+					// 		return response.json();
+					// 	} else {
+					// 		throw new Error('Something went wrong on api server!');
+					// 	}
+					// })
+					// .then(responseJson => {
+					// 	return responseJson.movies;
+					// })
+					// .catch(error => {
+					// 	console.error(error);
+					// })
+					.then(data => {
+						console.log(data);
+						console.log('count : ' + data.length);
 
-							allergy_list: data[i].allergy_list,
-							city_list: data[i].city_list,
-							image_url: data[i].image_url,
-						});
-					}
-					// console.log(arr);
-					return arr;
-				})
-				.catch(err => {
-					console.error(err);
-				})
-		);
+						let _title, _desc;
+						switch (this.props.profileStore.language) {
+							case 'ko':
+								_title = 'title_ko';
+								_desc = 'desc_ko';
+								break;
+							case 'en':
+								_title = 'title_en';
+								_desc = 'desc_en';
+								break;
+							case 'zh_cn':
+								_title = 'title_zh_cn';
+								_desc = 'desc_zh_cn';
+								break;
+							case 'zh_tw':
+								_title = 'title_zh_tw';
+								_desc = 'desc_zh_tw';
+								break;
+							case 'jp':
+								_title = 'title_jp';
+								_desc = 'desc_jp';
+								break;
+						}
+
+						let count = data.length;
+						let arr = [];
+						for (let i = 0; i < count; i++) {
+							arr.push({
+								key: data[i].id,
+								title_local: data[i].title_local,
+								title_phonetic: data[i].title_phonetic,
+								// title: data[i].title_en,
+								// description: data[i].desc_en,
+								title: data[i][_title],
+								description: data[i][_desc],
+								favorite: true,
+
+								description_id: data[i].description_id,
+								food_type_list: data[i].food_type_list,
+								ingredient_list: data[i].ingredient_list,
+								cook_list: data[i].cook_list,
+								eat_list: data[i].eat_list,
+								history_list: data[i].history_list,
+								caution_list: data[i].caution_list,
+
+								allergy_list: data[i].allergy_list,
+								city_list: data[i].city_list,
+								image_url: data[i].image_url,
+							});
+						}
+						// console.log(arr);
+						return arr;
+					})
+					.catch(err => {
+						console.error(err);
+					})
+			);
+
+		if (false)
+			return (
+				api
+					.get('/total_foods')
+					// .then(console.log)
+					// .then(response => response.data)
+					.then(response => {
+						// console.log("!!!response!!!");
+						// console.log(response);
+						return response.data;
+					})
+					.then(data => {
+						// console.log(data);
+						console.log('count : ' + data.length);
+
+						let _title, _desc;
+						switch (this.props.profileStore.language) {
+							case 'ko':
+								_title = 'title_ko';
+								_desc = 'desc_ko';
+								break;
+							case 'en':
+								_title = 'title_en';
+								_desc = 'desc_en';
+								break;
+							case 'zh_cn':
+								_title = 'title_zh_cn';
+								_desc = 'desc_zh_cn';
+								break;
+							case 'zh_tw':
+								_title = 'title_zh_tw';
+								_desc = 'desc_zh_tw';
+								break;
+							case 'jp':
+								_title = 'title_jp';
+								_desc = 'desc_jp';
+								break;
+						}
+
+						let count = data.length;
+						let arr = [];
+						for (let i = 0; i < count; i++) {
+							arr.push({
+								key: data[i].id,
+								title_local: data[i].title_local,
+								title_phonetic: data[i].title_phonetic,
+								// title: data[i].title_en,
+								// description: data[i].desc_en,
+								title: data[i][_title],
+								description: data[i][_desc],
+								favorite: true,
+
+								description_id: data[i].description_id,
+								food_type_list: data[i].food_type_list,
+								ingredient_list: data[i].ingredient_list,
+								cook_list: data[i].cook_list,
+								eat_list: data[i].eat_list,
+								history_list: data[i].history_list,
+								caution_list: data[i].caution_list,
+
+								allergy_list: data[i].allergy_list,
+								city_list: data[i].city_list,
+								image_url: data[i].image_url,
+							});
+						}
+						// console.log(arr);
+						return arr;
+					})
+					.catch(err => {
+						console.error(err);
+					})
+			);
 	}
 
 	// information

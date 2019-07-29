@@ -7,6 +7,14 @@ import com.facebook.react.ReactRootView;
 import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
 import org.devio.rn.splashscreen.SplashScreen; // here
 
+// for https
+import com.labis.foodtraveler.CustomClientFactory;
+import com.facebook.react.modules.network.OkHttpClientProvider;
+import okhttp3.OkHttpClient;
+import android.os.Build;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
+
 import android.content.Intent;
 
 public class MainActivity extends ReactActivity {
@@ -15,6 +23,10 @@ public class MainActivity extends ReactActivity {
     protected void onCreate(Bundle savedInstanceState) {
         SplashScreen.show(this);  // here
         super.onCreate(savedInstanceState);
+
+        // if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        //     OkHttpClientProvider.setOkHttpClientFactory(new CustomClientFactory());
+        // }
     }
 
     /**

@@ -24,6 +24,7 @@ import com.facebook.appevents.AppEventsLogger;
 
 import com.airbnb.android.react.maps.MapsPackage;
 import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
+import com.RNFetchBlob.RNFetchBlobPackage;     
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -45,7 +46,8 @@ public class MainApplication extends Application implements ReactApplication {
             new VectorIconsPackage(),
             new RNGestureHandlerPackage(),
             new MapsPackage(),
-            new RNFusedLocationPackage()
+            new RNFusedLocationPackage(),
+            new RNFetchBlobPackage()
       );
     }
 
