@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, FlatList, StyleSheet, VirtualizedList } from 'react-native';
 
 import { create } from 'apisauce';
+import RNFetchBlob from 'rn-fetch-blob';
 import _size from 'lodash/size';
 import _forEach from 'lodash/forEach';
 import _values from 'lodash/values';
@@ -235,6 +236,108 @@ class IngredientScreen extends React.Component {
 	} // end of render
 
 	_getInfoIngredient(list) {
+		console.log('call _getInfoIngredient');
+		console.log('list : ' + list);
+		let array = [];
+		array.push(list);
+
+		// return (
+		// 	api
+		// 		.post('/ingredient', { ingredient_list: array })
+		// 		.then(response => response.data)
+		// 		// .then(console.log)
+		// 		// .then(data => data[_id])
+		// 		// .then(console.log)
+		return RNFetchBlob.config({
+			trusty: true,
+		})
+			.fetch(
+				'POST',
+				// 'http://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com:7000/FooTravel/total_foods'
+				'https://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com/FooTravel/ingredient',
+				{
+					'Content-Type': 'multipart/form-data',
+				},
+				[{ ingredient_list: array }]
+			)
+			.then(response => {
+				console.log('!!!response!!!');
+				return response.json();
+			})
+			.then(data => {
+				console.log('ingredient_list count : ' + data.length);
+				let count = data.length;
+				let arr = [];
+				let typeArr = {};
+
+				let _index, _value, _type, _lan;
+				switch (this.props.profileStore.language) {
+					case 'ko':
+						_type = 'type_ko';
+						_lan = 'ingredient_ko';
+						break;
+					case 'en':
+						_type = 'type_en';
+						_lan = 'ingredient_en';
+						break;
+					case 'zh_cn':
+						_type = 'type_zh_cn';
+						_lan = 'ingredient_zh_cn';
+						break;
+					case 'zh_tw':
+						_type = 'type_zh_tw';
+						_lan = 'ingredient_zh_tw';
+						break;
+					case 'jp':
+						_type = 'type_jp';
+						_lan = 'ingredient_jp';
+						break;
+				}
+
+				for (let i = 0; i < count; i++) {
+					// type 1
+					// arr.push({
+					//   key: data[i].id,
+					//   ingredient_ko: data[i].ingredient_ko,
+					//   ingredient_en: data[i].ingredient_en,
+					//   type_ko: data[i].type_ko,
+					//   type_en: data[i].type_en,
+					//   icon_url: data[i].icon_url,
+					// });
+
+					// type 2
+					// let _type_en = data[i].type_en;
+					// let _ingredient_en = data[i].ingredient_en;
+					let _index = data[i][_type];
+					let _value = data[i][_lan];
+					if (typeArr[_index] == null || typeArr[_index] == undefined) {
+						typeArr[_index] = _value;
+					} else {
+						typeArr[_index] += ', ' + _value;
+					}
+
+					// type3
+					// arr.push({
+					//   type_en: data[i].type_en,
+					//   ingredient_ko: data[i].ingredient_ko,
+					//   ingredient_en: data[i].ingredient_en,
+					//   type_ko: data[i].type_ko,
+					//   icon_url: data[i].icon_url,
+					// });
+				}
+				// arr.push(typeArr);
+
+				// console.log(arr);
+				// console.log(typeArr);
+				// return arr;
+				return typeArr;
+			})
+			.catch(err => {
+				console.error(err);
+			});
+	} // end of _getInfoIngredient(list)
+
+	_getInfoIngredient_api(list) {
 		console.log('call _getInfoIngredient');
 		console.log('list : ' + list);
 		let array = [];

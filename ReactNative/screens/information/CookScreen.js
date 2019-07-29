@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, FlatList, StyleSheet, VirtualizedList } from 'react-native';
 
 import { create } from 'apisauce';
+import RNFetchBlob from 'rn-fetch-blob';
 import _size from 'lodash/size';
 import _forEach from 'lodash/forEach';
 import _values from 'lodash/values';
@@ -123,6 +124,77 @@ class CookScreen extends React.Component {
 	} // end of render
 
 	_getCook(food_id) {
+		console.log('call _getCook');
+		console.log('food_id : ' + food_id);
+		// let array = [];
+		// array.push(list);
+
+		return RNFetchBlob.config({
+			trusty: true,
+		})
+			.fetch(
+				'POST',
+				// 'http://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com:7000/FooTravel/total_foods'
+				'https://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com/FooTravel/cook',
+				{
+					'Content-Type': 'multipart/form-data',
+				},
+				[{ food_id: food_id }]
+			)
+			.then(response => {
+				console.log('!!!response!!!');
+				return response.json();
+			})
+			.then(data => {
+				console.log('cook_list count : ' + data.length);
+				let count = data.length;
+				let arr = [];
+				let typeArr = {};
+
+				let _type, _desc;
+				let index = 1;
+
+				let _lan;
+				switch (this.props.profileStore.language) {
+					case 'ko':
+						_lan = 'description_ko';
+						break;
+					case 'en':
+						_lan = 'description_en';
+						break;
+					case 'zh_cn':
+						_lan = 'description_zh_cn';
+						break;
+					case 'zh_tw':
+						_lan = 'description_zh_tw';
+						break;
+					case 'jp':
+						_lan = 'description_jp';
+						break;
+				}
+
+				for (let i = 0; i < count; i++) {
+					_type = data[i].type;
+					// _desc = data[i].description_en;
+					_desc = data[i][_lan];
+					_typeIndex = _type + ' ' + index;
+
+					arr.push({
+						type: _typeIndex,
+						desc: _desc,
+					});
+					index++;
+				}
+
+				return arr;
+				// return typeArr;
+			})
+			.catch(err => {
+				console.error(err);
+			});
+	} // end of _getCook(food_id)
+
+	_getCook_api(food_id) {
 		console.log('call _getCook');
 		console.log('food_id : ' + food_id);
 		// let array = [];

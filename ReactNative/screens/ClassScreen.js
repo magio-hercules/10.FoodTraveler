@@ -20,6 +20,7 @@ import { StyleSheet, FlatList, View, Text, Image, TouchableHighlight, ImageBackg
 import { NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
 import { create } from 'apisauce';
+import RNFetchBlob from 'rn-fetch-blob';
 
 /* #type1, redux
 import { connect } from 'react-redux';
@@ -108,6 +109,73 @@ class ClassScreen extends React.Component {
 	}
 
 	_getTotalClasses() {
+		console.log('call _getTotalClasses');
+
+		return RNFetchBlob.config({
+			trusty: true,
+		})
+			.fetch(
+				'GET',
+				// 'http://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com:7000/FooTravel/total_foods'
+				'https://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com/FooTravel/total_classes'
+			)
+			.then(response => {
+				console.log('!!!response!!!');
+				return response.json();
+			})
+			.then(data => {
+				// console.log(data);
+				console.log('_getTotalClasses count : ' + data.length);
+
+				let _title, _desc;
+				switch (this.props.profileStore.language) {
+					case 'ko':
+						_title = 'title_ko';
+						_desc = 'desc_ko';
+						break;
+					case 'en':
+						_title = 'title_en';
+						_desc = 'desc_en';
+						break;
+					case 'zh_cn':
+						_title = 'title_zh_cn';
+						_desc = 'desc_zh_cn';
+						break;
+					case 'zh_tw':
+						_title = 'title_zh_tw';
+						_desc = 'desc_zh_tw';
+						break;
+					case 'jp':
+						_title = 'title_jp';
+						_desc = 'desc_jp';
+						break;
+				}
+
+				let count = data.length;
+				let arr = [];
+				for (let i = 0; i < count; i++) {
+					arr.push({
+						key: data[i].id,
+						food_id: data[i].food_id,
+						city_id: data[i].city_id,
+						name: data[i].name,
+						description: data[i][_desc],
+						menu: data[i].menu,
+						// gallery_list: data[i].gallery_list,
+						position: data[i].position,
+						image_url: data[i].image_url,
+					});
+				}
+				console.log('total_classes');
+				console.log(arr);
+				return arr;
+			})
+			.catch(err => {
+				console.error(err);
+			});
+	}
+
+	_getTotalClasses_api() {
 		console.log('call _getTotalClasses');
 
 		return api

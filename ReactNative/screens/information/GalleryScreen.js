@@ -4,6 +4,7 @@ import { View, Text, TouchableHighlight, StyleSheet, Image } from 'react-native'
 import ImageSlider from 'react-native-image-slider';
 
 import { create } from 'apisauce';
+import RNFetchBlob from 'rn-fetch-blob';
 import _size from 'lodash/size';
 import _forEach from 'lodash/forEach';
 import _values from 'lodash/values';
@@ -66,6 +67,59 @@ class GalleryScreen extends React.Component {
 	}
 
 	_getGallery(_route, _obj) {
+		console.log('call _getGallery');
+
+		let arr = [];
+		arr.push(obj);
+
+		let url = '';
+		if (_route == '/gallery_store') {
+			url = 'https://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com/FooTravel/gallery_store';
+		} else if (_route == '/gallery_class') {
+			url = 'https://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com/FooTravel/gallery_class';
+		}
+
+		return RNFetchBlob.config({
+			trusty: true,
+		})
+			.fetch(
+				'POST',
+				// 'http://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com:7000/FooTravel/total_foods'
+				url,
+				{
+					'Content-Type': 'multipart/form-data',
+				},
+				arr
+			)
+			.then(response => {
+				console.log('!!!response!!!');
+				return response.json();
+			})
+			.then(data => {
+				console.log('gallery count : ' + data.length);
+				let count = data.length;
+				let arr = [];
+				arrImage = [];
+
+				let _data;
+				for (let i = 0; i < count; i++) {
+					_data = data[i];
+
+					arr.push({
+						id: i,
+						image_url: _data.image_url,
+					});
+					arrImage.push(_data.image_url);
+				}
+
+				return arr;
+			})
+			.catch(err => {
+				console.error(err);
+			});
+	} // end of _getGallery(store_id)
+
+	_getGallery_api(_route, _obj) {
 		console.log('call _getGallery');
 
 		return api
