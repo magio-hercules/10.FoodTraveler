@@ -23,6 +23,8 @@ import Language from '../constants/Language';
 import TTSList from '../components/TTSList';
 import AvatarIcon from '../components/AvatarIcon';
 
+import { Dropdown } from 'react-native-material-dropdown';
+
 class HelpScreen extends React.Component {
 	static navigationOptions = {
 		// title: 'Help',
@@ -83,8 +85,33 @@ class HelpScreen extends React.Component {
 		this.setState({ status: 'ExchangeRate' });
 	};
 
+	onChangeText(text) {
+		console.log('call onChangeText');
+
+		console.log(text);
+
+		// ['name', 'code', 'sample', 'typography']
+		// 	.map((name) => ({ name, ref: this[name] }))
+		// 	.filter(({ ref }) => ref && ref.isFocused())
+		// 	.forEach(({ name, ref }) => {
+		// 		this.setState({ [name]: text });
+		// 	});
+	}
+
+	updateRef(name, ref) {
+		this[name] = ref;
+	}
+
 	render() {
 		const state = this.state;
+
+		let arrPlace = [
+			{ value: Language.Restaurant[this.props.profileStore.language] },
+			{ value: Language.Taxi[this.props.profileStore.language] },
+			{ value: Language.Airport[this.props.profileStore.language] },
+			{ value: Language.Street[this.props.profileStore.language] },
+		];
+		let arrCountry = [{ value: '대한민국' }, { value: '미국' }, { value: '중국' }, { value: '일본' }];
 
 		console.log('current status : ' + state.status);
 
@@ -157,7 +184,7 @@ class HelpScreen extends React.Component {
 									</Text>
 								</View>
 
-								<View style={styles.PickerContainer}>
+								{/* <View style={styles.PickerContainer}>
 									<Picker
 										selectedValue={this.state.place}
 										style={styles.Picker}
@@ -180,6 +207,17 @@ class HelpScreen extends React.Component {
 											value="street"
 										/>
 									</Picker>
+								</View> */}
+								<View style={[styles.PickerContainerExchange, {}]}>
+									<Dropdown
+										// style={styles.PickerExchange}
+										containerStyle={styles.PickerExchange}
+										// ref={this.typographyRef}
+										// label="country"
+										// onChangeText={this.onChangeText}
+										data={arrPlace}
+										value={state.place}
+									/>
 								</View>
 							</View>
 
@@ -218,7 +256,7 @@ class HelpScreen extends React.Component {
 									</Text>
 								</View>
 
-								<View style={[styles.PickerContainerExchange, , { marginTop: 4 }]}>
+								{/* <View style={[styles.PickerContainerExchange, , { marginTop: 4 }]}>
 									<Picker
 										selectedValue={this.state.myCountry}
 										style={styles.PickerExchange}
@@ -231,8 +269,20 @@ class HelpScreen extends React.Component {
 										<Picker.Item label="중국" value="zh" />
 										<Picker.Item label="일본" value="jp" />
 									</Picker>
+								</View> */}
+								<View style={[styles.PickerContainerExchange, {}]}>
+									<Dropdown
+										// style={styles.PickerExchange}
+										containerStyle={styles.PickerExchange}
+										// ref={this.typographyRef}
+										// label="country"
+										onChangeText={this.onChangeText}
+										data={arrCountry}
+										value={state.myCountry}
+									/>
 								</View>
-								<View style={styles.PickerContainerExchange}>
+								{/* <View style={styles.PickerContainerExchange}> */}
+								<View style={[styles.PickerContainerExchange, {}]}>
 									<TextInput
 										style={styles.ExchangeRatePrice}
 										onChangeText={text => this.setState({ myPrice: text })}
@@ -253,7 +303,7 @@ class HelpScreen extends React.Component {
 									</Text>
 								</View>
 
-								<View style={[styles.PickerContainerExchange, , { marginTop: 4 }]}>
+								{/* <View style={[styles.PickerContainerExchange, { marginTop: 4 }]}>
 									<Picker
 										selectedValue={this.state.travelCountry}
 										style={styles.PickerExchange}
@@ -266,8 +316,20 @@ class HelpScreen extends React.Component {
 										<Picker.Item label="일본" value="jp" />
 										<Picker.Item label="대한민국" value="ko" />
 									</Picker>
+								</View> */}
+								<View style={[styles.PickerContainerExchange, {}]}>
+									<Dropdown
+										// style={styles.PickerExchange}
+										containerStyle={styles.PickerExchange}
+										// ref={this.typographyRef}
+										// label="country"
+										onChangeText={this.onChangeText}
+										data={arrCountry}
+										value={state.myCountry}
+									/>
 								</View>
-								<View style={styles.PickerContainerExchange}>
+								{/* <View style={styles.PickerContainerExchange}> */}
+								<View style={[styles.PickerContainerExchange, {}]}>
 									<TextInput
 										style={styles.ExchangeRatePrice}
 										onChangeText={text => this.setState({ travelPrice: text })}
@@ -366,23 +428,30 @@ const styles = StyleSheet.create({
 	},
 	PickerContainerExchange: {
 		width: '100%',
-		height: 50,
+		height: 60,
 		marginTop: -2,
-		borderWidth: 2,
+		borderWidth: 1,
 		// borderRadius: 10,
-		borderColor: '#CFD8DC',
+		// borderColor: '#CFD8DC',
+		borderColor: '#bebebe',
+
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#E3F2FD',
+		backgroundColor: '#FFFFFF',
 	},
 	PickerExchange: {
 		width: '100%',
-		height: 40,
+		height: 60,
+		marginTop: -25,
 		marginLeft: 10,
+		marginRight: 10,
+		paddingLeft: 10,
+		paddingRight: 10,
+
 		borderColor: '#c8e1ff',
 		// justifyContent:'center',
 		// alignItems: 'center',
-		// backgroundColor: "#ffF2FD",
+		// backgroundColor: '#ffF2FD',
 	},
 	ContentsLayout: {
 		flex: 1,
@@ -416,6 +485,7 @@ const styles = StyleSheet.create({
 	ContentsHeader: {
 		flexDirection: 'row',
 		alignItems: 'center',
+		marginBottom: 10,
 		// backgroundColor: '#a13',
 	},
 	ContentsHeaderIcon: {
