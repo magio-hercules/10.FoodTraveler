@@ -69,9 +69,6 @@ class GalleryScreen extends React.Component {
 	_getGallery(_route, _obj) {
 		console.log('call _getGallery');
 
-		let arr = [];
-		arr.push(obj);
-
 		let url = '';
 		if (_route == '/gallery_store') {
 			url = 'https://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com/FooTravel/gallery_store';
@@ -86,10 +83,8 @@ class GalleryScreen extends React.Component {
 				'POST',
 				// 'http://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com:7000/FooTravel/total_foods'
 				url,
-				{
-					'Content-Type': 'multipart/form-data',
-				},
-				arr
+				{ 'Content-Type': 'application/json' },
+				JSON.stringify(_obj)
 			)
 			.then(response => {
 				console.log('!!!response!!!');

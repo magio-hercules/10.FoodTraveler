@@ -136,10 +136,8 @@ class CookScreen extends React.Component {
 				'POST',
 				// 'http://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com:7000/FooTravel/total_foods'
 				'https://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com/FooTravel/cook',
-				{
-					'Content-Type': 'multipart/form-data',
-				},
-				[{ food_id: food_id }]
+				{ 'Content-Type': 'application/json' },
+				JSON.stringify({ food_id: food_id })
 			)
 			.then(response => {
 				console.log('!!!response!!!');

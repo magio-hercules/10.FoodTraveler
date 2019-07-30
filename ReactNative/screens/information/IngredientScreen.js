@@ -241,13 +241,6 @@ class IngredientScreen extends React.Component {
 		let array = [];
 		array.push(list);
 
-		// return (
-		// 	api
-		// 		.post('/ingredient', { ingredient_list: array })
-		// 		.then(response => response.data)
-		// 		// .then(console.log)
-		// 		// .then(data => data[_id])
-		// 		// .then(console.log)
 		return RNFetchBlob.config({
 			trusty: true,
 		})
@@ -255,10 +248,8 @@ class IngredientScreen extends React.Component {
 				'POST',
 				// 'http://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com:7000/FooTravel/total_foods'
 				'https://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com/FooTravel/ingredient',
-				{
-					'Content-Type': 'multipart/form-data',
-				},
-				[{ ingredient_list: array }]
+				{ 'Content-Type': 'application/json' },
+				JSON.stringify({ ingredient_list: array })
 			)
 			.then(response => {
 				console.log('!!!response!!!');
