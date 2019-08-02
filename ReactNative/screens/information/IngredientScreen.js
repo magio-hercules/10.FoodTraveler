@@ -79,14 +79,12 @@ class IngredientScreen extends React.Component {
 	}
 
 	render() {
-		console.log('call render');
-		console.log(this.state.data);
-		console.log('call render 1');
+		// console.log('Ingredient call render');
+		// console.log(this.state.data);
 		let keys = Object.keys(this.state.data);
 		let arrayData = Object.values(this.state.data);
-		console.log(keys);
-		console.log(arrayData);
-		console.log('call render 2');
+		// console.log(keys);
+		// console.log(arrayData);
 
 		var newArr = _values(
 			_mapKeys(this.state.data, function(value, key) {
@@ -103,9 +101,9 @@ class IngredientScreen extends React.Component {
 				keyExtractor={(item, index) => index.toString()}
 				renderItem={({ item, index }) => {
 					console.log('renderItem');
-					console.log(item);
-					console.log(index);
-					console.log(keys[index]);
+					// console.log(item);
+					// console.log(index);
+					// console.log(keys[index]);
 
 					let _imageSrc;
 					// let fileName = `../../assets/icons/ingredient/` + keys[index] + `.png`;

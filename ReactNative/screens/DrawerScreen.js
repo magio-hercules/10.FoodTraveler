@@ -22,11 +22,12 @@ import Toast from 'react-native-simple-toast';
 
 // const arrLanguage = ['한국어', '영어', '중국어(간체)', '중국어(번체)', '일문'];
 const arrLanguage = ['Korean', 'English', 'Simplified Chinese', 'Traditional Chinese', 'Japanese'];
+const arrCity = ['Seoul', 'Busan', 'Jeju'];
 
 class DrawerScreen extends Component {
 	constructor(props) {
 		super(props);
-		console.log('[DRAWER] constructor');
+		console.log('[LIFE CYCLE] DrawerScreen constructor');
 		console.log(this.props.navigation.state.params);
 
 		if (this.props.navigation.state.params == undefined || this.props.navigation.state.params == null) {
@@ -45,6 +46,7 @@ class DrawerScreen extends Component {
 		}
 
 		console.log('this.props.profileStore.language : ' + this.props.profileStore.language);
+		console.log('this.props.profileStore.filterList : ' + this.props.profileStore.filterList);
 	}
 
 	// navigateToScreen = (route) => () => {
@@ -102,8 +104,9 @@ class DrawerScreen extends Component {
 	};
 
 	_getLanguageIcon = language => {
-		var source;
+		console.log('call _getLanguageIcon (language: ' + language + ')');
 
+		var source;
 		switch (language) {
 			case 'ko':
 				// case '한국어':
@@ -124,6 +127,28 @@ class DrawerScreen extends Component {
 			case 'jp':
 				// case '일본어':
 				source = require('../assets/icons/drawer/language_jp.png');
+				break;
+		}
+
+		return source;
+	};
+
+	_getCityIcon = city => {
+		console.log('call _getCityIcon (city: ' + city + ')');
+		var source;
+
+		switch (city) {
+			case 'Seoul':
+			case 1:
+				source = require('../assets/icons/drawer/city_seoul.png');
+				break;
+			case 'Busan':
+			case 2:
+				source = require('../assets/icons/drawer/city_busan.png');
+				break;
+			case 'Jeju':
+			case 3:
+				source = require('../assets/icons/drawer/city_jeju.png');
 				break;
 		}
 
@@ -164,41 +189,70 @@ class DrawerScreen extends Component {
 		// 	},
 		// });
 		// this.props.navigation.dispatch(navigateAction);
-		Toast.show('준비중입니다.');
-		console.log('FoodName : ' + foodName);
 
-		switch (foodName) {
-			case 'rice':
-				break;
-			case 'soup':
-				break;
-			case 'noodle':
-				break;
-			case 'bread':
-				break;
-			case 'pizza':
-				break;
-			case 'pasta':
-				break;
-			case 'meat':
-				break;
-			case 'seafood':
-				break;
-			case 'vegetable':
-				break;
-			case 'dessert':
-				break;
-			case 'drink':
-				break;
-			case 'alcohol':
-				break;
-			default:
-				break;
+		console.log('FoodName : ' + foodName);
+		console.log('this.props.profileStore.filterList : ' + this.props.profileStore.filterList);
+
+		// let _filterList = this.props.profileStore.filterList;
+		// let index = _filterList.indexOf(foodName);
+		// console.log(foodName + ' index is ' + index);
+
+		// // filter toggle
+		// if (index != -1) {
+		// 	_filterList.splice(index, 1);
+		// } else {
+		// 	_filterList.push(foodName);
+		// }
+
+		// console.log('setState _filterList : ' + _filterList);
+		// console.log('_filterList : ' + _filterList);
+		// this.props.profileStore.filterList = _filterList;
+
+		let index = this.props.profileStore.filterList.indexOf(foodName);
+		if (index != -1) {
+			console.log('index != -1');
+			// this.props.profileStore.filterListSplice(index);
+			this.props.profileStore.filterList = '';
+		} else {
+			console.log('index == -1');
+			// this.props.profileStore.filterListPush(foodName);
+			this.props.profileStore.filterList = '' + foodName;
 		}
+
+		console.log('this.props.profileStore.filterList : ' + this.props.profileStore.filterList);
+
+		// switch (foodName) {
+		// 	case 'rice':
+		// 		break;
+		// 	case 'soup':
+		// 		break;
+		// 	case 'noodle':
+		// 		break;
+		// 	case 'bread':
+		// 		break;
+		// 	case 'pizza':
+		// 		break;
+		// 	case 'pasta':
+		// 		break;
+		// 	case 'meat':
+		// 		break;
+		// 	case 'seafood':
+		// 		break;
+		// 	case 'vegetable':
+		// 		break;
+		// 	case 'dessert':
+		// 		break;
+		// 	case 'drink':
+		// 		break;
+		// 	case 'alcohol':
+		// 		break;
+		// 	default:
+		// 		break;
+		// }
 	};
 
-	_onSelect_modalDropDown(idx, value) {
-		console.log('_onLanguage');
+	_onSelect_language_modalDropDown(idx, value) {
+		console.log('_onSelect_language_modalDropDown');
 		console.log('index: ' + idx + ', value: ' + value);
 
 		switch (value) {
@@ -222,7 +276,25 @@ class DrawerScreen extends Component {
 				this.props.profileStore.language = 'jp';
 				global.language = 'jp';
 				break;
-			default:
+		}
+	}
+
+	_onSelect_city_modalDropDown(idx, value) {
+		console.log('_onSelect_city_modalDropDown');
+		console.log('index: ' + idx + ', value: ' + value);
+
+		switch (value) {
+			case 'Seoul':
+				// this.props.profileStore.city = 'Seoul';
+				this.props.profileStore.city = 1;
+				break;
+			case 'Busan':
+				// this.props.profileStore.city = 'Busan';
+				this.props.profileStore.city = 2;
+				break;
+			case 'Jeju':
+				// this.props.profileStore.city = 'Jeju';
+				this.props.profileStore.city = 3;
 				break;
 		}
 	}
@@ -318,7 +390,7 @@ class DrawerScreen extends Component {
 								dropdownStyle={styles.dropdown}
 								options={arrLanguage}
 								renderRow={this._renderRow.bind(this)}
-								onSelect={(idx, value) => this._onSelect_modalDropDown(idx, value)}
+								onSelect={(idx, value) => this._onSelect_language_modalDropDown(idx, value)}
 							>
 								<View style={styles.sectionProfileRow}>
 									<View style={styles.sectionProfileRowIcon}>
@@ -363,7 +435,7 @@ class DrawerScreen extends Component {
 								</View>
 							</TouchableHighlight>
 							{/* 도시 */}
-							<TouchableHighlight onPress={this._onCity} underlayColor="#ECEFF1">
+							{/* <TouchableHighlight onPress={this._onCity} underlayColor="#ECEFF1">
 								<View style={styles.sectionProfileRow}>
 									<View style={styles.sectionProfileRowIcon}>
 										<Avatar
@@ -384,7 +456,33 @@ class DrawerScreen extends Component {
 										/>
 									</View>
 								</View>
-							</TouchableHighlight>
+							</TouchableHighlight> */}
+							<ModalDropdown
+								defaultIndex={0}
+								dropdownStyle={styles.dropdown}
+								options={arrCity}
+								renderRow={this._renderRow.bind(this)}
+								onSelect={(idx, value) => this._onSelect_city_modalDropDown(idx, value)}
+							>
+								<View style={styles.sectionProfileRow}>
+									<View style={styles.sectionProfileRowIcon}>
+										<Avatar
+											size="small"
+											overlayContainerStyle={{ backgroundColor: 'white' }}
+											source={this._getCityIcon(this.props.profileStore.city)}
+										/>
+									</View>
+									<View style={styles.sectionProfileRowText}>
+										<Text>{Language.City[this.props.profileStore.language]}</Text>
+									</View>
+									<View style={styles.sectionProfileRowButton}>
+										<Image
+											style={styles.iconImage}
+											source={require('../assets/icons/contents/arrow_right.png')}
+										/>
+									</View>
+								</View>
+							</ModalDropdown>
 						</View>
 						<Divider style={styles.drawerDivider} />
 
@@ -398,27 +496,45 @@ class DrawerScreen extends Component {
 									style={styles.foodSectionIcon}
 									title={Language.Rice[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/food/rice.png')}
-									// onPress={this._onFood}
-									onPress={() => this._onFood('rice')}
+									imageSrc={
+										// this.props.profileStore.filterList.includes('rice')
+										// this.props.profileStore.filterList.includes(1)
+										this.props.profileStore.filterList == 1
+											? require('../assets/icons/food/rice_sel.png')
+											: require('../assets/icons/food/rice.png')
+									}
+									// onPress={() => this._onFood('rice')}
+									onPress={() => this._onFood(1)}
 									size="small"
 								/>
 								<AvatarIcon
 									style={styles.foodSectionIcon}
 									title={Language.Soup[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/food/soup.png')}
-									// onPress={this._onFood}
-									onPress={() => this._onFood('soup')}
+									imageSrc={
+										// this.props.profileStore.filterList.includes('soup')
+										// this.props.profileStore.filterList.includes(2)
+										this.props.profileStore.filterList == 2
+											? require('../assets/icons/food/soup_sel.png')
+											: require('../assets/icons/food/soup.png')
+									}
+									// onPress={() => this._onFood('soup')}
+									onPress={() => this._onFood(2)}
 									size="small"
 								/>
 								<AvatarIcon
 									style={styles.foodSectionIcon}
 									title={Language.Noodle[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/food/noodle.png')}
-									// onPress={this._onFood}
-									onPress={() => this._onFood('noodle')}
+									imageSrc={
+										// this.props.profileStore.filterList.includes('noodle')
+										// this.props.profileStore.filterList.includes(3)
+										this.props.profileStore.filterList == 3
+											? require('../assets/icons/food/noodle_sel.png')
+											: require('../assets/icons/food/noodle.png')
+									}
+									// onPress={() => this._onFood('noodle')}
+									onPress={() => this._onFood(3)}
 									size="small"
 								/>
 							</View>
@@ -427,27 +543,45 @@ class DrawerScreen extends Component {
 									style={styles.foodSectionIcon}
 									title={Language.Bread[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/food/bread.png')}
-									// onPress={this._onFood}
-									onPress={() => this._onFood('bread')}
+									imageSrc={
+										// this.props.profileStore.filterList.includes('bread')
+										// this.props.profileStore.filterList.includes(4)
+										this.props.profileStore.filterList == 4
+											? require('../assets/icons/food/bread_sel.png')
+											: require('../assets/icons/food/bread.png')
+									}
+									// onPress={() => this._onFood('bread')}
+									onPress={() => this._onFood(4)}
 									size="small"
 								/>
 								<AvatarIcon
 									style={styles.foodSectionIcon}
 									title={Language.Pizza[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/food/pizza.png')}
-									// onPress={this._onFood}
-									onPress={() => this._onFood('pizza')}
+									imageSrc={
+										// this.props.profileStore.filterList.includes('pizza')
+										// this.props.profileStore.filterList.includes(5)
+										this.props.profileStore.filterList == 5
+											? require('../assets/icons/food/pizza_sel.png')
+											: require('../assets/icons/food/pizza.png')
+									}
+									// onPress={() => this._onFood('pizza')}
+									onPress={() => this._onFood(5)}
 									size="small"
 								/>
 								<AvatarIcon
 									style={styles.foodSectionIcon}
 									title={Language.Pasta[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/food/pasta.png')}
-									// onPress={this._onFood}
-									onPress={() => this._onFood('pasta')}
+									imageSrc={
+										// this.props.profileStore.filterList.includes('pasta')
+										// this.props.profileStore.filterList.includes(6)
+										this.props.profileStore.filterList == 6
+											? require('../assets/icons/food/pasta_sel.png')
+											: require('../assets/icons/food/pasta.png')
+									}
+									// onPress={() => this._onFood('pasta')}
+									onPress={() => this._onFood(6)}
 									size="small"
 								/>
 							</View>
@@ -456,27 +590,45 @@ class DrawerScreen extends Component {
 									style={styles.foodSectionIcon}
 									title={Language.Meat[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/food/meat.png')}
-									// onPress={this._onFood}
-									onPress={() => this._onFood('meat')}
+									imageSrc={
+										// this.props.profileStore.filterList.includes('meat')
+										// this.props.profileStore.filterList.includes(7)
+										this.props.profileStore.filterList == 7
+											? require('../assets/icons/food/meat_sel.png')
+											: require('../assets/icons/food/meat.png')
+									}
+									// onPress={() => this._onFood('meat')}
+									onPress={() => this._onFood(7)}
 									size="small"
 								/>
 								<AvatarIcon
 									style={styles.foodSectionIcon}
 									title={Language.Seafood[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/food/seafood.png')}
-									// onPress={this._onFood}
-									onPress={() => this._onFood('seafood')}
+									imageSrc={
+										// this.props.profileStore.filterList.includes('seafood')
+										// this.props.profileStore.filterList.includes(8)
+										this.props.profileStore.filterList == 8
+											? require('../assets/icons/food/seafood_sel.png')
+											: require('../assets/icons/food/seafood.png')
+									}
+									// onPress={() => this._onFood('seafood')}
+									onPress={() => this._onFood(8)}
 									size="small"
 								/>
 								<AvatarIcon
 									style={styles.foodSectionIcon}
 									title={Language.Vegetable[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/food/vegetable.png')}
-									// onPress={this._onFood}
-									onPress={() => this._onFood('vegetable')}
+									imageSrc={
+										// this.props.profileStore.filterList.includes('vegetable')
+										// this.props.profileStore.filterList.includes(9)
+										this.props.profileStore.filterList == 9
+											? require('../assets/icons/food/vegetable_sel.png')
+											: require('../assets/icons/food/vegetable.png')
+									}
+									// onPress={() => this._onFood('vegetable')}
+									onPress={() => this._onFood(9)}
 									size="small"
 								/>
 							</View>
@@ -485,27 +637,45 @@ class DrawerScreen extends Component {
 									style={styles.foodSectionIcon}
 									title={Language.Dessert[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/food/dessert.png')}
-									// onPress={this._onFood}
-									onPress={() => this._onFood('dessert')}
+									imageSrc={
+										// this.props.profileStore.filterList.includes('dessert')
+										// this.props.profileStore.filterList.includes(10)
+										this.props.profileStore.filterList == 10
+											? require('../assets/icons/food/dessert_sel.png')
+											: require('../assets/icons/food/dessert.png')
+									}
+									// onPress={() => this._onFood('dessert')}
+									onPress={() => this._onFood(10)}
 									size="small"
 								/>
 								<AvatarIcon
 									style={styles.foodSectionIcon}
 									title={Language.Drink[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/food/drink.png')}
-									// onPress={this._onFood}
-									onPress={() => this._onFood('drink')}
+									imageSrc={
+										// this.props.profileStore.filterList.includes('drink')
+										// this.props.profileStore.filterList.includes(11)
+										this.props.profileStore.filterList == 11
+											? require('../assets/icons/food/drink_sel.png')
+											: require('../assets/icons/food/drink.png')
+									}
+									// onPress={() => this._onFood('drink')}
+									onPress={() => this._onFood(11)}
 									size="small"
 								/>
 								<AvatarIcon
 									style={styles.foodSectionIcon}
 									title={Language.Alcohol[this.props.profileStore.language]}
 									icon={{ name: 'spoon', type: 'font-awesome' }}
-									imageSrc={require('../assets/icons/food/alcohol.png')}
-									// onPress={this._onFood}
-									onPress={() => this._onFood('alcohol')}
+									imageSrc={
+										// this.props.profileStore.filterList.includes('alcohol')
+										// this.props.profileStore.filterList.includes(12)
+										this.props.profileStore.filterList == 12
+											? require('../assets/icons/food/alcohol_sel.png')
+											: require('../assets/icons/food/alcohol.png')
+									}
+									// onPress={() => this._onFood('alcohol')}
+									onPress={() => this._onFood(12)}
 									size="small"
 								/>
 							</View>

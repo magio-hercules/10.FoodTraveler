@@ -40,11 +40,11 @@ class GalleryScreen extends React.Component {
 
 	constructor(props) {
 		super(props);
-		console.log('GalleryScreen constructor');
+		console.log('[LIFE CYCLE] GalleryScreen constructor');
 	}
 
 	async componentDidMount() {
-		console.log('call componentDidMount');
+		console.log('[LIFE CYCLE] GalleryScreen componentDidMount');
 		let _type = this.props.foodStore.gallery_type;
 		console.log('gallery_type : ' + _type);
 

@@ -43,8 +43,11 @@ const api = create({
 
 class ClassScreen extends React.Component {
 	state = {
+		isFocused: false,
 		refreshing: false,
+		language: '',
 		data: [],
+		city: '',
 	};
 
 	// 참고 LifeCycle
@@ -54,15 +57,23 @@ class ClassScreen extends React.Component {
 
 	constructor(props) {
 		super(props);
-		console.log('ClassScreen constructor');
+		console.log('[LIFE CYCLE] ClassScreen constructor');
 	}
 
 	componentWillMount() {
-		console.log('call componentWillMount');
+		console.log('[LIFE CYCLE] ClassScreen componentWillMount');
+	}
+
+	componentDidFocus() {
+		console.log('[LIFE CYCLE] ClassScreen componentWillMount');
+	}
+
+	componentDidBlur() {
+		console.log('[LIFE CYCLE] ClassScreen componentDidBlur');
 	}
 
 	async componentDidMount() {
-		console.log('call componentDidMount');
+		console.log('[LIFE CYCLE] ClassScreen componentDidMount');
 
 		let _data = await this._getTotalClasses();
 		console.log('_data : ' + _data);
@@ -72,41 +83,89 @@ class ClassScreen extends React.Component {
 		console.log('curLanguage : ' + this.props.profileStore.language);
 
 		autorun(() => {
+			if (!this.state.isFocused) {
+				console.log('food isFocused : ' + this.state.isFocused);
+				return;
+			}
+			if (this.state.language == this.props.profileStore.language) {
+				console.log('this.state.language == this.props.profileStore.language');
+				return;
+			}
+
 			console.log('autorun');
 			console.log('this.state.language : ' + this.state.language);
 			console.log('this.props.profileStore.language : ' + this.props.profileStore.language);
-			if (this.state.language == this.props.profileStore.language) {
-				console.log('this.state.language == this.props.profileStore.language');
-			} else {
-				console.log('this.state.language != this.props.profileStore.language');
 
-				this._getTotalClasses().then(
-					_data => {
-						this.setState({ data: _data });
-						console.log('_data : ' + _data);
-						console.log('after setState({ data: _data })');
-						console.log('this.props.profileStore.language : ' + this.props.profileStore.language);
-					},
-					error => {
-						console.log('after then error : ');
-						console.log(error);
-					}
-				);
-				console.log('this.state.language : ' + this.state.language);
-				this.setState({ language: this.props.profileStore.language });
-			}
+			this._getTotalClasses().then(
+				_data => {
+					this.setState({ data: _data });
+					console.log('after setState _data count : ' + _data.length);
+				},
+				error => {
+					console.log('after then error : ');
+					console.log(error);
+				}
+			);
+			this.setState({ language: this.props.profileStore.language });
 		});
 
-		console.log('end componentDidMount');
+		autorun(() => {
+			if (!this.state.isFocused) {
+				console.log('food isFocused : ' + this.state.isFocused);
+				return;
+			}
+			if (this.state.city == this.props.profileStore.city) {
+				console.log('this.state.city == this.props.profileStore.city');
+				return;
+			}
+
+			console.log('autorun');
+			console.log('this.props.profileStore.city : ' + this.props.profileStore.city);
+
+			this._getTotalClasses().then(
+				_data => {
+					this.setState({ data: _data });
+					console.log('after setState _data count : ' + _data.length);
+				},
+				error => {
+					console.log('after then error : ');
+					console.log(error);
+				}
+			);
+			this.setState({ city: this.props.profileStore.city });
+		});
+
+		// this._componentDidFocus();
+		this.didFocus = this.props.navigation.addListener('didFocus', this._componentDidFocus);
+		this.didBlur = this.props.navigation.addListener('didBlur', this._componentDidBlur);
+
+		console.log('[LIFE CYCLE] ClassScreen end componentDidMount');
+	}
+
+	componentWillUnmount() {
+		console.log('[LIFE CYCLE] ClassScreen componentWillUnmount');
+
+		// this.didFocus.remove();
+		// this.didBlur.remove();
 	}
 
 	async componentWillReceiveProps() {
-		console.log('ClassScreen componentWillReceiveProps');
+		console.log('[LIFE CYCLE] ClassScreen componentWillReceiveProps');
 
 		let _data = await this._getTotalClasses();
 		console.log('_data : ' + _data);
 		this.setState({ data: _data });
 	}
+
+	_componentDidFocus = () => {
+		this.setState({ isFocused: true });
+		console.log('[LIFE CYCLE] ClassScreen _componentDidFocus');
+	};
+
+	_componentDidBlur = () => {
+		this.setState({ isFocused: false });
+		console.log('[LIFE CYCLE] ClassScreen _componentDidBlur');
+	};
 
 	_getTotalClasses() {
 		console.log('call _getTotalClasses');
@@ -153,21 +212,25 @@ class ClassScreen extends React.Component {
 
 				let count = data.length;
 				let arr = [];
+				let city = this.props.profileStore.city;
+
 				for (let i = 0; i < count; i++) {
-					arr.push({
-						key: data[i].id,
-						food_id: data[i].food_id,
-						city_id: data[i].city_id,
-						name: data[i].name,
-						description: data[i][_desc],
-						menu: data[i].menu,
-						// gallery_list: data[i].gallery_list,
-						position: data[i].position,
-						image_url: data[i].image_url,
-					});
+					if (city == parseInt(data[i].city_id)) {
+						arr.push({
+							key: data[i].id,
+							food_id: data[i].food_id,
+							city_id: data[i].city_id,
+							name: data[i].name,
+							description: data[i][_desc],
+							menu: data[i].menu,
+							// gallery_list: data[i].gallery_list,
+							position: data[i].position,
+							image_url: data[i].image_url,
+						});
+					}
 				}
 				console.log('total_classes');
-				console.log(arr);
+				// console.log(arr);
 				return arr;
 			})
 			.catch(err => {
@@ -225,7 +288,7 @@ class ClassScreen extends React.Component {
 					});
 				}
 				console.log('total_classes');
-				console.log(arr);
+				// console.log(arr);
 				return arr;
 			})
 			.catch(err => {
@@ -288,7 +351,7 @@ class ClassScreen extends React.Component {
 	};
 
 	render() {
-		console.log('call render');
+		// console.log('ClassScreen call render');
 
 		return (
 			<FlatList

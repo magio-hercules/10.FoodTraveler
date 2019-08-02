@@ -120,11 +120,11 @@ export default class MapScreen extends React.Component {
 
 		this.onPoiClick = this.onPoiClick.bind(this);
 
-		console.log('MapScreen constructor');
+		console.log('[LIFE CYCLE] MapScreen constructor');
 	}
 
 	componentDidMount() {
-		console.log('[MAP] call componentDidMount');
+		console.log('[LIFE CYCLE] MapScreen componentDidMount');
 
 		// let bPermission = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
 
@@ -169,10 +169,12 @@ export default class MapScreen extends React.Component {
 		};
 		this.setState({ markerPos_store: _markerPos_store });
 
-		console.log('[MAP] end componentDidMount');
+		console.log('[LIFE CYCLE] MapScreen end componentDidMount');
 	}
 
 	componentWillUnmount() {
+		console.log('[LIFE CYCLE] MapScreen end componentWillUnmount');
+
 		navigator.geolocation.clearWatch(this.watchID);
 	}
 

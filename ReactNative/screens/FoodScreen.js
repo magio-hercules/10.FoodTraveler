@@ -112,11 +112,13 @@ class FoodScreen extends React.Component {
 	};
 
 	state = {
-		refreshing: false,
+		isFocused: false,
+		// refreshing: false,
 		language: '',
 		// data: randomCards(20),
 		// data: this._getTotalFoods()
 		data: [],
+		filterList: [],
 	};
 
 	// 참고 LifeCycle
@@ -126,15 +128,19 @@ class FoodScreen extends React.Component {
 
 	constructor(props) {
 		super(props);
-		console.log('FoodScreen constructor');
+		console.log('[LIFE CYCLE] FoodScreen constructor');
+	}
+
+	get FilterList() {
+		return this.props.profileStore.filterList;
 	}
 
 	componentWillMount() {
-		console.log('call componentWillMount');
+		console.log('[LIFE CYCLE] FoodScreen componentWillMount');
 	}
 
 	async componentDidMount() {
-		console.log('call componentDidMount');
+		console.log('[LIFE CYCLE] FoodScreen componentDidMount');
 
 		let _data = await this._getTotalFoods();
 		console.log('_data : ' + _data);
@@ -143,43 +149,96 @@ class FoodScreen extends React.Component {
 		this.setState({ language: this.props.profileStore.language });
 		console.log('curLanguage : ' + this.props.profileStore.language);
 
+		// this.setState({ filterList: this.FilterList });
+		console.log('curFilterList : ' + this.FilterList);
+
 		autorun(() => {
-			console.log('autorun');
-			console.log('this.state.language : ' + this.state.language);
-			console.log('this.props.profileStore.language : ' + this.props.profileStore.language);
+			if (!this.state.isFocused) {
+				console.log('food isFocused : ' + this.state.isFocused);
+				return;
+			}
 			if (this.state.language == this.props.profileStore.language) {
 				console.log('this.state.language == this.props.profileStore.language');
-			} else {
-				console.log('this.state.language != this.props.profileStore.language');
-
-				// let _data = this._getTotalFoods();
-				this._getTotalFoods().then(
-					_data => {
-						this.setState({ data: _data });
-						console.log('_data : ' + _data);
-						console.log('after setState({ data: _data })');
-						console.log('this.props.profileStore.language : ' + this.props.profileStore.language);
-					},
-					error => {
-						console.log('after then error : ');
-						console.log(error);
-					}
-				);
-				console.log('this.state.language : ' + this.state.language);
-				this.setState({ language: this.props.profileStore.language });
+				return;
 			}
+
+			console.log('FoodScreen autorun 1');
+			console.log('this.state.language : ' + this.state.language);
+			console.log('this.props.profileStore.language : ' + this.props.profileStore.language);
+
+			this._getTotalFoods().then(
+				_data => {
+					this.setState({ data: _data });
+					console.log('after setState _data count : ' + _data.length);
+				},
+				error => {
+					console.log('after then error : ');
+					console.log(error);
+				}
+			);
+			this.setState({ language: this.props.profileStore.language });
 		});
 
-		console.log('end componentDidMount');
+		autorun(() => {
+			console.log('!!!!!! FoodScreen autorun 2');
+
+			if (!this.state.isFocused) {
+				console.log('food isFocused : ' + this.state.isFocused);
+				return;
+			}
+			if (this.state.filterList == this.FilterList) {
+				console.log('this.state.filterList == this.FilterList');
+				return;
+			}
+
+			console.log('FoodScreen autorun 2');
+			console.log('this.state.filterList : ' + this.state.filterList);
+			console.log('this.FilterList : ' + this.FilterList);
+
+			this._getTotalFoods().then(
+				_data => {
+					this.setState({ data: _data });
+					console.log('after setState _data count : ' + _data.length);
+					this.setState({ filterList: this.FilterList });
+				},
+				error => {
+					console.log('after then error : ');
+					console.log(error);
+				}
+			);
+		});
+
+		this._componentDidFocus();
+		this.didFocus = this.props.navigation.addListener('didFocus', this._componentDidFocus);
+		this.didBlur = this.props.navigation.addListener('didBlur', this._componentDidBlur);
+
+		console.log('[LIFE CYCLE] FoodScreen end componentDidMount');
+	}
+
+	componentWillUnmount() {
+		console.log('[LIFE CYCLE] FoodScreen componentWillUnmount');
+
+		// this.didFocus.remove();
+		// this.didBlur.remove();
 	}
 
 	async componentWillReceiveProps() {
-		console.log('FoodScreen componentWillReceiveProps');
+		console.log('[LIFE CYCLE] FoodScreen componentWillReceiveProps');
 
 		let _data = await this._getTotalFoods();
 		console.log('_data : ' + _data);
 		this.setState({ data: _data });
 	}
+
+	_componentDidFocus = () => {
+		this.setState({ isFocused: true });
+		console.log('[LIFE CYCLE] FoodScreen _componentDidFocus');
+	};
+
+	_componentDidBlur = () => {
+		this.setState({ isFocused: false });
+		console.log('[LIFE CYCLE] FoodScreen _componentDidBlur');
+	};
 
 	_getTotalFoods() {
 		console.log('call _getTotalFoods');
@@ -193,12 +252,12 @@ class FoodScreen extends React.Component {
 				'https://ec2-13-125-205-18.ap-northeast-2.compute.amazonaws.com/FooTravel/total_foods'
 			)
 			.then(response => {
-				console.log('!!!response!!!');
+				// console.log('!!!response!!!');
 				return response.json();
 			})
 			.then(data => {
-				console.log(data);
-				console.log('count : ' + data.length);
+				// console.log(data);
+				// console.log('count : ' + data.length);
 
 				let _title, _desc;
 				switch (this.props.profileStore.language) {
@@ -226,29 +285,33 @@ class FoodScreen extends React.Component {
 
 				let count = data.length;
 				let arr = [];
+
 				for (let i = 0; i < count; i++) {
-					arr.push({
-						key: data[i].id,
-						title_local: data[i].title_local,
-						title_phonetic: data[i].title_phonetic,
-						// title: data[i].title_en,
-						// description: data[i].desc_en,
-						title: data[i][_title],
-						description: data[i][_desc],
-						favorite: true,
+					// if (_filterList.length == 0 || _filterList.includes(parseInt(data[i].food_type_list))) {
+					if (this.FilterList.length == 0 || this.FilterList.includes(parseInt(data[i].food_type_list))) {
+						arr.push({
+							key: data[i].id,
+							title_local: data[i].title_local,
+							title_phonetic: data[i].title_phonetic,
+							// title: data[i].title_en,
+							// description: data[i].desc_en,
+							title: data[i][_title],
+							description: data[i][_desc],
+							favorite: true,
 
-						description_id: data[i].description_id,
-						food_type_list: data[i].food_type_list,
-						ingredient_list: data[i].ingredient_list,
-						cook_list: data[i].cook_list,
-						eat_list: data[i].eat_list,
-						history_list: data[i].history_list,
-						caution_list: data[i].caution_list,
+							description_id: data[i].description_id,
+							food_type_list: data[i].food_type_list,
+							ingredient_list: data[i].ingredient_list,
+							cook_list: data[i].cook_list,
+							eat_list: data[i].eat_list,
+							history_list: data[i].history_list,
+							caution_list: data[i].caution_list,
 
-						allergy_list: data[i].allergy_list,
-						city_list: data[i].city_list,
-						image_url: data[i].image_url,
-					});
+							allergy_list: data[i].allergy_list,
+							city_list: data[i].city_list,
+							image_url: data[i].image_url,
+						});
+					}
 				}
 				// console.log(arr);
 				return arr;
@@ -476,7 +539,7 @@ class FoodScreen extends React.Component {
 	};
 
 	render() {
-		console.log('call render');
+		// console.log('FoodScreen call render');
 
 		return (
 			<FlatList
@@ -485,98 +548,105 @@ class FoodScreen extends React.Component {
 				// keyExtractor={(item) => item.key}
 				keyExtractor={(item, index) => index.toString()}
 				renderItem={({ item, index }) => {
+					// console.log('item and index');
+					// console.log(item);
+					// console.log(index);
+					// console.log(item.food_type_list);
+
 					return (
-						<View
-							key={item.key}
-							// title={item.title}
+						(this.FilterList.length == 0 || this.FilterList.includes(parseInt(item.food_type_list))) && (
+							<View
+								key={item.key}
+								// title={item.title}
 
-							// height={LayoutInfo.size.imagePart + LayoutInfo.size.contentPart}
-							width={LayoutInfo.width}
-							height={LayoutInfo.size.imagePart + LayoutInfo.size.contentPart}
-							contentContainerStyle={{ height: LayoutInfo.size.contentPart }}
-						>
-							<ImageBackground
-								style={[styles.ImagePartLayout, styles.ImagePart]}
-								source={{ uri: item.image_url }}
+								// height={LayoutInfo.size.imagePart + LayoutInfo.size.contentPart}
+								width={LayoutInfo.width}
+								height={LayoutInfo.size.imagePart + LayoutInfo.size.contentPart}
+								contentContainerStyle={{ height: LayoutInfo.size.contentPart }}
 							>
-								<View style={[styles.ImagePartOverlay]}>
-									<InformationIcon
-										// name='Ingredient'
-										name={Language.Ingredient[this.props.profileStore.language]}
-										iconSrc={require('../assets/icons/contents/ingredients.png')}
-										// onPress={this._onPressIngredient}/>
-										number={this.props.number}
-										onPress={() => this._onPressIngredient(index)}
-									/>
-									<InformationIcon
-										// name='Cook'
-										name={Language.Cook[this.props.profileStore.language]}
-										iconSrc={require('../assets/icons/contents/chef.png')}
-										onPress={() => this._onPressCook(index)}
-									/>
-									<InformationIcon
-										// name='Eat'
-										name={Language.Eat[this.props.profileStore.language]}
-										iconSrc={require('../assets/icons/contents/eat.png')}
-										onPress={() => this._onPressEat(index)}
-									/>
-									<InformationIcon
-										// name='History'
-										name={Language.History[this.props.profileStore.language]}
-										iconSrc={require('../assets/icons/contents/history.png')}
-										onPress={() => this._onPressHistory(index)}
-									/>
-									<InformationIcon
-										// name='Caution'
-										name={Language.Caution[this.props.profileStore.language]}
-										iconSrc={require('../assets/icons/contents/caution.png')}
-										onPress={() => this._onPressCaution(index)}
-									/>
-								</View>
-							</ImageBackground>
-
-							<View style={[styles.ContentPart]}>
-								<View style={styles.ContentHeader}>
-									<View style={styles.ContentHeaderTextSection}>
-										<View style={styles.ContentHeaderTextSectionInner}>
-											<Text style={styles.ContentHeaderText}>
-												{item.title_local + ' [' + item.title_phonetic + ']'}
-											</Text>
-										</View>
-										<View style={styles.ContentHeaderTextSectionInner}>
-											<Text style={styles.ContentHeaderTextDesc}>{': ' + item.title}</Text>
-										</View>
-									</View>
-									<View style={styles.IconPart}>
-										<CommunityIcon
-											// iconSrc={
-											// 	item.favorite
-											// 		? require('../assets/icons/heart_3.png')
-											// 		: require('../assets/icons/heart_2.png')
-											// } community
-											iconSrc={require('../assets/icons/community/heart.png')}
-											tintColor={item.favorite ? '#f44336' : 'rgb(50, 50, 50)'}
-											onPress={() => this._onPressHeart(index)}
+								<ImageBackground
+									style={[styles.ImagePartLayout, styles.ImagePart]}
+									source={{ uri: item.image_url }}
+								>
+									<View style={[styles.ImagePartOverlay]}>
+										<InformationIcon
+											// name='Ingredient'
+											name={Language.Ingredient[this.props.profileStore.language]}
+											iconSrc={require('../assets/icons/contents/ingredients.png')}
+											// onPress={this._onPressIngredient}/>
+											number={this.props.number}
+											onPress={() => this._onPressIngredient(index)}
 										/>
-										<CommunityIcon
-											iconSrc={require('../assets/icons/community/message.png')}
-											onPress={() => this._onPressMessage(index)}
-											// onPlus={this.props.increment}
+										<InformationIcon
+											// name='Cook'
+											name={Language.Cook[this.props.profileStore.language]}
+											iconSrc={require('../assets/icons/contents/chef.png')}
+											onPress={() => this._onPressCook(index)}
 										/>
-										<CommunityIcon
-											iconSrc={require('../assets/icons/community/share.png')}
-											onPress={() => this._onPressShare(index)}
-											// onPlus={this.props.decrement}
+										<InformationIcon
+											// name='Eat'
+											name={Language.Eat[this.props.profileStore.language]}
+											iconSrc={require('../assets/icons/contents/eat.png')}
+											onPress={() => this._onPressEat(index)}
+										/>
+										<InformationIcon
+											// name='History'
+											name={Language.History[this.props.profileStore.language]}
+											iconSrc={require('../assets/icons/contents/history.png')}
+											onPress={() => this._onPressHistory(index)}
+										/>
+										<InformationIcon
+											// name='Caution'
+											name={Language.Caution[this.props.profileStore.language]}
+											iconSrc={require('../assets/icons/contents/caution.png')}
+											onPress={() => this._onPressCaution(index)}
 										/>
 									</View>
-								</View>
+								</ImageBackground>
 
-								<Text style={styles.ContentText} numberOfLines={4} ellipsizeMode="tail">
-									{' '}
-									{item.description}{' '}
-								</Text>
+								<View style={[styles.ContentPart]}>
+									<View style={styles.ContentHeader}>
+										<View style={styles.ContentHeaderTextSection}>
+											<View style={styles.ContentHeaderTextSectionInner}>
+												<Text style={styles.ContentHeaderText}>
+													{item.title_local + ' [' + item.title_phonetic + ']'}
+												</Text>
+											</View>
+											<View style={styles.ContentHeaderTextSectionInner}>
+												<Text style={styles.ContentHeaderTextDesc}>{': ' + item.title}</Text>
+											</View>
+										</View>
+										<View style={styles.IconPart}>
+											<CommunityIcon
+												// iconSrc={
+												// 	item.favorite
+												// 		? require('../assets/icons/heart_3.png')
+												// 		: require('../assets/icons/heart_2.png')
+												// } community
+												iconSrc={require('../assets/icons/community/heart.png')}
+												tintColor={item.favorite ? '#f44336' : 'rgb(50, 50, 50)'}
+												onPress={() => this._onPressHeart(index)}
+											/>
+											<CommunityIcon
+												iconSrc={require('../assets/icons/community/message.png')}
+												onPress={() => this._onPressMessage(index)}
+												// onPlus={this.props.increment}
+											/>
+											<CommunityIcon
+												iconSrc={require('../assets/icons/community/share.png')}
+												onPress={() => this._onPressShare(index)}
+												// onPlus={this.props.decrement}
+											/>
+										</View>
+									</View>
+
+									<Text style={styles.ContentText} numberOfLines={4} ellipsizeMode="tail">
+										{' '}
+										{item.description}{' '}
+									</Text>
+								</View>
 							</View>
-						</View>
+						)
 					);
 				}}
 			/>
@@ -638,6 +708,9 @@ export default connect(mapStateToProps, mapDispatchProps)(FoodScreen);
 //   setFoodId: action,
 //   lan: computed
 // })
+decorate(FoodScreen, {
+	FilterList: computed,
+});
 
 export default inject('profileStore', 'foodStore', 'routerStore')(observer(FoodScreen));
 
