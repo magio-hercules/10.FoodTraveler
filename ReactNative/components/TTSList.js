@@ -128,6 +128,7 @@ class TTSList extends React.Component {
 
 	constructor(props) {
 		super(props);
+		console.log('[LIFE CYCLE] TTSList constructor');
 
 		// const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 		// this.state = {
@@ -137,7 +138,7 @@ class TTSList extends React.Component {
 	}
 
 	async componentDidMount() {
-		console.log('call componentDidMount');
+		console.log('[LIFE CYCLE] TTSList componentDidMount');
 
 		let _data = await this._getTTSData();
 		console.log('_data : ' + _data);
@@ -187,7 +188,7 @@ class TTSList extends React.Component {
 			});
 		}
 		console.log('TTS List');
-		console.log(arr);
+		// console.log(arr);
 		return arr;
 	}
 
@@ -232,7 +233,7 @@ class TTSList extends React.Component {
 	// }
 
 	render() {
-		console.log('!!! TTSList call render !!!');
+		// console.log('!!! TTSList call render !!!');
 
 		return (
 			<View>
@@ -253,8 +254,8 @@ class TTSList extends React.Component {
 					data={this.state.data}
 					keyExtractor={(item, index) => index.toString()}
 					renderItem={({ item, index }) => {
-						console.log('renderItem');
-						console.log(item);
+						// console.log('renderItem');
+						// console.log(item);
 
 						return (
 							<View key={item.key} width={'100%'} height={55}>

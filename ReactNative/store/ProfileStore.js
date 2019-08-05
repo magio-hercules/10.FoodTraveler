@@ -20,13 +20,6 @@ class ProfileStore {
 		console.log(this.filterList);
 	}
 
-	// filterListRemove(name) {
-	// 	console.log('!!!filterListSplice name: ' + name);
-	// 	console.log(this.filterList);
-	// 	this.filterList = this.filterList.remove(name);
-	// 	console.log(this.filterList);
-	// }
-
 	filterListPush(name) {
 		console.log('!!!filterListPush name: ' + name);
 		console.log(this.filterList);
@@ -41,9 +34,6 @@ decorate(ProfileStore, {
 	nation: observable,
 	city: observable,
 	filterList: observable,
-	// filterListSplice: computed,
-	// filterListPush: computed,
-	// filterListRemove: action,
 	filterListSplice: action,
 	filterListPush: action,
 });

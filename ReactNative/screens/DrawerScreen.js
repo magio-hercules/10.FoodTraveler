@@ -794,7 +794,7 @@ const styles = StyleSheet.create({
 		marginLeft: 10,
 		fontSize: 30,
 		borderColor: 'cornflowerblue',
-		borderWidth: 2,
+		borderWidth: 1,
 		borderRadius: 3,
 	},
 	dropdown_row: {
