@@ -18,7 +18,7 @@ import { switchCase } from '@babel/types';
 
 import ModalDropdown from 'react-native-modal-dropdown';
 
-import Toast from 'react-native-simple-toast';
+// import Toast from 'react-native-simple-toast';
 
 // const arrLanguage = ['한국어', '영어', '중국어(간체)', '중국어(번체)', '일문'];
 const arrLanguage = ['Korean', 'English', 'Simplified Chinese', 'Traditional Chinese', 'Japanese'];
@@ -165,17 +165,17 @@ class DrawerScreen extends Component {
 
 	_onReservation = () => {
 		console.log('_onReservation');
-		Toast.show('준비중입니다.');
+		// Toast.show('준비중입니다.');
 	};
 
 	_onNation = () => {
 		console.log('_onNation');
-		Toast.show('준비중입니다.');
+		// Toast.show('준비중입니다.');
 	};
 
 	_onCity = () => {
 		console.log('_onCity');
-		Toast.show('준비중입니다.');
+		// Toast.show('준비중입니다.');
 	};
 
 	_onFood = foodName => {
@@ -303,7 +303,8 @@ class DrawerScreen extends Component {
 		// let icon = highlighted ? require('./images/heart.png') : require('./images/flower.png');
 		let evenRow = rowID % 2;
 		return (
-			<View style={[styles.dropdown_row, { backgroundColor: evenRow ? 'lemonchiffon' : 'white' }]}>
+			<View style={[styles.dropdown_row, { backgroundColor: 'white' }]}>
+			{/* <View style={[styles.dropdown_row, { backgroundColor: evenRow ? 'lemonchiffon' : 'white' }]}> */}
 				{/* <Image style={styles.dropdown_2_image}
 					mode='stretch'
 					source={icon}
@@ -348,7 +349,7 @@ class DrawerScreen extends Component {
 											rounded
 											size="small"
 											overlayContainerStyle={{ backgroundColor: 'white' }}
-											source={require('../assets/icons/drawer/country_korea.png')}
+											source={require('../assets/icons/drawer/reservation.png')}
 											onPress={this.props.onPress}
 										/>
 									</View>
