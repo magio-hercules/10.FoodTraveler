@@ -42,10 +42,10 @@ server.on('uncaughtException', function (err) {
   console.error(err.stack);
 });
 
- var https_server = https.createServer(options, app);
- https_server.listen('443', function() {
-   console.log('HTTPS START!');
- });
+// var https_server = https.createServer(options, app);
+// https_server.listen('443', function() {
+//   console.log('HTTPS START!');
+// });
 
 /**
  * Normalize a port into a number, string, or false.
