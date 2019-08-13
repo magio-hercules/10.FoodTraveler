@@ -7,7 +7,6 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.zmxv.RNSound.RNSoundPackage;
-import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
