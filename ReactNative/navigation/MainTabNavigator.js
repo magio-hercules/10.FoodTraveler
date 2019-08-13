@@ -170,14 +170,14 @@ const _tabBarOptions = () => {
 	return {
 		style: {
 			// width: windowsWidth,
-			height: 60,
+			height: 55,
 		},
 		labelStyle: {
 			fontFamily: 'NanumSquare_acL',
 			fontSize: 12,
 		},
 		tabStyle: {
-			height: 60,
+			height: 55,
 			// backgroundColor: '#F6F6F7',
 		},
 	};
@@ -244,12 +244,12 @@ FoodStack.navigationOptions = ({ navigation }) => {
 	return {
 		tabBarVisible,
 		// tabBarLabel: 'Food',
-		initialLayout: { height: 60 },
+		initialLayout: { height: 55 },
 		// tabBarLabel: Language.Food[global.language],
 		tabBarLabel: ({ focused }) => (
 			<Text
 				style={{
-					fontSize: 11,
+					fontSize: 9,
 					textAlign: 'center',
 					color: focused ? '#000' : '#808285',
 				}}
@@ -388,7 +388,7 @@ LikeStack.navigationOptions = ({ navigation }) => {
 		tabBarLabel: ({ focused }) => (
 			<Text
 				style={{
-					fontSize: 11,
+					fontSize: 9,
 					textAlign: 'center',
 					color: focused ? '#000' : '#808285',
 				}}
@@ -459,7 +459,7 @@ RestaurantStack.navigationOptions = ({ navigation }) => {
 		tabBarLabel: ({ focused }) => (
 			<Text
 				style={{
-					fontSize: 11,
+					fontSize: 9,
 					textAlign: 'center',
 					color: focused ? '#000' : '#808285',
 				}}
@@ -562,7 +562,7 @@ ClassStack.navigationOptions = ({ navigation }) => {
 		tabBarLabel: ({ focused }) => (
 			<Text
 				style={{
-					fontSize: 11,
+					fontSize: 9,
 					textAlign: 'center',
 					color: focused ? '#000' : '#808285',
 				}}
@@ -603,7 +603,7 @@ HelpStack.navigationOptions = ({ navigation }) => {
 		tabBarLabel: ({ focused }) => (
 			<Text
 				style={{
-					fontSize: 11,
+					fontSize: 9,
 					textAlign: 'center',
 					color: focused ? '#000' : '#808285',
 				}}
