@@ -180,7 +180,7 @@ class IngredientScreen extends React.Component {
 						case '주류':
 						case '酒':
 						case 'お酒':
-							_imageSrc = require('../../assets/icons/ingredient/Liquor.png');
+							_imageSrc = require('../../assets/icons/ingredient/Alcohol.png');
 							break;
 					}
 
