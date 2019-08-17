@@ -266,11 +266,22 @@ export default class MapScreen extends React.Component {
 	_onPressButton = flag => {
 		console.log('call _onPressButton : flag(' + flag + ')');
 
+		let str;
 		if (flag) {
-			ToastAndroid.show('press Plus Button', ToastAndroid.SHORT);
+			// ToastAndroid.show('press Plus Button', ToastAndroid.SHORT);
+			str = 'press Plus Button';
 		} else {
-			ToastAndroid.show('press Minus Button', ToastAndroid.SHORT);
+			// ToastAndroid.show('press Minus Button', ToastAndroid.SHORT);
+			str = 'press Minus Button';
 		}
+
+		Toast.show(str, {
+			duration: Toast.durations.SHORT,
+			position: Toast.positions.BOTTOM,
+			shadow: true,
+			animation: true,
+			hideOnPress: true,
+		});
 	};
 
 	// onRegionChange(region) {

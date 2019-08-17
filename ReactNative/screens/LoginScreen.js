@@ -4,8 +4,10 @@ import { NavigationActions } from 'react-navigation';
 
 import { facebookService } from '../services/FacebookService';
 import FBSDK from 'react-native-fbsdk';
+import Video from 'react-native-video';
+import Toast from 'react-native-root-toast';
 
-const { AccessToken, LoginManager } = FBSDK;
+const { LoginButton, AccessToken, LoginManager } = FBSDK;
 
 export default class LoginScreen extends React.Component {
 	constructor(props) {
@@ -15,6 +17,7 @@ export default class LoginScreen extends React.Component {
 		this.state = {
 			accessToken: null,
 			profile: {},
+			loaded: false,
 		};
 
 		this.login = this.login.bind(this);
@@ -22,48 +25,106 @@ export default class LoginScreen extends React.Component {
 
 	componentDidMount() {
 		console.log('[LOGIN] componentDidMount');
+	}
 
-		AccessToken.getCurrentAccessToken()
-			.then(data => {
-				if (data != null) {
-					console.log('[LOGIN] success getCurrentAccessToken');
-					console.log(data);
+	_onEnd() {
+		console.log('[LOGIN] _onEnd');
 
-					this.setState({
-						accessToken: data.accessToken,
+		setTimeout(
+			function() {
+				// Toast.show('동영상 제거.', {
+				// 	duration: Toast.durations.SHORT,
+				// 	position: Toast.positions.BOTTOM,
+				// 	shadow: true,
+				// 	animation: true,
+				// 	hideOnPress: true,
+				// });
+				this.setState({ loaded: true });
+
+				AccessToken.getCurrentAccessToken()
+					.then(data => {
+						if (data != null) {
+							console.log('[LOGIN] success getCurrentAccessToken');
+							console.log(data);
+
+							this.setState({
+								accessToken: data.accessToken,
+							});
+
+							let str = 'data.userID : ' + data.userID + '님 환영합니다.';
+							console.log(str);
+
+							this.login(true);
+						} else {
+							console.log('[LOGIN] getCurrentAccessToken data is null');
+						}
+					})
+					.catch(error => {
+						console.log(error);
 					});
+			}.bind(this),
+			1000
+		);
+	}
 
-					let str = 'data.userID : ' + data.userID + '님 환영합니다.';
-					console.log(str);
-
-					this.login(true);
-				} else {
-					console.log('[LOGIN] getCurrentAccessToken data is null');
-				}
-			})
-			.catch(error => {
-				console.log(error);
-			});
+	_onError() {
+		console.log('[LOGIN] _onError');
+		Toast.show('Splash Mp4 load failed.', {
+			duration: Toast.durations.SHORT,
+			position: Toast.positions.BOTTOM,
+			shadow: true,
+			animation: true,
+			hideOnPress: true,
+		});
 	}
 
 	render() {
 		return (
 			<View style={styles.container}>
-				<Text style={styles.label}>Login</Text>
-				{facebookService.makeLoginButton(accessToken => {
-					console.log('makeLoginButton accessToken');
-					console.log(accessToken);
+				{!this.state.loaded && (
+					<Video
+						source={require('../assets/mp4_splash.mp4')} // Can be a URL or a local file.
+						ref={ref => {
+							this.player = ref;
+						}} // Store reference
+						resizeMode="stretch"
+						// onBuffer={this.onBuffer}                // Callback when remote video is buffering
+						onError={this._onError} // Callback when video cannot be loaded
+						onEnd={this._onEnd.bind(this)}
+						style={styles.backgroundVideo}
+					/>
+				)}
 
-					this.login(true);
-				})}
+				{this.state.loaded && (
+					<View style={styles.container}>
+						<Text style={styles.label}>Login</Text>
 
-				<TouchableOpacity
-					style={styles.loginButton}
-					// onPress={() => this.props.navigation.navigate('DrawerNavigator')}>
-					onPress={() => this.login(false)}
-				>
-					<Text style={styles.buttonText}>Guest 로그인</Text>
-				</TouchableOpacity>
+						<LoginButton
+							onLoginFinished={(error, result) => {
+								if (error) {
+									console.log('login has error: ' + result.error);
+								} else if (result.isCancelled) {
+									console.log('login is cancelled.');
+								} else {
+									AccessToken.getCurrentAccessToken().then(data => {
+										console.log('data.accessToken');
+										console.log(data.accessToken.toString());
+
+										this.login(true);
+									});
+								}
+							}}
+							onLogoutFinished={() => console.log('logout.')}
+						/>
+						<TouchableOpacity
+							style={[this.state.loaded && styles.loginButton]}
+							// onPress={() => this.props.navigation.navigate('DrawerNavigator')}>
+							onPress={() => this.login(false)}
+						>
+							<Text style={styles.buttonText}>Guest 로그인</Text>
+						</TouchableOpacity>
+					</View>
+				)}
 			</View>
 		);
 	}
@@ -95,7 +156,14 @@ export default class LoginScreen extends React.Component {
 
 			let _name = this.state.profile.name;
 			let str = (_name == undefined ? 'GUEST' : _name) + ' 님 환영합니다.';
-			ToastAndroid.show(str, ToastAndroid.SHORT);
+			// ToastAndroid.show(str, ToastAndroid.SHORT);
+			Toast.show(str, {
+				duration: Toast.durations.SHORT,
+				position: Toast.positions.BOTTOM,
+				shadow: true,
+				animation: true,
+				hideOnPress: true,
+			});
 
 			const navigateAction = NavigationActions.navigate({
 				routeName: 'DrawerNavigator',
@@ -136,5 +204,13 @@ const styles = StyleSheet.create({
 		// color: '#fff',
 		textAlign: 'center',
 		fontWeight: '700',
+	},
+
+	backgroundVideo: {
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		bottom: 0,
+		right: 0,
 	},
 });

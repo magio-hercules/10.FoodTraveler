@@ -25,6 +25,8 @@ import com.airbnb.android.react.maps.MapsPackage;
 import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;     
 
+import com.brentvatne.react.ReactVideoPackage;
+
 public class MainApplication extends Application implements ReactApplication {
 
   private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
@@ -40,13 +42,15 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new RNSoundPackage(),
-            new FBSDKPackage(mCallbackManager),
+            // new FBSDKPackage(mCallbackManager),
+            new FBSDKPackage(),
             new SplashScreenReactPackage(),
             new VectorIconsPackage(),
             new RNGestureHandlerPackage(),
             new MapsPackage(),
             new RNFusedLocationPackage(),
-            new RNFetchBlobPackage()
+            new RNFetchBlobPackage(),
+            new ReactVideoPackage()
       );
     }
 
