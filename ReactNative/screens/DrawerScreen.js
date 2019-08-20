@@ -21,6 +21,8 @@ import ModalDropdown from 'react-native-modal-dropdown';
 // import Toast from 'react-native-simple-toast';
 import Toast from 'react-native-root-toast';
 
+import { facebookService } from '../services/FacebookService';
+
 // const arrLanguage = ['한국어', '영어', '중국어(간체)', '중국어(번체)', '일문'];
 const arrLanguage = ['Korean', 'English', 'Simplified Chinese', 'Traditional Chinese', 'Japanese'];
 const arrCity = ['Seoul', 'Busan', 'Jeju'];
@@ -349,14 +351,19 @@ class DrawerScreen extends Component {
 									justifyContent: 'center',
 									alignItems: 'center',
 								}}
-								imageSrc={require('../assets/icons/test/profile.jpg')}
+								imageSrc={
+									this.props.profileStore.avatar != undefined
+										? { uri: this.props.profileStore.avatar }
+										: require('../assets/icons/test/profile.jpg')
+								}
 								size="medium"
 								rounded
+								noText
 								onPress={this._onProfileImage}
 							/>
 							<View style={styles.profileSectionHeader}>
-								<Text style={[styles.profileSectionHeaderText]}>장영훈</Text>
-								<Text style={[styles.profileSectionHeaderText]}>cool0huny@naver.com</Text>
+								<Text style={[styles.profileSectionHeaderText]}>{this.props.profileStore.name}</Text>
+								<Text style={[styles.profileSectionHeaderText]}>{this.props.profileStore.email}</Text>
 							</View>
 						</View>
 						<Divider style={styles.drawerDivider} />

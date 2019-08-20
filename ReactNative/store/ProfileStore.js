@@ -2,6 +2,10 @@ import { decorate, observable, action, computed } from 'mobx';
 // import { computedDecorator } from 'mobx/lib/internal';
 
 class ProfileStore {
+	id = '';
+	name = '';
+	email = '';
+	avatar = '';
 	language = 'ko'; // ko, en, jp, zh
 	nation = 'Korea';
 	city = 1; // 'Seoul'
@@ -30,6 +34,10 @@ class ProfileStore {
 }
 
 decorate(ProfileStore, {
+	id: observable,
+	name: observable,
+	email: observable,
+	avatar: observable,
 	language: observable,
 	nation: observable,
 	city: observable,

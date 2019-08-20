@@ -48,7 +48,7 @@ export default class AvatarIcon extends Component {
 						overlayContainerStyle={{ backgroundColor: 'white' }}
 						// showEditButton
 					/>
-					<Text style={styles.AvatarText}>{this.props.title} </Text>
+					{!this.props.noText && <Text style={styles.AvatarText}>{this.props.title} </Text>}
 				</View>
 			</TouchableHighlight>
 		);

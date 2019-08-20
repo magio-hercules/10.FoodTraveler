@@ -7,9 +7,11 @@ import FBSDK from 'react-native-fbsdk';
 import Video from 'react-native-video';
 import Toast from 'react-native-root-toast';
 
+import { observer, inject } from 'mobx-react';
+
 const { LoginButton, AccessToken, LoginManager } = FBSDK;
 
-export default class LoginScreen extends React.Component {
+class LoginScreen extends React.Component {
 	constructor(props) {
 		super(props);
 		console.log('[LOGIN] constructor');
@@ -30,41 +32,37 @@ export default class LoginScreen extends React.Component {
 	_onEnd() {
 		console.log('[LOGIN] _onEnd');
 
-		setTimeout(
-			function() {
-				// Toast.show('동영상 제거.', {
-				// 	duration: Toast.durations.SHORT,
-				// 	position: Toast.positions.BOTTOM,
-				// 	shadow: true,
-				// 	animation: true,
-				// 	hideOnPress: true,
-				// });
-				this.setState({ loaded: true });
+		this.setState({ loaded: true });
 
-				AccessToken.getCurrentAccessToken()
-					.then(data => {
-						if (data != null) {
-							console.log('[LOGIN] success getCurrentAccessToken');
-							console.log(data);
+		AccessToken.getCurrentAccessToken()
+			.then(data => {
+				if (data != null) {
+					console.log('[LOGIN] success getCurrentAccessToken');
+					console.log(data);
 
-							this.setState({
-								accessToken: data.accessToken,
-							});
-
-							let str = 'data.userID : ' + data.userID + '님 환영합니다.';
-							console.log(str);
-
-							this.login(true);
-						} else {
-							console.log('[LOGIN] getCurrentAccessToken data is null');
-						}
-					})
-					.catch(error => {
-						console.log(error);
+					this.setState({
+						accessToken: data.accessToken,
 					});
-			}.bind(this),
-			1000
-		);
+
+					let str = 'data.userID : ' + data.userID + '님 환영합니다.';
+					console.log(str);
+
+					this.login(true);
+				} else {
+					console.log('[LOGIN] getCurrentAccessToken data is null');
+				}
+			})
+			.catch(error => {
+				console.log(error);
+			});
+
+		// 참고용 bind(this)
+		// setTimeout(
+		// 	function() {
+
+		// 	}.bind(this),
+		// 	0
+		// );
 	}
 
 	_onError() {
@@ -135,12 +133,12 @@ export default class LoginScreen extends React.Component {
 
 	async login(bFlag) {
 		try {
-			var profile;
+			var _profile;
 			if (!bFlag) {
 				console.log('Guest 로그인');
-				profile = { name: 'guest', avatar: null };
+				_profile = { id: '', name: 'GUEST', email: 'guest@labis.co.kr', avatar: undefined };
 				this.setState({
-					profile: profile,
+					profile: _profile,
 				});
 			} else {
 				console.log('profile 조회');
@@ -151,8 +149,15 @@ export default class LoginScreen extends React.Component {
 			}
 
 			console.log('profile.name : ' + this.state.profile.name);
+			console.log('profile.email : ' + this.state.profile.email);
 			console.log('profile.id : ' + this.state.profile.id);
 			console.log('profile.avatar : ' + this.state.profile.avatar);
+
+			// set profileStore
+			this.props.profileStore.id = _profile.id;
+			this.props.profileStore.name = _profile.name;
+			this.props.profileStore.email = _profile.email;
+			this.props.profileStore.avatar = _profile.avatar;
 
 			let _name = this.state.profile.name;
 			let str = (_name == undefined ? 'GUEST' : _name) + ' 님 환영합니다.';
@@ -214,3 +219,5 @@ const styles = StyleSheet.create({
 		right: 0,
 	},
 });
+
+export default inject('profileStore')(observer(LoginScreen));
