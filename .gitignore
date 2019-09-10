@@ -1,3 +1,4 @@
 /node_modules/*
 /ReactNative/node_modules/*
 /ReactNative_ejectTest/*
+/Pods/*

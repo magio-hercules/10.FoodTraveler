@@ -5,28 +5,64 @@ target 'FoodTraveler' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
   # use_frameworks!
 
-  #pod 'FBSDKCoreKit'
-  #pod 'FBSDKLoginKit'
-  #pod 'FBSDKShareKit'
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKLoginKit'
+  pod 'FBSDKShareKit'
 
-  pod 'FBSDKCoreKit', '~> 4.40.0'
-  pod 'FBSDKLoginKit', '~> 4.40.0'
-  pod 'FBSDKShareKit', '~> 4.40.0'
+  #pod 'FBSDKCoreKit', '~> 4.40.0'
+  #pod 'FBSDKLoginKit', '~> 4.40.0'
+  #pod 'FBSDKShareKit', '~> 4.40.0'
   
  # Pods for FoodTraveler
 
-  pod 'RNSound', :path => '../node_modules/react-native-sound'
+  #pod 'React', :path => '../node_modules/react-native'
+
+  pod 'React', :path => '../node_modules/react-native', subspecs: [
+    'RCTImage',
+    'CxxBridge',
+    'RCTLinkingIOS'
+  ]
+
+# Explicitly include Yoga if you are using RN >= 0.42.0
+  pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+
+  # Third party deps podspec link
+  pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+  pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
+  pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+
+  #pod 'RNSound', :path => '../node_modules/react-native-sound'
 
   #pod 'react-native-simple-toast', :path => '../node_modules/react-native-simple-toast'
 
-  pod 'rn-fetch-blob', :path => '../node_modules/rn-fetch-blob'
+  #pod 'rn-fetch-blob', :path => '../node_modules/rn-fetch-blob'
 
-  pod 'react-native-video', :path => '../node_modules/react-native-video'
+  #pod 'react-native-video', :path => '../node_modules/react-native-video'
+  pod 'react-native-video', :path => '../node_modules/react-native-video/react-native-video.podspec'
+
+  #pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
+
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      if target.name == "React"
+        target.remove_from_project
+      end
+      if target.name == "yoga"
+        target.remove_from_project
+        target.build_configurations.each do |config|
+          config.build_settings['GCC_TREAT_WARNINGS_AS_ERRORS'] = 'NO'
+          config.build_settings['GCC_WARN_64_TO_32_BIT_CONVERSION'] = 'NO'
+        end 
+      end
+    end
+  end
 
   target 'FoodTravelerTests' do
     inherit! :search_paths
     # Pods for testing
   end
+
+
 
 end
 

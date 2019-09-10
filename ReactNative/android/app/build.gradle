@@ -156,13 +156,13 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-fbsdk')
     implementation project(':react-native-video')
     implementation project(':rn-fetch-blob')
     implementation project(':react-native-sound')
     implementation(project(':react-native-geolocation-service')) {
         exclude group: 'com.google.android.gms', module: 'play-services-location'
     }
-    implementation project(':react-native-fbsdk')
     implementation project(':react-native-splash-screen')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-gesture-handler')
