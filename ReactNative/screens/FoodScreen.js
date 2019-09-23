@@ -287,8 +287,7 @@ class FoodScreen extends React.Component {
 				let arr = [];
 
 				for (let i = 0; i < count; i++) {
-					// if (_filterList.length == 0 || _filterList.includes(parseInt(data[i].food_type_list))) {
-					if (this.FilterList.length == 0 || this.FilterList.includes(parseInt(data[i].food_type_list))) {
+					if (this.FilterList.length == 0 || this.FilterList == data[i].food_type_list) {
 						arr.push({
 							key: data[i].id,
 							title_local: data[i].title_local,

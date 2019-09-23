@@ -142,7 +142,7 @@ class LoginScreen extends React.Component {
 				});
 			} else {
 				console.log('profile 조회');
-				const _profile = await facebookService.fetchProfile();
+				_profile = await facebookService.fetchProfile();
 				this.setState({
 					profile: _profile,
 				});

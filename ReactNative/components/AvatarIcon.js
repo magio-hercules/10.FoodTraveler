@@ -8,7 +8,7 @@ const propTypes = {
 	size: PropTypes.string,
 	title: PropTypes.string,
 	icon: PropTypes.object,
-	imageSrc: PropTypes.node,
+	imageSrc: PropTypes.oneOfType([PropTypes.node, PropTypes.object, PropTypes.number]),
 	activeOpacity: PropTypes.number,
 	onPress: PropTypes.func,
 };
