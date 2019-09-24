@@ -354,7 +354,7 @@ class DrawerScreen extends Component {
 								imageSrc={
 									this.props.profileStore.avatar != undefined
 										? { uri: this.props.profileStore.avatar }
-										: require('../assets/icons/test/profile.jpg')
+										: require('../assets/icons/avatar.png')
 								}
 								size="medium"
 								rounded

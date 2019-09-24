@@ -136,7 +136,7 @@ class LoginScreen extends React.Component {
 			var _profile;
 			if (!bFlag) {
 				console.log('Guest 로그인');
-				_profile = { id: '', name: 'GUEST', email: 'guest@labis.co.kr', avatar: undefined };
+				_profile = { id: '', name: 'GUEST', email: 'guest@guest.com', avatar: undefined };
 				this.setState({
 					profile: _profile,
 				});

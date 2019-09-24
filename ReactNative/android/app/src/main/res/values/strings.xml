@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Food Traveler</string>
     <string name="facebook_app_id">811251632566564</string>
+    <string name="fb_login_protocol_scheme">fb811251632566564</string>
 </resources>
