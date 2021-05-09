@@ -18,7 +18,7 @@
 		"@react-navigation/core": "^3.0.0-alpha.17",
 		"@react-navigation/web": "^1.0.0-alpha.7",
 		"apisauce": "^1.0.2",
-		"lodash": "^4.17.11",
+		"lodash": "^4.17.21",
 		"mobx": "^5.10.1",
 		"mobx-react": "^6.0.3",
 		"mobx-react-lite": "^1.4.0",
