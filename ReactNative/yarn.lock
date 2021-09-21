@@ -5551,9 +5551,10 @@ react-native-extended-stylesheet@^0.11.2:
     css-mediaquery "^0.1.2"
     object-resolve-path "^1.1.0"
 
-react-native-fbsdk@redcancode/react-native-fbsdk#rn59-fbsdk5:
-  version "0.9.2"
-  resolved "https://codeload.github.com/redcancode/react-native-fbsdk/tar.gz/95577b135432d3c2a55ddc1df20d00a3bf9c7209"
+react-native-fbsdk@^0.10.1:
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/react-native-fbsdk/-/react-native-fbsdk-0.10.3.tgz#5bd6c7e3b19490d61c368e7f569e6990520dbdd9"
+  integrity sha512-qIej8QvDbKVAin7jIDnd5qH+LxfzlIIXE0xEY4z4SBaIMiSL1MqPx8OfdVasu453Qza58dm/hj7UyXP4loX+Iw==
 
 react-native-geolocation-service@^2.0.0:
   version "2.0.0"
@@ -6800,9 +6801,9 @@ tmp@^0.0.33:
     os-tmpdir "~1.0.2"
 
 tmpl@1.0.x:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/tmpl/-/tmpl-1.0.4.tgz#23640dd7b42d00433911140820e5cf440e521dd1"
-  integrity sha1-I2QN17QtAEM5ERQIIOXPRA5SHdE=
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/tmpl/-/tmpl-1.0.5.tgz#8683e0b902bb9c20c4f726e3c0b69f36518c07cc"
+  integrity sha512-3f0uOEAQwIqGuWW2MVzYg8fV/QNnc/IpuJNG837rLuczAaLVHslWHZQj4IGiEl5Hs3kkbhwL9Ab7Hrsmuj+Smw==
 
 to-camel-case@^1.0.0:
   version "1.0.0"
